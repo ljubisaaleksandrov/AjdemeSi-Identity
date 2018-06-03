@@ -1,0 +1,19 @@
+C:\Users\Kika Atov\documents\visual studio 2017\Projects\AjdemeSi\AjdemeSi.Database\bin\Debug\AjdemeSi.Database.dacpac
+C:\Users\Kika Atov\documents\visual studio 2017\Projects\AjdemeSi\AjdemeSi.Database\bin\Debug\AjdemeSi.Database.dll
+C:\Users\Kika Atov\documents\visual studio 2017\Projects\AjdemeSi\AjdemeSi.Database\bin\Debug\AjdemeSi.Database.pdb
+C:\Users\Kika Atov\documents\visual studio 2017\Projects\AjdemeSi\AjdemeSi.Database\obj\Debug\Model.xml
+C:\Users\Kika Atov\documents\visual studio 2017\Projects\AjdemeSi\AjdemeSi.Database\obj\Debug\refactor.xml
+C:\Users\Kika Atov\documents\visual studio 2017\Projects\AjdemeSi\AjdemeSi.Database\obj\Debug\postdeploy.sql
+C:\Users\Kika Atov\documents\visual studio 2017\Projects\AjdemeSi\AjdemeSi.Database\obj\Debug\predeploy.sql
+C:\Users\Kika Atov\documents\visual studio 2017\Projects\AjdemeSi\AjdemeSi.Database\obj\Debug\AjdemeSi.Database.dll
+C:\Users\Kika Atov\documents\visual studio 2017\Projects\AjdemeSi\AjdemeSi.Database\obj\Debug\AjdemeSi.Database.pdb
+C:\Users\lyubisha aleksandrov\Documents\GitHub\Identity-v0.2\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Database\bin\Debug\AjdemeSi.Database.dacpac
+C:\Users\lyubisha aleksandrov\Documents\GitHub\Identity-v0.2\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Database\bin\Debug\AjdemeSi.Database.dll
+C:\Users\lyubisha aleksandrov\Documents\GitHub\Identity-v0.2\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Database\bin\Debug\AjdemeSi.Database.pdb
+C:\Users\lyubisha aleksandrov\Documents\GitHub\Identity-v0.2\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Database\obj\Debug\AjdemeSi.Database.dll
+C:\Users\lyubisha aleksandrov\Documents\GitHub\Identity-v0.2\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Database\obj\Debug\AjdemeSi.Database.pdb
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Database\bin\Debug\AjdemeSi.Database.dacpac
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Database\bin\Debug\AjdemeSi.Database.dll
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Database\bin\Debug\AjdemeSi.Database.pdb
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Database\obj\Debug\AjdemeSi.Database.dll
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Database\obj\Debug\AjdemeSi.Database.pdb

@@ -1,0 +1,528 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AjdemeSi.DomainModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DataContext" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(AjdemeSi.DomainModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(AjdemeSi.DomainModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="AspNetRoles" EntityType="AjdemeSi.DomainModel.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="AjdemeSi.DomainModel.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="AjdemeSi.DomainModel.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="AjdemeSi.DomainModel.AspNetUser" />
+    <EntitySet Name="Cars" EntityType="AjdemeSi.DomainModel.Car" />
+    <EntitySet Name="ChatMessages" EntityType="AjdemeSi.DomainModel.ChatMessage" />
+    <EntitySet Name="Drivers" EntityType="AjdemeSi.DomainModel.Driver" />
+    <EntitySet Name="Drivings" EntityType="AjdemeSi.DomainModel.Driving" />
+    <EntitySet Name="DrivingPassangers" EntityType="AjdemeSi.DomainModel.DrivingPassanger" />
+    <EntitySet Name="Friends" EntityType="AjdemeSi.DomainModel.Friend" />
+    <EntitySet Name="GroupMembers" EntityType="AjdemeSi.DomainModel.GroupMember" />
+    <EntitySet Name="UserSettings" EntityType="AjdemeSi.DomainModel.UserSetting" />
+    <EntitySet Name="UsersGroups" EntityType="AjdemeSi.DomainModel.UsersGroup" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ChatMessage_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="ChatMessage" EntitySet="ChatMessages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Driver_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_Driver_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Driver" EntitySet="Drivers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Driving_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Driving" EntitySet="Drivings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_DrivingPassengers_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_DrivingPassengers_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="DrivingPassanger" EntitySet="DrivingPassangers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Friends1_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_Friends1_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Friend" EntitySet="Friends" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Friends2_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_Friends2_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Friend" EntitySet="Friends" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_GroupMembers_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_GroupMembers_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="GroupMember" EntitySet="GroupMembers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserSettings_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_UserSettings_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="UserSetting" EntitySet="UserSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UsersGroup_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_UsersGroup_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="UsersGroup" EntitySet="UsersGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Car_dbo_Driver_UserId" Association="AjdemeSi.DomainModel.FK_dbo_Car_dbo_Driver_UserId">
+      <End Role="Driver" EntitySet="Drivers" />
+      <End Role="Car" EntitySet="Cars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ChatMessage_dbo_UsersGroup_UsersGroupId" Association="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_UsersGroup_UsersGroupId">
+      <End Role="UsersGroup" EntitySet="UsersGroups" />
+      <End Role="ChatMessage" EntitySet="ChatMessages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Driving_dbo_Driving_Id" Association="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_Driving_Id">
+      <End Role="Driving" EntitySet="Drivings" />
+      <End Role="Driving1" EntitySet="Drivings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Driving_dbo_UsersGroup_UsersGroupId" Association="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_UsersGroup_UsersGroupId">
+      <End Role="UsersGroup" EntitySet="UsersGroups" />
+      <End Role="Driving" EntitySet="Drivings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_DrivingPassengers_dbo_Driving_Id" Association="AjdemeSi.DomainModel.FK_dbo_DrivingPassengers_dbo_Driving_Id">
+      <End Role="Driving" EntitySet="Drivings" />
+      <End Role="DrivingPassanger" EntitySet="DrivingPassangers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_GroupMembers_dbo_UsersGroup_UsersGroupId" Association="AjdemeSi.DomainModel.FK_dbo_GroupMembers_dbo_UsersGroup_UsersGroupId">
+      <End Role="UsersGroup" EntitySet="UsersGroups" />
+      <End Role="GroupMember" EntitySet="GroupMembers" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="AjdemeSi.DomainModel.AspNetUserRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="AjdemeSi.DomainModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="AjdemeSi.DomainModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="AjdemeSi.DomainModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="ChatMessages" Relationship="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="ChatMessage" />
+    <NavigationProperty Name="Driver" Relationship="AjdemeSi.DomainModel.FK_dbo_Driver_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="Driver" />
+    <NavigationProperty Name="Drivings" Relationship="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="Driving" />
+    <NavigationProperty Name="DrivingPassangers" Relationship="AjdemeSi.DomainModel.FK_dbo_DrivingPassengers_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="DrivingPassanger" />
+    <NavigationProperty Name="Friends" Relationship="AjdemeSi.DomainModel.FK_dbo_Friends1_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="Friend" />
+    <NavigationProperty Name="Friends1" Relationship="AjdemeSi.DomainModel.FK_dbo_Friends2_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="Friend" />
+    <NavigationProperty Name="GroupMembers" Relationship="AjdemeSi.DomainModel.FK_dbo_GroupMembers_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="GroupMember" />
+    <NavigationProperty Name="UserSettings" Relationship="AjdemeSi.DomainModel.FK_dbo_UserSettings_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="UserSetting" />
+    <NavigationProperty Name="UsersGroups" Relationship="AjdemeSi.DomainModel.FK_dbo_UsersGroup_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="UsersGroup" />
+    <NavigationProperty Name="AspNetRoles" Relationship="AjdemeSi.DomainModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+  </EntityType>
+  <EntityType Name="Car">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Make" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="YearOfManufacture" Type="Int32" Nullable="false" />
+    <Property Name="SiteRegistrationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Driver" Relationship="AjdemeSi.DomainModel.FK_dbo_Car_dbo_Driver_UserId" FromRole="Car" ToRole="Driver" />
+  </EntityType>
+  <EntityType Name="ChatMessage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UsersGroupId" Type="Int32" Nullable="false" />
+    <Property Name="SenderId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateModified" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_AspNetUsers_UserId" FromRole="ChatMessage" ToRole="AspNetUser" />
+    <NavigationProperty Name="UsersGroup" Relationship="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_UsersGroup_UsersGroupId" FromRole="ChatMessage" ToRole="UsersGroup" />
+  </EntityType>
+  <EntityType Name="Driver">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="LicenceRegistrationDate" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="SiteRegistrationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_Driver_dbo_AspNetUsers_UserId" FromRole="Driver" ToRole="AspNetUser" />
+    <NavigationProperty Name="Cars" Relationship="AjdemeSi.DomainModel.FK_dbo_Car_dbo_Driver_UserId" FromRole="Driver" ToRole="Car" />
+  </EntityType>
+  <EntityType Name="Driving">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DriverUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FromCounty" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FromCity" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FromPlace" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ToCounty" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ToCity" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ToPlace" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TravelTime" Type="Int32" Nullable="false" />
+    <Property Name="MaxPassengers" Type="Int32" Nullable="false" />
+    <Property Name="TotalPrice" Type="Single" Nullable="false" />
+    <Property Name="MinTotalPrice" Type="Single" Nullable="false" />
+    <Property Name="PricePerPassenger" Type="Single" Nullable="false" />
+    <Property Name="ReturnDrivingId" Type="Int32" />
+    <Property Name="UsersGroupId" Type="Int32" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_AspNetUsers_UserId" FromRole="Driving" ToRole="AspNetUser" />
+    <NavigationProperty Name="Driving1" Relationship="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_Driving_Id" FromRole="Driving" ToRole="Driving1" />
+    <NavigationProperty Name="Driving2" Relationship="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_Driving_Id" FromRole="Driving1" ToRole="Driving" />
+    <NavigationProperty Name="UsersGroup" Relationship="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_UsersGroup_UsersGroupId" FromRole="Driving" ToRole="UsersGroup" />
+    <NavigationProperty Name="DrivingPassangers" Relationship="AjdemeSi.DomainModel.FK_dbo_DrivingPassengers_dbo_Driving_Id" FromRole="Driving" ToRole="DrivingPassanger" />
+  </EntityType>
+  <EntityType Name="DrivingPassanger">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DrivingId" Type="Int32" Nullable="false" />
+    <Property Name="Rate" Type="Int32" />
+    <Property Name="RateComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_DrivingPassengers_dbo_AspNetUsers_UserId" FromRole="DrivingPassanger" ToRole="AspNetUser" />
+    <NavigationProperty Name="Driving" Relationship="AjdemeSi.DomainModel.FK_dbo_DrivingPassengers_dbo_Driving_Id" FromRole="DrivingPassanger" ToRole="Driving" />
+  </EntityType>
+  <EntityType Name="Friend">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Friend1Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Friend2Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_Friends1_dbo_AspNetUsers_UserId" FromRole="Friend" ToRole="AspNetUser" />
+    <NavigationProperty Name="AspNetUser1" Relationship="AjdemeSi.DomainModel.FK_dbo_Friends2_dbo_AspNetUsers_UserId" FromRole="Friend" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="GroupMember">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UsersGroupId" Type="Int32" Nullable="false" />
+    <Property Name="MemberId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_GroupMembers_dbo_AspNetUsers_UserId" FromRole="GroupMember" ToRole="AspNetUser" />
+    <NavigationProperty Name="UsersGroup" Relationship="AjdemeSi.DomainModel.FK_dbo_GroupMembers_dbo_UsersGroup_UsersGroupId" FromRole="GroupMember" ToRole="UsersGroup" />
+  </EntityType>
+  <EntityType Name="UserSetting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BirthDate" Type="DateTime" Precision="3" />
+    <Property Name="Gender" Type="Boolean" />
+    <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_UserSettings_dbo_AspNetUsers_UserId" FromRole="UserSetting" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="UsersGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserCreatorId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_UsersGroup_dbo_AspNetUsers_UserId" FromRole="UsersGroup" ToRole="AspNetUser" />
+    <NavigationProperty Name="ChatMessages" Relationship="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_UsersGroup_UsersGroupId" FromRole="UsersGroup" ToRole="ChatMessage" />
+    <NavigationProperty Name="Drivings" Relationship="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_UsersGroup_UsersGroupId" FromRole="UsersGroup" ToRole="Driving" />
+    <NavigationProperty Name="GroupMembers" Relationship="AjdemeSi.DomainModel.FK_dbo_GroupMembers_dbo_UsersGroup_UsersGroupId" FromRole="UsersGroup" ToRole="GroupMember" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="AjdemeSi.DomainModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="AjdemeSi.DomainModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ChatMessage_dbo_AspNetUsers_UserId">
+    <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="AjdemeSi.DomainModel.ChatMessage" Role="ChatMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ChatMessage">
+        <PropertyRef Name="SenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Driver_dbo_AspNetUsers_UserId">
+    <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="AjdemeSi.DomainModel.Driver" Role="Driver" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Driver">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Driving_dbo_AspNetUsers_UserId">
+    <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="AjdemeSi.DomainModel.Driving" Role="Driving" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Driving">
+        <PropertyRef Name="DriverUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_DrivingPassengers_dbo_AspNetUsers_UserId">
+    <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="AjdemeSi.DomainModel.DrivingPassanger" Role="DrivingPassanger" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DrivingPassanger">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Friends1_dbo_AspNetUsers_UserId">
+    <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="AjdemeSi.DomainModel.Friend" Role="Friend" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Friend">
+        <PropertyRef Name="Friend1Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Friends2_dbo_AspNetUsers_UserId">
+    <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="AjdemeSi.DomainModel.Friend" Role="Friend" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Friend">
+        <PropertyRef Name="Friend2Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_GroupMembers_dbo_AspNetUsers_UserId">
+    <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="AjdemeSi.DomainModel.GroupMember" Role="GroupMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GroupMember">
+        <PropertyRef Name="MemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserSettings_dbo_AspNetUsers_UserId">
+    <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="AjdemeSi.DomainModel.UserSetting" Role="UserSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserSetting">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UsersGroup_dbo_AspNetUsers_UserId">
+    <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="AjdemeSi.DomainModel.UsersGroup" Role="UsersGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsersGroup">
+        <PropertyRef Name="UserCreatorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Car_dbo_Driver_UserId">
+    <End Type="AjdemeSi.DomainModel.Driver" Role="Driver" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="AjdemeSi.DomainModel.Car" Role="Car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Driver">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Car">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ChatMessage_dbo_UsersGroup_UsersGroupId">
+    <End Type="AjdemeSi.DomainModel.UsersGroup" Role="UsersGroup" Multiplicity="1" />
+    <End Type="AjdemeSi.DomainModel.ChatMessage" Role="ChatMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ChatMessage">
+        <PropertyRef Name="UsersGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Driving_dbo_Driving_Id">
+    <End Type="AjdemeSi.DomainModel.Driving" Role="Driving" Multiplicity="0..1" />
+    <End Type="AjdemeSi.DomainModel.Driving" Role="Driving1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Driving">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Driving1">
+        <PropertyRef Name="ReturnDrivingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Driving_dbo_UsersGroup_UsersGroupId">
+    <End Type="AjdemeSi.DomainModel.UsersGroup" Role="UsersGroup" Multiplicity="1" />
+    <End Type="AjdemeSi.DomainModel.Driving" Role="Driving" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Driving">
+        <PropertyRef Name="UsersGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_DrivingPassengers_dbo_Driving_Id">
+    <End Type="AjdemeSi.DomainModel.Driving" Role="Driving" Multiplicity="1" />
+    <End Type="AjdemeSi.DomainModel.DrivingPassanger" Role="DrivingPassanger" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Driving">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DrivingPassanger">
+        <PropertyRef Name="DrivingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_GroupMembers_dbo_UsersGroup_UsersGroupId">
+    <End Type="AjdemeSi.DomainModel.UsersGroup" Role="UsersGroup" Multiplicity="1" />
+    <End Type="AjdemeSi.DomainModel.GroupMember" Role="GroupMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GroupMember">
+        <PropertyRef Name="UsersGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="AjdemeSi.DomainModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+    <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  </Association>
+</Schema>
