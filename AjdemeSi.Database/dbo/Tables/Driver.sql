@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Driver]
 (
 	[UserId]					[nvarchar](128) UNIQUE NOT NULL,
-	[LicenceRegistrationDate]	[nvarchar](128) not NULL,
+	[LicenceRegistrationDate]	[Datetime] not NULL,
 	[SiteRegistrationDate]		[Datetime] not null,
 	
 	CONSTRAINT [PK_dbo.Driver] PRIMARY KEY CLUSTERED ([UserId] ASC),

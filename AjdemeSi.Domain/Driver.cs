@@ -21,7 +21,7 @@ namespace AjdemeSi.Domain
         }
     
         public string UserId { get; set; }
-        public string LicenceRegistrationDate { get; set; }
+        public System.DateTime LicenceRegistrationDate { get; set; }
         public System.DateTime SiteRegistrationDate { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }

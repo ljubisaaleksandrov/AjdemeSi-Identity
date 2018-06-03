@@ -84,7 +84,7 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="LicenceRegistrationDate" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LicenceRegistrationDate" Type="datetime" Nullable="false" />
           <Property Name="SiteRegistrationDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Driving">
@@ -711,7 +711,7 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="LicenceRegistrationDate" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LicenceRegistrationDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="SiteRegistrationDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_Driver_dbo_AspNetUsers_UserId" FromRole="Driver" ToRole="AspNetUser" />
           <NavigationProperty Name="Cars" Relationship="AjdemeSi.DomainModel.FK_dbo_Car_dbo_Driver_UserId" FromRole="Driver" ToRole="Car" />

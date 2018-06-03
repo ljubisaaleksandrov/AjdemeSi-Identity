@@ -169,6 +169,14 @@ namespace AjdemeSi.Controllers
         }
 
         //
+        // GET: /Account/Register
+        [AllowAnonymous]
+        public ActionResult RegisterDriver()
+        {
+            return PartialView();
+        }
+
+        //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]

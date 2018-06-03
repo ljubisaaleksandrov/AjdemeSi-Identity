@@ -54,3 +54,4 @@ C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\Ajdem
 C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Domain\bin\Debug\System.Web.Mvc.xml
 C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.dll
 C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.pdb
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.csprojResolveAssemblyReference.cache

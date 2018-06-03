@@ -79,7 +79,7 @@
       <PropertyRef Name="UserId" />
     </Key>
     <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="LicenceRegistrationDate" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="LicenceRegistrationDate" Type="datetime" Nullable="false" />
     <Property Name="SiteRegistrationDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Driving">

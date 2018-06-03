@@ -81,6 +81,30 @@ namespace AjdemeSi.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class RegisterDriverViewModel : RegisterViewModel
+    {
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Licence Date")]
+        public string LicenceRegistrationDate { get; set; }
+
+        [Required]
+        [StringLength(128)]
+        [DataType(DataType.Text)]
+        [Display(Name = "Make")]
+        public string Make { get; set; }
+
+        [Required]
+        [StringLength(128)]
+        [DataType(DataType.Text)]
+        [Display(Name = "Model")]
+        public string Model { get; set; }
+
+        [Required]
+        [Display(Name = "Year Of Manufacture")]
+        public string YearOfManufacture { get; set; }
+    }
+
     public class ResetPasswordViewModel
     {
         [Required]
