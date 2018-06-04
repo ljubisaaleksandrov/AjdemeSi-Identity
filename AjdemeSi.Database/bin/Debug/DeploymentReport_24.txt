@@ -1,0 +1,49 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[AspNetRoles] (Table)
+       [dbo].[AspNetUserClaims] (Table)
+       [dbo].[AspNetUserLogins] (Table)
+       [dbo].[AspNetUserRoles] (Table)
+       [dbo].[AspNetUsers] (Table)
+       [dbo].[Car] (Table)
+       [dbo].[ChatMessage] (Table)
+       [dbo].[Driver] (Table)
+       [dbo].[Driving] (Table)
+       [dbo].[DrivingPassangers] (Table)
+       [dbo].[Friends] (Table)
+       [dbo].[GroupMembers] (Table)
+       [dbo].[UserSettings] (Table)
+       [dbo].[UsersGroup] (Table)
+       Default Constraint: unnamed constraint on [dbo].[AspNetUsers] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Driving] (Default Constraint)
+       [dbo].[FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId] (Foreign Key)
+       [dbo].[FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId] (Foreign Key)
+       [dbo].[FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId] (Foreign Key)
+       [dbo].[FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId] (Foreign Key)
+       [dbo].[FK_dbo.Car_dbo.Driver_UserId] (Foreign Key)
+       [dbo].[FK_dbo.ChatMessage_dbo.UsersGroup_UsersGroupId] (Foreign Key)
+       [dbo].[FK_dbo.ChatMessage_dbo.AspNetUsers_UserId] (Foreign Key)
+       [dbo].[FK_dbo.Driver_dbo.AspNetUsers_UserId] (Foreign Key)
+       [dbo].[FK_dbo.Driving_dbo.AspNetUsers_UserId] (Foreign Key)
+       [dbo].[FK_dbo.Driving_dbo.Driving_Id] (Foreign Key)
+       [dbo].[FK_dbo.Driving_dbo.UsersGroup_UsersGroupId] (Foreign Key)
+       [dbo].[FK_dbo.DrivingPassengers_dbo.AspNetUsers_UserId] (Foreign Key)
+       [dbo].[FK_dbo.DrivingPassengers_dbo.Driving_Id] (Foreign Key)
+       [dbo].[FK_dbo.Friends1_dbo.AspNetUsers_UserId] (Foreign Key)
+       [dbo].[FK_dbo.Friends2_dbo.AspNetUsers_UserId] (Foreign Key)
+       [dbo].[FK_dbo.GroupMembers_dbo.UsersGroup_UsersGroupId] (Foreign Key)
+       [dbo].[FK_dbo.GroupMembers_dbo.AspNetUsers_UserId] (Foreign Key)
+       [dbo].[FK_dbo.UserSettings_dbo.AspNetUsers_UserId] (Foreign Key)
+       [dbo].[FK_dbo.UsersGroup_dbo.AspNetUsers_UserId] (Foreign Key)
+
+** Supporting actions

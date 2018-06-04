@@ -1,15 +1,15 @@
 ﻿var Acc = function () {
     var settings = {
-        const_dot = '.',
-        const_sharp = '#',
+        const_dot: '.',
+        const_sharp: '#',
         loginForm: '#login-form',
         registerForm: '#register-form',
         ajaxSignUpBtn: '.sign-in-button.sign-in-button-post',
         ajaxSignUpFormWrapper: '.sign-in-wrapper',
         ajaxMenuRegisterDriverBtnClass: 'sign-in-reg-driver-button',
-        ajaxMenuRegisterDriverBtn: const_dot + 'sign-in-reg-driver-button',
+        ajaxMenuRegisterDriverBtn: this.const_dot + this.ajaxMenuRegisterDriverBtnClass,
         ajaxMenuRegisterUserBtnClass: 'sign-in-reg-user-button',
-        ajaxMenuRegisterUserBtn: const_dot + 'sign-in-reg-user-button'
+        ajaxMenuRegisterUserBtn: this.const_dot + this.ajaxMenuRegisterUserBtnClass
     };
 
     this.init = function () {
@@ -20,6 +20,24 @@
         $(document).on("click", settings.ajaxMenuRegisterUserBtn, fmrubc)
     },
     fmrdbc = function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+
+        $.ajax({
+            type: 'get',
+            url: $(e.target).attr('href'),
+            success: function (data) {
+                $(settings.ajaxSignUpFormWrapper).children().fadeOut(400, function () {
+                    $(settings.ajaxSignUpFormWrapper).html(data);
+                });
+                $(settings.ajaxSignUpFormWrapper).children().fadeIn(400, function () { });
+            },
+            error: function (err) {
+                console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+            }
+        });
+    },
+    fmrubc = function (e) {
         e.stopPropagation();
         e.preventDefault();
 

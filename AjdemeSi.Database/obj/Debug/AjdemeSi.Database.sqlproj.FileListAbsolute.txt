@@ -17,3 +17,8 @@ C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\Ajdem
 C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Database\bin\Debug\AjdemeSi.Database.pdb
 C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Database\obj\Debug\AjdemeSi.Database.dll
 C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Database\obj\Debug\AjdemeSi.Database.pdb
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Database\bin\Debug\AjdemeSi.Database.dacpac
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Database\bin\Debug\AjdemeSi.Database.dll
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Database\bin\Debug\AjdemeSi.Database.pdb
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Database\obj\Debug\AjdemeSi.Database.dll
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Database\obj\Debug\AjdemeSi.Database.pdb
