@@ -227,7 +227,7 @@
     <Compile Include="Areas\Administration\Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\Administration\Controllers\HomeController.cs" />
-    <Compile Include="Controllers\DrivingController.cs" />
+    <Compile Include="Controllers\RideController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">

@@ -10,6 +10,7 @@ using AjdemeSi.Services.Interfaces.Identity;
 using AjdemeSi.Services.Logic;
 using AjdemeSi.Controllers;
 using AjdemeSi.Domain.Models.Identity;
+using AjdemeSi.Domain.Models.Ride;
 
 namespace AjdemeSi.App_Start
 {
@@ -29,9 +30,15 @@ namespace AjdemeSi.App_Start
 
             builder.Register<IMapper>(c => new MapperConfiguration(cfg =>
             {
+                cfg.CreateMap<IdentityUserViewModel, AspNetUser>();
                 cfg.CreateMap<AspNetUser, IdentityUserViewModel>()
                    .ForMember(dest => dest.UserRoles, opt => opt.MapFrom(src => src.AspNetRoles.Select(ur => ur.Name)));
-                cfg.CreateMap<IdentityUserViewModel, AspNetUser>();
+
+                cfg.CreateMap<RidePassanger, AspNetUser>();
+                cfg.CreateMap<RidePassanger, RidePassengerViewModel>()
+                   .ForMember(dest => dest, opt => opt.MapFrom(src => src.AspNetUser));
+                cfg.CreateMap<RideDriverViewModel, RidePassanger>();
+                cfg.CreateMap<RideViewModel, Ride>().ForMember(d => d.RidePassangers, opt => opt.MapFrom(s => s.Passengers));
 
                 //cfg.CreateMap<QuestionCategory, QuestionCategoryViewModel>()
                 //                                                .ForMember(dest => dest.QuestionAnswerType, opt => opt.MapFrom(src => src.AnswerType))

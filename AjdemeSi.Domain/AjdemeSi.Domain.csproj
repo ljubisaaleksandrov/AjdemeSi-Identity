@@ -97,20 +97,16 @@
     <Compile Include="Driver.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Driving.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DrivingPassanger.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Friend.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GroupMember.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DrivingPagedListViewModel.cs" />
-    <Compile Include="Models\DrivingViewModel.cs" />
+    <Compile Include="Models\Ride\RidePassengerViewModel.cs" />
+    <Compile Include="Models\Ride\RideDriverViewModel.cs" />
+    <Compile Include="Models\Ride\RidePagedListViewModel.cs" />
+    <Compile Include="Models\Ride\RideViewModel.cs" />
     <Compile Include="Models\Identity\IdentityUserPagedListViewModel.cs" />
     <Compile Include="Models\Identity\IdentityUserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -119,10 +115,19 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Ride.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RidePassanger.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserSetting.cs">

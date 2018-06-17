@@ -61,7 +61,6 @@
     <Property Name="Make" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Model" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="YearOfManufacture" Type="int" Nullable="false" />
-    <Property Name="SiteRegistrationDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ChatMessage">
     <Key>
@@ -82,7 +81,24 @@
     <Property Name="LicenceRegistrationDate" Type="datetime" Nullable="false" />
     <Property Name="SiteRegistrationDate" Type="datetime" Nullable="false" />
   </EntityType>
-  <EntityType Name="Driving">
+  <EntityType Name="Friends">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Friend1Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Friend2Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GroupMembers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UsersGroupId" Type="int" Nullable="false" />
+    <Property Name="MemberId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ride">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -102,35 +118,27 @@
     <Property Name="MinTotalPrice" Type="real" Nullable="false" />
     <Property Name="PricePerPassenger" Type="real" Nullable="false" />
     <Property Name="ReturnDrivingId" Type="int" />
-    <Property Name="UsersGroupId" Type="int" Nullable="false" />
     <Property Name="DateCreated" Type="datetime" />
   </EntityType>
-  <EntityType Name="DrivingPassangers">
+  <EntityType Name="RidePassangers">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="DrivingId" Type="int" Nullable="false" />
+    <Property Name="RideId" Type="int" Nullable="false" />
     <Property Name="Rate" Type="int" />
     <Property Name="RateComment" Type="nvarchar(max)" />
   </EntityType>
-  <EntityType Name="Friends">
+  <EntityType Name="sysdiagrams">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="diagram_id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Friend1Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="Friend2Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="DateCreated" Type="datetime" Nullable="false" />
-  </EntityType>
-  <EntityType Name="GroupMembers">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UsersGroupId" Type="int" Nullable="false" />
-    <Property Name="MemberId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="UserSettings">
     <Key>
@@ -150,6 +158,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserCreatorId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="RideId" Type="int" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -259,66 +268,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_dbo_Driving_dbo_AspNetUsers_UserId">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-    <End Role="Driving" Type="Self.Driving" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Driving">
-        <PropertyRef Name="DriverUserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_Driving_dbo_Driving_Id">
-    <End Role="Driving" Type="Self.Driving" Multiplicity="0..1" />
-    <End Role="Driving1" Type="Self.Driving" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Driving">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Driving1">
-        <PropertyRef Name="ReturnDrivingId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_Driving_dbo_UsersGroup_UsersGroupId">
-    <End Role="UsersGroup" Type="Self.UsersGroup" Multiplicity="1" />
-    <End Role="Driving" Type="Self.Driving" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UsersGroup">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Driving">
-        <PropertyRef Name="UsersGroupId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_DrivingPassengers_dbo_AspNetUsers_UserId">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-    <End Role="DrivingPassangers" Type="Self.DrivingPassangers" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="DrivingPassangers">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_DrivingPassengers_dbo_Driving_Id">
-    <End Role="Driving" Type="Self.Driving" Multiplicity="1" />
-    <End Role="DrivingPassangers" Type="Self.DrivingPassangers" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Driving">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="DrivingPassangers">
-        <PropertyRef Name="DrivingId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_dbo_Friends1_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
     <End Role="Friends" Type="Self.Friends" Multiplicity="*" />
@@ -367,6 +316,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_dbo_Ride_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Ride" Type="Self.Ride" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ride">
+        <PropertyRef Name="DriverUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Ride_dbo_Ride_Id">
+    <End Role="Ride" Type="Self.Ride" Multiplicity="0..1" />
+    <End Role="Ride1" Type="Self.Ride" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ride">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ride1">
+        <PropertyRef Name="ReturnDrivingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_RidePassengers_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="RidePassangers" Type="Self.RidePassangers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RidePassangers">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_RidePassengers_dbo_Driving_Id">
+    <End Role="Ride" Type="Self.Ride" Multiplicity="1" />
+    <End Role="RidePassangers" Type="Self.RidePassangers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ride">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RidePassangers">
+        <PropertyRef Name="RideId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_dbo_UserSettings_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -393,6 +390,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_dbo_UsersGroup_dbo_Ride_RideId">
+    <End Role="Ride" Type="Self.Ride" Multiplicity="0..1" />
+    <End Role="UsersGroup" Type="Self.UsersGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ride">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsersGroup">
+        <PropertyRef Name="RideId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="AjdemeSiDomainModelStoreContainer">
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -402,10 +411,11 @@
     <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChatMessage" EntityType="Self.ChatMessage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Driving" EntityType="Self.Driving" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DrivingPassangers" EntityType="Self.DrivingPassangers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Friends" EntityType="Self.Friends" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GroupMembers" EntityType="Self.GroupMembers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ride" EntityType="Self.Ride" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RidePassangers" EntityType="Self.RidePassangers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserSettings" EntityType="Self.UserSettings" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsersGroup" EntityType="Self.UsersGroup" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -440,26 +450,6 @@
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Driver" EntitySet="Driver" />
     </AssociationSet>
-    <AssociationSet Name="FK_dbo_Driving_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_Driving_dbo_AspNetUsers_UserId">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="Driving" EntitySet="Driving" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_Driving_dbo_Driving_Id" Association="Self.FK_dbo_Driving_dbo_Driving_Id">
-      <End Role="Driving" EntitySet="Driving" />
-      <End Role="Driving1" EntitySet="Driving" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_Driving_dbo_UsersGroup_UsersGroupId" Association="Self.FK_dbo_Driving_dbo_UsersGroup_UsersGroupId">
-      <End Role="UsersGroup" EntitySet="UsersGroup" />
-      <End Role="Driving" EntitySet="Driving" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_DrivingPassengers_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_DrivingPassengers_dbo_AspNetUsers_UserId">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="DrivingPassangers" EntitySet="DrivingPassangers" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_DrivingPassengers_dbo_Driving_Id" Association="Self.FK_dbo_DrivingPassengers_dbo_Driving_Id">
-      <End Role="Driving" EntitySet="Driving" />
-      <End Role="DrivingPassangers" EntitySet="DrivingPassangers" />
-    </AssociationSet>
     <AssociationSet Name="FK_dbo_Friends1_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_Friends1_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Friends" EntitySet="Friends" />
@@ -476,12 +466,32 @@
       <End Role="UsersGroup" EntitySet="UsersGroup" />
       <End Role="GroupMembers" EntitySet="GroupMembers" />
     </AssociationSet>
+    <AssociationSet Name="FK_dbo_Ride_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_Ride_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Ride" EntitySet="Ride" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Ride_dbo_Ride_Id" Association="Self.FK_dbo_Ride_dbo_Ride_Id">
+      <End Role="Ride" EntitySet="Ride" />
+      <End Role="Ride1" EntitySet="Ride" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_RidePassengers_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_RidePassengers_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="RidePassangers" EntitySet="RidePassangers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_RidePassengers_dbo_Driving_Id" Association="Self.FK_dbo_RidePassengers_dbo_Driving_Id">
+      <End Role="Ride" EntitySet="Ride" />
+      <End Role="RidePassangers" EntitySet="RidePassangers" />
+    </AssociationSet>
     <AssociationSet Name="FK_dbo_UserSettings_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_UserSettings_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="UserSettings" EntitySet="UserSettings" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_UsersGroup_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_UsersGroup_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UsersGroup" EntitySet="UsersGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UsersGroup_dbo_Ride_RideId" Association="Self.FK_dbo_UsersGroup_dbo_Ride_RideId">
+      <End Role="Ride" EntitySet="Ride" />
       <End Role="UsersGroup" EntitySet="UsersGroup" />
     </AssociationSet>
   </EntityContainer>

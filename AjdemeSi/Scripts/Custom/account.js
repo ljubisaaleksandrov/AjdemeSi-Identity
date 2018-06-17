@@ -5,73 +5,55 @@
         loginForm: '#login-form',
         registerForm: '#register-form',
         ajaxSignUpBtn: '.sign-in-button.sign-in-button-post',
-        ajaxSignUpFormWrapper: '.sign-in-wrapper',
+        ajaxSignUpFormWrapper: '.home-content-wrapper',
         ajaxMenuRegisterDriverBtnClass: 'sign-in-reg-driver-button',
-        ajaxMenuRegisterDriverBtn: this.const_dot + this.ajaxMenuRegisterDriverBtnClass,
         ajaxMenuRegisterUserBtnClass: 'sign-in-reg-user-button',
-        ajaxMenuRegisterUserBtn: this.const_dot + this.ajaxMenuRegisterUserBtnClass
+        ajaxMenuRegisterDriverBtnClass: 'sign-in-reg-driver-button',
+        ajaxMenuRegisterUserBtnClass: 'sign-in-reg-user-button',
+        ajaxMenuRegisterDriverBtnLabel: 'Register Driver',
+        ajaxMenuRegisterUserBtnLabel: 'Register User',
+        ajaxMenuRegisterDriverBtnAction: '/Account/RegisterDriver',
+        ajaxMenuRegisterUserBtnAction: '/Account/Register',
     };
 
     this.init = function () {
         $(document).on("submit", settings.loginForm, flfs),
         $(document).on("submit", settings.registerForm, frfs),
         $(document).on("click", settings.ajaxSignUpBtn, fasubc),
-        $(document).on("click", settings.ajaxMenuRegisterDriverBtn, fmrdbc),
-        $(document).on("click", settings.ajaxMenuRegisterUserBtn, fmrubc)
-    },
-    fmrdbc = function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-
-        $.ajax({
-            type: 'get',
-            url: $(e.target).attr('href'),
-            success: function (data) {
-                $(settings.ajaxSignUpFormWrapper).children().fadeOut(400, function () {
-                    $(settings.ajaxSignUpFormWrapper).html(data);
-                });
-                $(settings.ajaxSignUpFormWrapper).children().fadeIn(400, function () { });
-            },
-            error: function (err) {
-                console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
-            }
-        });
-    },
-    fmrubc = function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-
-        $.ajax({
-            type: 'get',
-            url: $(e.target).attr('href'),
-            success: function (data) {
-                $(settings.ajaxSignUpFormWrapper).children().fadeOut(400, function () {
-                    $(settings.ajaxSignUpFormWrapper).html(data);
-                });
-                $(settings.ajaxSignUpFormWrapper).children().fadeIn(400, function () { });
-            },
-            error: function (err) {
-                console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
-            }
-        });
+        $(document).on("click", settings.const_dot + settings.ajaxMenuRegisterDriverBtnClass, fasubc),
+        $(document).on("click", settings.const_dot + settings.ajaxMenuRegisterUserBtnClass, fasubc)
     },
     fasubc = function (e) {
-        e.stopPropagation();
-        e.preventDefault();
+        var currentAction = $(e.target).attr('href');
+        if (typeof currentAction != 'undefined') {
+            e.stopPropagation();
+            e.preventDefault();
 
-        $.ajax({
-            type: 'get',
-            url: $(e.target).attr('href'),
-            success: function (data) {
-                $(settings.ajaxSignUpFormWrapper).children().fadeOut(400, function () {
-                    $(settings.ajaxSignUpFormWrapper).html(data);
-                });
-                $(settings.ajaxSignUpFormWrapper).children().fadeIn(400, function () { });
-            },
-            error: function (err) {
-                console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+            if ($(e.target).hasClass(settings.ajaxMenuRegisterDriverBtnClass)) {
+                if (currentAction == settings.ajaxMenuRegisterDriverBtnAction){
+                    $(e.target).attr('href', settings.ajaxMenuRegisterUserBtnAction);
+                    $(e.target).text(settings.ajaxMenuRegisterUserBtnLabel);
+                }
+                else {
+                    $(e.target).attr('href', settings.ajaxMenuRegisterDriverBtnAction);
+                    $(e.target).text(settings.ajaxMenuRegisterDriverBtnLabel);
+                }
             }
-        });
+
+            $.ajax({
+                type: 'get',
+                url: currentAction,
+                success: function (data) {
+                    $(settings.ajaxSignUpFormWrapper).children().fadeOut(400, function () {
+                        $(settings.ajaxSignUpFormWrapper).html(data);
+                    });
+                    $(settings.ajaxSignUpFormWrapper).children().fadeIn(400, function () { });
+                },
+                error: function (err) {
+                    console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+                }
+            });
+        }
     },
     flfs = function (e) {
         var isFormValid = true;

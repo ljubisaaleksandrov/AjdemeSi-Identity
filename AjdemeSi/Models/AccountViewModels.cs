@@ -94,6 +94,8 @@ namespace AjdemeSi.Models
         [Display(Name = "Make")]
         public string Make { get; set; }
 
+        public List<string> MakesList { get; set; }
+
         [Required]
         [StringLength(128)]
         [DataType(DataType.Text)]

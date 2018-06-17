@@ -74,8 +74,8 @@
     <Build Include="dbo\Tables\UsersGroupMembers.sql" />
     <Build Include="dbo\Tables\UserSettings.sql" />
     <Build Include="dbo\Tables\Driver.sql" />
-    <Build Include="dbo\Tables\Driving.sql" />
-    <Build Include="dbo\Tables\DrivingPassangers.sql" />
+    <Build Include="dbo\Tables\Ride.sql" />
+    <Build Include="dbo\Tables\RidePassangers.sql" />
     <Build Include="dbo\Tables\Car.sql" />
   </ItemGroup>
   <ItemGroup>
