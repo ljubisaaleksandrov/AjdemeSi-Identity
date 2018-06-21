@@ -1,0 +1,23 @@
+﻿@using AjdemeSi.Domain.Models.Ride
+@model RideDashboardViewModel
+
+@{
+    ViewBag.Title = "Rides";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @if(Model.UserCommonViewModel.IsDriver)
+    {
+        @Html.Partial("_DriverRides", Model.DriverRidePagedListViewModel)
+    }
+    @if (!Model.UserCommonViewModel.IsDriver || Model.UserCommonViewModel.LoadResults)
+    {
+        @Html.Partial("_RidesList", Model.RidePagedListViewModel)
+    }
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/Scripts/Custom/autocomplete.js"></script>
+}
