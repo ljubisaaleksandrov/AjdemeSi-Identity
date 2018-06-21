@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -173,7 +174,9 @@ namespace AjdemeSi.Controllers
         [AllowAnonymous]
         public ActionResult RegisterDriver()
         {
-            return PartialView();
+            RegisterDriverViewModel viewModel = new RegisterDriverViewModel();
+            viewModel.MakesList = new List<string>() { "Audi", "Mercedes" };
+            return PartialView(viewModel);
         }
 
         //

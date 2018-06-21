@@ -18,20 +18,19 @@ namespace AjdemeSi.Domain
         public UsersGroup()
         {
             this.ChatMessages = new HashSet<ChatMessage>();
-            this.Drivings = new HashSet<Driving>();
             this.GroupMembers = new HashSet<GroupMember>();
         }
     
         public int Id { get; set; }
         public string UserCreatorId { get; set; }
         public System.DateTime DateCreated { get; set; }
+        public Nullable<int> RideId { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChatMessage> ChatMessages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Driving> Drivings { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GroupMember> GroupMembers { get; set; }
+        public virtual Ride Ride { get; set; }
     }
 }

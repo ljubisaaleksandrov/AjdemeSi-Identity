@@ -66,7 +66,6 @@
           <Property Name="Make" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Model" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="YearOfManufacture" Type="int" Nullable="false" />
-          <Property Name="SiteRegistrationDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="ChatMessage">
           <Key>
@@ -87,7 +86,24 @@
           <Property Name="LicenceRegistrationDate" Type="datetime" Nullable="false" />
           <Property Name="SiteRegistrationDate" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="Driving">
+        <EntityType Name="Friends">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Friend1Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Friend2Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GroupMembers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UsersGroupId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ride">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -107,35 +123,27 @@
           <Property Name="MinTotalPrice" Type="real" Nullable="false" />
           <Property Name="PricePerPassenger" Type="real" Nullable="false" />
           <Property Name="ReturnDrivingId" Type="int" />
-          <Property Name="UsersGroupId" Type="int" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" />
         </EntityType>
-        <EntityType Name="DrivingPassangers">
+        <EntityType Name="RidePassangers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="DrivingId" Type="int" Nullable="false" />
+          <Property Name="RideId" Type="int" Nullable="false" />
           <Property Name="Rate" Type="int" />
           <Property Name="RateComment" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="Friends">
+        <EntityType Name="sysdiagrams">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Friend1Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Friend2Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="GroupMembers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UsersGroupId" Type="int" Nullable="false" />
-          <Property Name="MemberId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="UserSettings">
           <Key>
@@ -155,6 +163,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserCreatorId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="RideId" Type="int" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -264,66 +273,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Driving_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="Driving" Type="Self.Driving" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Driving">
-              <PropertyRef Name="DriverUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Driving_dbo_Driving_Id">
-          <End Role="Driving" Type="Self.Driving" Multiplicity="0..1" />
-          <End Role="Driving1" Type="Self.Driving" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Driving">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Driving1">
-              <PropertyRef Name="ReturnDrivingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Driving_dbo_UsersGroup_UsersGroupId">
-          <End Role="UsersGroup" Type="Self.UsersGroup" Multiplicity="1" />
-          <End Role="Driving" Type="Self.Driving" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UsersGroup">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Driving">
-              <PropertyRef Name="UsersGroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_DrivingPassengers_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="DrivingPassangers" Type="Self.DrivingPassangers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DrivingPassangers">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_DrivingPassengers_dbo_Driving_Id">
-          <End Role="Driving" Type="Self.Driving" Multiplicity="1" />
-          <End Role="DrivingPassangers" Type="Self.DrivingPassangers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Driving">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DrivingPassangers">
-              <PropertyRef Name="DrivingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_Friends1_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Friends" Type="Self.Friends" Multiplicity="*" />
@@ -372,6 +321,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_Ride_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Ride" Type="Self.Ride" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ride">
+              <PropertyRef Name="DriverUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ride_dbo_Ride_Id">
+          <End Role="Ride" Type="Self.Ride" Multiplicity="0..1" />
+          <End Role="Ride1" Type="Self.Ride" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ride">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ride1">
+              <PropertyRef Name="ReturnDrivingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RidePassengers_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="RidePassangers" Type="Self.RidePassangers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RidePassangers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RidePassengers_dbo_Driving_Id">
+          <End Role="Ride" Type="Self.Ride" Multiplicity="1" />
+          <End Role="RidePassangers" Type="Self.RidePassangers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ride">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RidePassangers">
+              <PropertyRef Name="RideId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_UserSettings_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -398,6 +395,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_UsersGroup_dbo_Ride_RideId">
+          <End Role="Ride" Type="Self.Ride" Multiplicity="0..1" />
+          <End Role="UsersGroup" Type="Self.UsersGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ride">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsersGroup">
+              <PropertyRef Name="RideId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="AjdemeSiDomainModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -407,10 +416,11 @@
           <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChatMessage" EntityType="Self.ChatMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Driving" EntityType="Self.Driving" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DrivingPassangers" EntityType="Self.DrivingPassangers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Friends" EntityType="Self.Friends" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupMembers" EntityType="Self.GroupMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ride" EntityType="Self.Ride" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RidePassangers" EntityType="Self.RidePassangers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserSettings" EntityType="Self.UserSettings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersGroup" EntityType="Self.UsersGroup" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -445,26 +455,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Driver" EntitySet="Driver" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Driving_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_Driving_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Driving" EntitySet="Driving" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Driving_dbo_Driving_Id" Association="Self.FK_dbo_Driving_dbo_Driving_Id">
-            <End Role="Driving" EntitySet="Driving" />
-            <End Role="Driving1" EntitySet="Driving" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Driving_dbo_UsersGroup_UsersGroupId" Association="Self.FK_dbo_Driving_dbo_UsersGroup_UsersGroupId">
-            <End Role="UsersGroup" EntitySet="UsersGroup" />
-            <End Role="Driving" EntitySet="Driving" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_DrivingPassengers_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_DrivingPassengers_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="DrivingPassangers" EntitySet="DrivingPassangers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_DrivingPassengers_dbo_Driving_Id" Association="Self.FK_dbo_DrivingPassengers_dbo_Driving_Id">
-            <End Role="Driving" EntitySet="Driving" />
-            <End Role="DrivingPassangers" EntitySet="DrivingPassangers" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_Friends1_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_Friends1_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Friends" EntitySet="Friends" />
@@ -481,12 +471,32 @@
             <End Role="UsersGroup" EntitySet="UsersGroup" />
             <End Role="GroupMembers" EntitySet="GroupMembers" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ride_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_Ride_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Ride" EntitySet="Ride" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ride_dbo_Ride_Id" Association="Self.FK_dbo_Ride_dbo_Ride_Id">
+            <End Role="Ride" EntitySet="Ride" />
+            <End Role="Ride1" EntitySet="Ride" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RidePassengers_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_RidePassengers_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="RidePassangers" EntitySet="RidePassangers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RidePassengers_dbo_Driving_Id" Association="Self.FK_dbo_RidePassengers_dbo_Driving_Id">
+            <End Role="Ride" EntitySet="Ride" />
+            <End Role="RidePassangers" EntitySet="RidePassangers" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_UserSettings_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_UserSettings_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="UserSettings" EntitySet="UserSettings" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_UsersGroup_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_UsersGroup_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UsersGroup" EntitySet="UsersGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UsersGroup_dbo_Ride_RideId" Association="Self.FK_dbo_UsersGroup_dbo_Ride_RideId">
+            <End Role="Ride" EntitySet="Ride" />
             <End Role="UsersGroup" EntitySet="UsersGroup" />
           </AssociationSet>
         </EntityContainer>
@@ -532,10 +542,11 @@
           <EntitySet Name="Cars" EntityType="AjdemeSi.DomainModel.Car" />
           <EntitySet Name="ChatMessages" EntityType="AjdemeSi.DomainModel.ChatMessage" />
           <EntitySet Name="Drivers" EntityType="AjdemeSi.DomainModel.Driver" />
-          <EntitySet Name="Drivings" EntityType="AjdemeSi.DomainModel.Driving" />
-          <EntitySet Name="DrivingPassangers" EntityType="AjdemeSi.DomainModel.DrivingPassanger" />
           <EntitySet Name="Friends" EntityType="AjdemeSi.DomainModel.Friend" />
           <EntitySet Name="GroupMembers" EntityType="AjdemeSi.DomainModel.GroupMember" />
+          <EntitySet Name="Rides" EntityType="AjdemeSi.DomainModel.Ride" />
+          <EntitySet Name="RidePassangers" EntityType="AjdemeSi.DomainModel.RidePassanger" />
+          <EntitySet Name="sysdiagrams" EntityType="AjdemeSi.DomainModel.sysdiagram" />
           <EntitySet Name="UserSettings" EntityType="AjdemeSi.DomainModel.UserSetting" />
           <EntitySet Name="UsersGroups" EntityType="AjdemeSi.DomainModel.UsersGroup" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -554,14 +565,6 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Driver" EntitySet="Drivers" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Driving_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="Driving" EntitySet="Drivings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_DrivingPassengers_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_DrivingPassengers_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="DrivingPassanger" EntitySet="DrivingPassangers" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_Friends1_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_Friends1_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Friend" EntitySet="Friends" />
@@ -573,6 +576,14 @@
           <AssociationSet Name="FK_dbo_GroupMembers_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_GroupMembers_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="GroupMember" EntitySet="GroupMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ride_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_Ride_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Ride" EntitySet="Rides" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RidePassengers_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_RidePassengers_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="RidePassanger" EntitySet="RidePassangers" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_UserSettings_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_UserSettings_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
@@ -590,21 +601,21 @@
             <End Role="UsersGroup" EntitySet="UsersGroups" />
             <End Role="ChatMessage" EntitySet="ChatMessages" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Driving_dbo_Driving_Id" Association="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_Driving_Id">
-            <End Role="Driving" EntitySet="Drivings" />
-            <End Role="Driving1" EntitySet="Drivings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Driving_dbo_UsersGroup_UsersGroupId" Association="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_UsersGroup_UsersGroupId">
-            <End Role="UsersGroup" EntitySet="UsersGroups" />
-            <End Role="Driving" EntitySet="Drivings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_DrivingPassengers_dbo_Driving_Id" Association="AjdemeSi.DomainModel.FK_dbo_DrivingPassengers_dbo_Driving_Id">
-            <End Role="Driving" EntitySet="Drivings" />
-            <End Role="DrivingPassanger" EntitySet="DrivingPassangers" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_GroupMembers_dbo_UsersGroup_UsersGroupId" Association="AjdemeSi.DomainModel.FK_dbo_GroupMembers_dbo_UsersGroup_UsersGroupId">
             <End Role="UsersGroup" EntitySet="UsersGroups" />
             <End Role="GroupMember" EntitySet="GroupMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ride_dbo_Ride_Id" Association="AjdemeSi.DomainModel.FK_dbo_Ride_dbo_Ride_Id">
+            <End Role="Ride" EntitySet="Rides" />
+            <End Role="Ride1" EntitySet="Rides" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RidePassengers_dbo_Driving_Id" Association="AjdemeSi.DomainModel.FK_dbo_RidePassengers_dbo_Driving_Id">
+            <End Role="Ride" EntitySet="Rides" />
+            <End Role="RidePassanger" EntitySet="RidePassangers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UsersGroup_dbo_Ride_RideId" Association="AjdemeSi.DomainModel.FK_dbo_UsersGroup_dbo_Ride_RideId">
+            <End Role="Ride" EntitySet="Rides" />
+            <End Role="UsersGroup" EntitySet="UsersGroups" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="AjdemeSi.DomainModel.AspNetUserRoles">
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
@@ -672,11 +683,11 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="AjdemeSi.DomainModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="ChatMessages" Relationship="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="ChatMessage" />
           <NavigationProperty Name="Driver" Relationship="AjdemeSi.DomainModel.FK_dbo_Driver_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="Driver" />
-          <NavigationProperty Name="Drivings" Relationship="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="Driving" />
-          <NavigationProperty Name="DrivingPassangers" Relationship="AjdemeSi.DomainModel.FK_dbo_DrivingPassengers_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="DrivingPassanger" />
           <NavigationProperty Name="Friends" Relationship="AjdemeSi.DomainModel.FK_dbo_Friends1_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="Friend" />
           <NavigationProperty Name="Friends1" Relationship="AjdemeSi.DomainModel.FK_dbo_Friends2_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="Friend" />
           <NavigationProperty Name="GroupMembers" Relationship="AjdemeSi.DomainModel.FK_dbo_GroupMembers_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="GroupMember" />
+          <NavigationProperty Name="Rides" Relationship="AjdemeSi.DomainModel.FK_dbo_Ride_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="Ride" />
+          <NavigationProperty Name="RidePassangers" Relationship="AjdemeSi.DomainModel.FK_dbo_RidePassengers_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="RidePassanger" />
           <NavigationProperty Name="UserSettings" Relationship="AjdemeSi.DomainModel.FK_dbo_UserSettings_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="UserSetting" />
           <NavigationProperty Name="UsersGroups" Relationship="AjdemeSi.DomainModel.FK_dbo_UsersGroup_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="UsersGroup" />
           <NavigationProperty Name="AspNetRoles" Relationship="AjdemeSi.DomainModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
@@ -690,7 +701,6 @@
           <Property Name="Make" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Model" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="YearOfManufacture" Type="Int32" Nullable="false" />
-          <Property Name="SiteRegistrationDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Driver" Relationship="AjdemeSi.DomainModel.FK_dbo_Car_dbo_Driver_UserId" FromRole="Car" ToRole="Driver" />
         </EntityType>
         <EntityType Name="ChatMessage">
@@ -716,46 +726,6 @@
           <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_Driver_dbo_AspNetUsers_UserId" FromRole="Driver" ToRole="AspNetUser" />
           <NavigationProperty Name="Cars" Relationship="AjdemeSi.DomainModel.FK_dbo_Car_dbo_Driver_UserId" FromRole="Driver" ToRole="Car" />
         </EntityType>
-        <EntityType Name="Driving">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DriverUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="FromCounty" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="FromCity" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="FromPlace" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ToCounty" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ToCity" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ToPlace" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TravelTime" Type="Int32" Nullable="false" />
-          <Property Name="MaxPassengers" Type="Int32" Nullable="false" />
-          <Property Name="TotalPrice" Type="Single" Nullable="false" />
-          <Property Name="MinTotalPrice" Type="Single" Nullable="false" />
-          <Property Name="PricePerPassenger" Type="Single" Nullable="false" />
-          <Property Name="ReturnDrivingId" Type="Int32" />
-          <Property Name="UsersGroupId" Type="Int32" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_AspNetUsers_UserId" FromRole="Driving" ToRole="AspNetUser" />
-          <NavigationProperty Name="Driving1" Relationship="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_Driving_Id" FromRole="Driving" ToRole="Driving1" />
-          <NavigationProperty Name="Driving2" Relationship="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_Driving_Id" FromRole="Driving1" ToRole="Driving" />
-          <NavigationProperty Name="UsersGroup" Relationship="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_UsersGroup_UsersGroupId" FromRole="Driving" ToRole="UsersGroup" />
-          <NavigationProperty Name="DrivingPassangers" Relationship="AjdemeSi.DomainModel.FK_dbo_DrivingPassengers_dbo_Driving_Id" FromRole="Driving" ToRole="DrivingPassanger" />
-        </EntityType>
-        <EntityType Name="DrivingPassanger">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="DrivingId" Type="Int32" Nullable="false" />
-          <Property Name="Rate" Type="Int32" />
-          <Property Name="RateComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_DrivingPassengers_dbo_AspNetUsers_UserId" FromRole="DrivingPassanger" ToRole="AspNetUser" />
-          <NavigationProperty Name="Driving" Relationship="AjdemeSi.DomainModel.FK_dbo_DrivingPassengers_dbo_Driving_Id" FromRole="DrivingPassanger" ToRole="Driving" />
-        </EntityType>
         <EntityType Name="Friend">
           <Key>
             <PropertyRef Name="Id" />
@@ -777,6 +747,55 @@
           <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_GroupMembers_dbo_AspNetUsers_UserId" FromRole="GroupMember" ToRole="AspNetUser" />
           <NavigationProperty Name="UsersGroup" Relationship="AjdemeSi.DomainModel.FK_dbo_GroupMembers_dbo_UsersGroup_UsersGroupId" FromRole="GroupMember" ToRole="UsersGroup" />
         </EntityType>
+        <EntityType Name="Ride">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DriverUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FromCounty" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FromCity" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FromPlace" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ToCounty" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ToCity" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ToPlace" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TravelTime" Type="Int32" Nullable="false" />
+          <Property Name="MaxPassengers" Type="Int32" Nullable="false" />
+          <Property Name="TotalPrice" Type="Single" Nullable="false" />
+          <Property Name="MinTotalPrice" Type="Single" Nullable="false" />
+          <Property Name="PricePerPassenger" Type="Single" Nullable="false" />
+          <Property Name="ReturnDrivingId" Type="Int32" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_Ride_dbo_AspNetUsers_UserId" FromRole="Ride" ToRole="AspNetUser" />
+          <NavigationProperty Name="Ride1" Relationship="AjdemeSi.DomainModel.FK_dbo_Ride_dbo_Ride_Id" FromRole="Ride" ToRole="Ride1" />
+          <NavigationProperty Name="Ride2" Relationship="AjdemeSi.DomainModel.FK_dbo_Ride_dbo_Ride_Id" FromRole="Ride1" ToRole="Ride" />
+          <NavigationProperty Name="RidePassangers" Relationship="AjdemeSi.DomainModel.FK_dbo_RidePassengers_dbo_Driving_Id" FromRole="Ride" ToRole="RidePassanger" />
+          <NavigationProperty Name="UsersGroups" Relationship="AjdemeSi.DomainModel.FK_dbo_UsersGroup_dbo_Ride_RideId" FromRole="Ride" ToRole="UsersGroup" />
+        </EntityType>
+        <EntityType Name="RidePassanger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RideId" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Int32" />
+          <Property Name="RateComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_RidePassengers_dbo_AspNetUsers_UserId" FromRole="RidePassanger" ToRole="AspNetUser" />
+          <NavigationProperty Name="Ride" Relationship="AjdemeSi.DomainModel.FK_dbo_RidePassengers_dbo_Driving_Id" FromRole="RidePassanger" ToRole="Ride" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="UserSetting">
           <Key>
             <PropertyRef Name="Id" />
@@ -796,10 +815,11 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserCreatorId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RideId" Type="Int32" />
           <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_UsersGroup_dbo_AspNetUsers_UserId" FromRole="UsersGroup" ToRole="AspNetUser" />
           <NavigationProperty Name="ChatMessages" Relationship="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_UsersGroup_UsersGroupId" FromRole="UsersGroup" ToRole="ChatMessage" />
-          <NavigationProperty Name="Drivings" Relationship="AjdemeSi.DomainModel.FK_dbo_Driving_dbo_UsersGroup_UsersGroupId" FromRole="UsersGroup" ToRole="Driving" />
           <NavigationProperty Name="GroupMembers" Relationship="AjdemeSi.DomainModel.FK_dbo_GroupMembers_dbo_UsersGroup_UsersGroupId" FromRole="UsersGroup" ToRole="GroupMember" />
+          <NavigationProperty Name="Ride" Relationship="AjdemeSi.DomainModel.FK_dbo_UsersGroup_dbo_Ride_RideId" FromRole="UsersGroup" ToRole="Ride" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
@@ -855,30 +875,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Driving_dbo_AspNetUsers_UserId">
-          <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="AjdemeSi.DomainModel.Driving" Role="Driving" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Driving">
-              <PropertyRef Name="DriverUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_DrivingPassengers_dbo_AspNetUsers_UserId">
-          <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="AjdemeSi.DomainModel.DrivingPassanger" Role="DrivingPassanger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DrivingPassanger">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_Friends1_dbo_AspNetUsers_UserId">
           <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
           <End Type="AjdemeSi.DomainModel.Friend" Role="Friend" Multiplicity="*" />
@@ -912,6 +908,30 @@
             </Principal>
             <Dependent Role="GroupMember">
               <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ride_dbo_AspNetUsers_UserId">
+          <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="AjdemeSi.DomainModel.Ride" Role="Ride" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ride">
+              <PropertyRef Name="DriverUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RidePassengers_dbo_AspNetUsers_UserId">
+          <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="AjdemeSi.DomainModel.RidePassanger" Role="RidePassanger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RidePassanger">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -967,42 +987,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Driving_dbo_Driving_Id">
-          <End Type="AjdemeSi.DomainModel.Driving" Role="Driving" Multiplicity="0..1" />
-          <End Type="AjdemeSi.DomainModel.Driving" Role="Driving1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Driving">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Driving1">
-              <PropertyRef Name="ReturnDrivingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Driving_dbo_UsersGroup_UsersGroupId">
-          <End Type="AjdemeSi.DomainModel.UsersGroup" Role="UsersGroup" Multiplicity="1" />
-          <End Type="AjdemeSi.DomainModel.Driving" Role="Driving" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UsersGroup">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Driving">
-              <PropertyRef Name="UsersGroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_DrivingPassengers_dbo_Driving_Id">
-          <End Type="AjdemeSi.DomainModel.Driving" Role="Driving" Multiplicity="1" />
-          <End Type="AjdemeSi.DomainModel.DrivingPassanger" Role="DrivingPassanger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Driving">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DrivingPassanger">
-              <PropertyRef Name="DrivingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_GroupMembers_dbo_UsersGroup_UsersGroupId">
           <End Type="AjdemeSi.DomainModel.UsersGroup" Role="UsersGroup" Multiplicity="1" />
           <End Type="AjdemeSi.DomainModel.GroupMember" Role="GroupMember" Multiplicity="*" />
@@ -1012,6 +996,42 @@
             </Principal>
             <Dependent Role="GroupMember">
               <PropertyRef Name="UsersGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ride_dbo_Ride_Id">
+          <End Type="AjdemeSi.DomainModel.Ride" Role="Ride" Multiplicity="0..1" />
+          <End Type="AjdemeSi.DomainModel.Ride" Role="Ride1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ride">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ride1">
+              <PropertyRef Name="ReturnDrivingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RidePassengers_dbo_Driving_Id">
+          <End Type="AjdemeSi.DomainModel.Ride" Role="Ride" Multiplicity="1" />
+          <End Type="AjdemeSi.DomainModel.RidePassanger" Role="RidePassanger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ride">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RidePassanger">
+              <PropertyRef Name="RideId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UsersGroup_dbo_Ride_RideId">
+          <End Type="AjdemeSi.DomainModel.Ride" Role="Ride" Multiplicity="0..1" />
+          <End Type="AjdemeSi.DomainModel.UsersGroup" Role="UsersGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ride">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsersGroup">
+              <PropertyRef Name="RideId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1074,7 +1094,6 @@
           <EntitySetMapping Name="Cars">
             <EntityTypeMapping TypeName="AjdemeSi.DomainModel.Car">
               <MappingFragment StoreEntitySet="Car">
-                <ScalarProperty Name="SiteRegistrationDate" ColumnName="SiteRegistrationDate" />
                 <ScalarProperty Name="YearOfManufacture" ColumnName="YearOfManufacture" />
                 <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="Make" ColumnName="Make" />
@@ -1104,41 +1123,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Drivings">
-            <EntityTypeMapping TypeName="AjdemeSi.DomainModel.Driving">
-              <MappingFragment StoreEntitySet="Driving">
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="UsersGroupId" ColumnName="UsersGroupId" />
-                <ScalarProperty Name="ReturnDrivingId" ColumnName="ReturnDrivingId" />
-                <ScalarProperty Name="PricePerPassenger" ColumnName="PricePerPassenger" />
-                <ScalarProperty Name="MinTotalPrice" ColumnName="MinTotalPrice" />
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-                <ScalarProperty Name="MaxPassengers" ColumnName="MaxPassengers" />
-                <ScalarProperty Name="TravelTime" ColumnName="TravelTime" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="ToPlace" ColumnName="ToPlace" />
-                <ScalarProperty Name="ToCity" ColumnName="ToCity" />
-                <ScalarProperty Name="ToCounty" ColumnName="ToCounty" />
-                <ScalarProperty Name="FromPlace" ColumnName="FromPlace" />
-                <ScalarProperty Name="FromCity" ColumnName="FromCity" />
-                <ScalarProperty Name="FromCounty" ColumnName="FromCounty" />
-                <ScalarProperty Name="DriverUserId" ColumnName="DriverUserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DrivingPassangers">
-            <EntityTypeMapping TypeName="AjdemeSi.DomainModel.DrivingPassanger">
-              <MappingFragment StoreEntitySet="DrivingPassangers">
-                <ScalarProperty Name="RateComment" ColumnName="RateComment" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="DrivingId" ColumnName="DrivingId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Friends">
             <EntityTypeMapping TypeName="AjdemeSi.DomainModel.Friend">
               <MappingFragment StoreEntitySet="Friends">
@@ -1158,6 +1142,51 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Rides">
+            <EntityTypeMapping TypeName="AjdemeSi.DomainModel.Ride">
+              <MappingFragment StoreEntitySet="Ride">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ReturnDrivingId" ColumnName="ReturnDrivingId" />
+                <ScalarProperty Name="PricePerPassenger" ColumnName="PricePerPassenger" />
+                <ScalarProperty Name="MinTotalPrice" ColumnName="MinTotalPrice" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="MaxPassengers" ColumnName="MaxPassengers" />
+                <ScalarProperty Name="TravelTime" ColumnName="TravelTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="ToPlace" ColumnName="ToPlace" />
+                <ScalarProperty Name="ToCity" ColumnName="ToCity" />
+                <ScalarProperty Name="ToCounty" ColumnName="ToCounty" />
+                <ScalarProperty Name="FromPlace" ColumnName="FromPlace" />
+                <ScalarProperty Name="FromCity" ColumnName="FromCity" />
+                <ScalarProperty Name="FromCounty" ColumnName="FromCounty" />
+                <ScalarProperty Name="DriverUserId" ColumnName="DriverUserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RidePassangers">
+            <EntityTypeMapping TypeName="AjdemeSi.DomainModel.RidePassanger">
+              <MappingFragment StoreEntitySet="RidePassangers">
+                <ScalarProperty Name="RateComment" ColumnName="RateComment" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="RideId" ColumnName="RideId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AjdemeSi.DomainModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UserSettings">
             <EntityTypeMapping TypeName="AjdemeSi.DomainModel.UserSetting">
               <MappingFragment StoreEntitySet="UserSettings">
@@ -1173,6 +1202,7 @@
           <EntitySetMapping Name="UsersGroups">
             <EntityTypeMapping TypeName="AjdemeSi.DomainModel.UsersGroup">
               <MappingFragment StoreEntitySet="UsersGroup">
+                <ScalarProperty Name="RideId" ColumnName="RideId" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="UserCreatorId" ColumnName="UserCreatorId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

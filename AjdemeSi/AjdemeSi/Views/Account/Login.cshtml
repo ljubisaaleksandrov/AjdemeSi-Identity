@@ -1,7 +1,7 @@
 ﻿@using AjdemeSi.Models
 @model LoginViewModel
 
-<div class="row">
+<div class="col-md-3 col-sm-4 col-xs-12 sign-in-wrapper">
     <div class="col-xs-12">
         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "login-form", role = "form" }))
         {
@@ -24,7 +24,7 @@
                 <div class="col-md-12">
                     <div class="inner-addon left-addon">
                         <i class="glyphicon glyphicon-lock"></i>
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder="Password" })
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
                     </div>
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>
@@ -45,7 +45,7 @@
             </div>
             <p>
                 Or&nbsp;
-                @Html.ActionLink("Register", "Register", "Account", null, new { @class= "btn btn-default sign-in-button sign-in-button-post" })
+                @Html.ActionLink("Register", "Register", "Account", null, new { @class = "btn btn-default sign-in-button sign-in-button-post" })
                 as a new user
             </p>
         }
