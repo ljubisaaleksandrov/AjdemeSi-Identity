@@ -8,13 +8,13 @@ namespace AjdemeSi.Controllers
         { 
             if (User.IsInRole("Admin"))
                 return RedirectToAction("Index", "Home", new { area = "Administration" });
-            //else if(User.Identity.IsAuthenticated)
-            //{
-            //    if (User.IsInRole("Driver"))
-            //        return RedirectToAction("Routes", "Index");
-            //    else
-            //        return RedirectToAction("Logoff", "Account");
-            //}
+            else if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Driver"))
+                    return RedirectToAction("Routes", "Index");
+                else
+                    return RedirectToAction("Index", "Ride");
+            }
             else
                 return View();
         }

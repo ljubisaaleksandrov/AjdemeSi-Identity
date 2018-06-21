@@ -34,10 +34,11 @@ namespace AjdemeSi.Domain
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<ChatMessage> ChatMessages { get; set; }
         public virtual DbSet<Driver> Drivers { get; set; }
-        public virtual DbSet<Driving> Drivings { get; set; }
-        public virtual DbSet<DrivingPassanger> DrivingPassangers { get; set; }
         public virtual DbSet<Friend> Friends { get; set; }
         public virtual DbSet<GroupMember> GroupMembers { get; set; }
+        public virtual DbSet<Ride> Rides { get; set; }
+        public virtual DbSet<RidePassanger> RidePassangers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UserSetting> UserSettings { get; set; }
         public virtual DbSet<UsersGroup> UsersGroups { get; set; }
     

@@ -10,6 +10,7 @@ using AjdemeSi.Services.Interfaces.Identity;
 using AjdemeSi.Services.Logic;
 using AjdemeSi.Controllers;
 using AjdemeSi.Domain.Models.Identity;
+using AjdemeSi.Domain.Models.Ride;
 
 namespace AjdemeSi.App_Start
 {
@@ -17,8 +18,6 @@ namespace AjdemeSi.App_Start
     {
         public static void Configure()
         {
-            var test = AppDomain.CurrentDomain.GetAssemblies().OrderBy(x => x.FullName);
-
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             if(AppDomain.CurrentDomain.GetAssemblies().Any(a => a.GetName().Name == "AjdemeSi.Services"))
@@ -29,14 +28,16 @@ namespace AjdemeSi.App_Start
 
             builder.Register<IMapper>(c => new MapperConfiguration(cfg =>
             {
+                cfg.CreateMap<IdentityUserViewModel, AspNetUser>();
                 cfg.CreateMap<AspNetUser, IdentityUserViewModel>()
                    .ForMember(dest => dest.UserRoles, opt => opt.MapFrom(src => src.AspNetRoles.Select(ur => ur.Name)));
-                cfg.CreateMap<IdentityUserViewModel, AspNetUser>();
 
-                //cfg.CreateMap<QuestionCategory, QuestionCategoryViewModel>()
-                //                                                .ForMember(dest => dest.QuestionAnswerType, opt => opt.MapFrom(src => src.AnswerType))
-                //                                                .ForMember(dest => dest.Parent, opt => opt.MapFrom(src => src.QuestionCategory2.Name));
-                //cfg.CreateMap<QuestionCategoryViewModel, QuestionCategory>();
+                cfg.CreateMap<RidePassanger, AspNetUser>();
+                cfg.CreateMap<RidePassanger, RidePassengerViewModel>()
+                   .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.AspNetUser.UserName));
+                cfg.CreateMap<RideDriverViewModel, RidePassanger>();
+                cfg.CreateMap<RideViewModel, Ride>().ForMember(d => d.RidePassangers, opt => opt.MapFrom(s => s.Passengers));
+
             }).CreateMapper());
 
             var container = builder.Build();
