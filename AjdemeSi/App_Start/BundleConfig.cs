@@ -9,7 +9,8 @@ namespace AjdemeSi
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-ui.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -30,8 +31,11 @@ namespace AjdemeSi
             bundles.Add(new ScriptBundle("~/bundles/bussiness").Include(
                       "~/Scripts/Custom/bussiness.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/autocomplete").Include(
+                      "~/Scripts/Custom/autocomplete.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/jquery-ui.css",
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/custom.css"));

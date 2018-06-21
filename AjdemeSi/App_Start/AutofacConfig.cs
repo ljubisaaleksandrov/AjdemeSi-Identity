@@ -18,8 +18,6 @@ namespace AjdemeSi.App_Start
     {
         public static void Configure()
         {
-            var test = AppDomain.CurrentDomain.GetAssemblies().OrderBy(x => x.FullName);
-
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             if(AppDomain.CurrentDomain.GetAssemblies().Any(a => a.GetName().Name == "AjdemeSi.Services"))
@@ -36,14 +34,10 @@ namespace AjdemeSi.App_Start
 
                 cfg.CreateMap<RidePassanger, AspNetUser>();
                 cfg.CreateMap<RidePassanger, RidePassengerViewModel>()
-                   .ForMember(dest => dest, opt => opt.MapFrom(src => src.AspNetUser));
+                   .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.AspNetUser.UserName));
                 cfg.CreateMap<RideDriverViewModel, RidePassanger>();
                 cfg.CreateMap<RideViewModel, Ride>().ForMember(d => d.RidePassangers, opt => opt.MapFrom(s => s.Passengers));
 
-                //cfg.CreateMap<QuestionCategory, QuestionCategoryViewModel>()
-                //                                                .ForMember(dest => dest.QuestionAnswerType, opt => opt.MapFrom(src => src.AnswerType))
-                //                                                .ForMember(dest => dest.Parent, opt => opt.MapFrom(src => src.QuestionCategory2.Name));
-                //cfg.CreateMap<QuestionCategoryViewModel, QuestionCategory>();
             }).CreateMapper());
 
             var container = builder.Build();

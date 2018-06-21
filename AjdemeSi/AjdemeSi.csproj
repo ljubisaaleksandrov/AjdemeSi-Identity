@@ -227,7 +227,7 @@
     <Compile Include="Areas\Administration\Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\Administration\Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RideController.cs" />
+    <Compile Include="Controllers\RidesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -249,6 +249,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom.css" />
+    <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\sbAdmin\font-awesome.min.css" />
     <Content Include="Content\sbAdmin\metisMenu.min.css" />
@@ -292,9 +293,11 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\Custom\autocomplete.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -352,6 +355,9 @@
     <Content Include="Views\Contacts\Edit.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Account\RegisterDriver.cshtml" />
+    <Content Include="Views\Rides\Index.cshtml" />
+    <Content Include="Views\Rides\_DriverRides.cshtml" />
+    <Content Include="Views\Rides\_RidesList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

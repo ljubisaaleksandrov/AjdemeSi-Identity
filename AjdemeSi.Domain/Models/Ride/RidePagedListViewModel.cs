@@ -20,14 +20,14 @@ namespace AjdemeSi.Domain.Models.Ride
         public List<SelectListItem> CountsList { get; set; }
 
         public RidePagedListViewModel(IQueryable<RideEF> superset,
-                                      string countryFrom,
-                                      string cityFrom,
-                                      string countryTo,
-                                      string cityTo,
                                       int pageNumber, 
                                       int pageSize, 
                                       int totalItemsCount,
-                                      IMapper mapper)
+                                      IMapper mapper,
+                                      string countryFrom = "",
+                                      string cityFrom = "",
+                                      string countryTo = "",
+                                      string cityTo = "")
         : base(superset, pageNumber, pageSize)
         {
             ListEntries = mapper.Map<List<RideViewModel>>(superset.ToList());
@@ -55,12 +55,12 @@ namespace AjdemeSi.Domain.Models.Ride
                                               int pageNumber, 
                                               int pageSize, 
                                               int totalItemsCount,
-                                              string countryFrom,
-                                              string cityFrom,
-                                              string countryTo,
-                                              string cityTo,
-                                              IMapper mapper)
-        : this(superset.AsQueryable<RideEF>(), countryFrom, cityFrom, countryTo, cityTo, pageNumber, pageSize, totalItemsCount, mapper)
+                                              IMapper mapper,
+                                              string countryFrom = "",
+                                              string cityFrom = "",
+                                              string countryTo = "",
+                                              string cityTo = "")
+        : this(superset.AsQueryable<RideEF>(), pageNumber, pageSize, totalItemsCount, mapper, countryFrom, cityFrom, countryTo, cityTo)
         { }
     }
 }

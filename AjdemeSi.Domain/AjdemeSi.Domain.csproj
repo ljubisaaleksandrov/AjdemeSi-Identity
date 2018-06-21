@@ -103,6 +103,8 @@
     <Compile Include="GroupMember.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Common\UserCommonViewModel.cs" />
+    <Compile Include="Models\Ride\RideDashboardViewModel.cs" />
     <Compile Include="Models\Ride\RidePassengerViewModel.cs" />
     <Compile Include="Models\Ride\RideDriverViewModel.cs" />
     <Compile Include="Models\Ride\RidePagedListViewModel.cs" />
@@ -172,5 +174,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

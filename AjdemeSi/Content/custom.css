@@ -46,6 +46,10 @@
 
 
 /*------ custom ------*/
+span.highlight {
+    color: gray;
+    font-weight: bold;
+}
 .home-content-wrapper {
     background-image: url("../Images/cheap-rental-cars-credit-card.jpg");
 }
