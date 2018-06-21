@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{6ffc4f2a-c576-4063-9db9-6fa6f155ad47}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -74,8 +74,8 @@
     <Build Include="dbo\Tables\UsersGroupMembers.sql" />
     <Build Include="dbo\Tables\UserSettings.sql" />
     <Build Include="dbo\Tables\Driver.sql" />
-    <Build Include="dbo\Tables\Driving.sql" />
-    <Build Include="dbo\Tables\DrivingPassangers.sql" />
+    <Build Include="dbo\Tables\Ride.sql" />
+    <Build Include="dbo\Tables\RidePassangers.sql" />
     <Build Include="dbo\Tables\Car.sql" />
   </ItemGroup>
   <ItemGroup>

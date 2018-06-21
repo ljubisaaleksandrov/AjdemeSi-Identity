@@ -6,7 +6,7 @@
                 url: "/Rides/GetCities",
                 type: "GET",
                 dataType: "json",
-                data: request,
+                data: requ est,
                 success: function (data) {
                     var escapedTerm = request.term.replace(/([\^\$\(\)\[\]\{\}\*\.\+\?\|\\])/gi, "\\$1");
                     var regex = new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + escapedTerm + ")(?![^<>]*>)(?![^&;]+;)", "gi");

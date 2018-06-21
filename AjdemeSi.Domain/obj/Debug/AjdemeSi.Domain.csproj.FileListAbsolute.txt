@@ -55,3 +55,39 @@ C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\Ajdem
 C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.dll
 C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.pdb
 C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.csprojResolveAssemblyReference.cache
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\AjdemeSi.Domain.dll.config
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\AjdemeSi.Domain.dll
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\AjdemeSi.Domain.pdb
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\AutoMapper.dll
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\EntityFramework.dll
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\PagedList.dll
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\PagedList.Mvc.dll
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\System.Web.Mvc.dll
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\AutoMapper.xml
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\EntityFramework.xml
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\PagedList.xml
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\PagedList.Mvc.xml
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\System.Web.Mvc.xml
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.csprojResolveAssemblyReference.cache
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.dll
+C:\Users\Bube\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.pdb
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\AjdemeSi.Domain.dll.config
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\AjdemeSi.Domain.dll
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\AjdemeSi.Domain.pdb
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\AutoMapper.dll
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\EntityFramework.dll
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\PagedList.dll
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\PagedList.Mvc.dll
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\System.Web.Mvc.dll
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\AutoMapper.xml
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\EntityFramework.xml
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\PagedList.xml
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\PagedList.Mvc.xml
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\System.Web.Mvc.xml
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.csprojResolveAssemblyReference.cache
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.dll
+C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.pdb

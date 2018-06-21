@@ -20,11 +20,11 @@ namespace AjdemeSi.Domain
             this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.ChatMessages = new HashSet<ChatMessage>();
-            this.Drivings = new HashSet<Driving>();
-            this.DrivingPassangers = new HashSet<DrivingPassanger>();
             this.Friends = new HashSet<Friend>();
             this.Friends1 = new HashSet<Friend>();
             this.GroupMembers = new HashSet<GroupMember>();
+            this.Rides = new HashSet<Ride>();
+            this.RidePassangers = new HashSet<RidePassanger>();
             this.UserSettings = new HashSet<UserSetting>();
             this.UsersGroups = new HashSet<UsersGroup>();
             this.AspNetRoles = new HashSet<AspNetRole>();
@@ -52,15 +52,15 @@ namespace AjdemeSi.Domain
         public virtual ICollection<ChatMessage> ChatMessages { get; set; }
         public virtual Driver Driver { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Driving> Drivings { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DrivingPassanger> DrivingPassangers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Friend> Friends { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Friend> Friends1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GroupMember> GroupMembers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Ride> Rides { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RidePassanger> RidePassangers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserSetting> UserSettings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

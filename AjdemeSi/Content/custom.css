@@ -46,6 +46,10 @@
 
 
 /*------ custom ------*/
+span.highlight {
+    color: gray;
+    font-weight: bold;
+}
 .home-content-wrapper {
     background-image: url("../Images/cheap-rental-cars-credit-card.jpg");
 }
@@ -78,8 +82,9 @@
 .sign-in-button         { border-radius: 0; background: transparent; color: white; border: 1px solid white; }
 .sign-in-button:hover   { background-color: #990000; color:white; }    
 
-.sign-in-reg-button         { border-radius: 0; background: #990000 !important; color: white; border: 1px solid #990000; }
-.sign-in-reg-button:hover   { background-color: #aa0000; color:white; }    
+.sign-in-reg-button         { border-radius: 0; background: #990000 !important; color: white !important; border: 1px solid #990000; }
+.sign-in-reg-button:hover,
+.sign-in-reg-button:focus   { background-color: #aa0000; color:white !important; }    
 
 
 .btn-green              { background-color: #377037 !important; border-color: #377037 !important; }
