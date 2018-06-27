@@ -253,3 +253,13 @@
 /AjdemeSi/AjdemeSi/bin/roslyn/vbc.exe
 /AjdemeSi/AjdemeSi/bin/roslyn/vbc.exe.config
 /AjdemeSi/AjdemeSi/bin/roslyn/vbc.rsp
+/AjdemeSi.Database/bin/Debug/AjdemeSi.Database_27.publish.sql
+/AjdemeSi.Database/bin/Debug/AjdemeSi.Database_28.publish.sql
+/AjdemeSi.Database/bin/Debug/DeploymentReport_28.txt
+/AjdemeSi.Database/bin/Debug/DeploymentReport_29.txt
+/AjdemeSi.Database/obj/Debug/Model.xml
+/AjdemeSi.Database/obj/Debug/postdeploy.sql
+/.vs/AjdemeSi/v15/Server/sqlite3/db.lock
+/.vs/AjdemeSi/v15/Server/sqlite3/storage.ide
+/.vs/AjdemeSi/v15/Server/sqlite3/storage.ide-shm
+/.vs/AjdemeSi/v15/Server/sqlite3/storage.ide-wal
