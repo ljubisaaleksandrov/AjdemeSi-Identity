@@ -38,6 +38,7 @@ namespace AjdemeSi
                       "~/Content/jquery-ui.css",
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
+                      "~/Content/timepicki.css",
                       "~/Content/custom.css"));
         }
     }

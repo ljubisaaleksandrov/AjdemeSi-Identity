@@ -77,6 +77,7 @@
     <Build Include="dbo\Tables\Ride.sql" />
     <Build Include="dbo\Tables\RidePassangers.sql" />
     <Build Include="dbo\Tables\Car.sql" />
+    <Build Include="dbo\Tables\City.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="PostDeploymant Scripts\Script.PostDeployment.sql" />

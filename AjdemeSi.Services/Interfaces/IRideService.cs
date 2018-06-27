@@ -3,7 +3,7 @@ using AjdemeSi.Domain.Models.Ride;
 using System;
 using System.Collections.Generic;
 
-namespace AjdemeSi.Services
+namespace AjdemeSi.Services.Interfaces
 {
     public interface IRideService
     {

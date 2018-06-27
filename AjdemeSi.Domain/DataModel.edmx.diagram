@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="AjdemeSi.DomainModel.GroupMember" Width="1.5" PointX="12.75" PointY="11" />
         <EntityTypeShape EntityType="AjdemeSi.DomainModel.Ride" Width="1.5" PointX="5.25" PointY="8.5" />
         <EntityTypeShape EntityType="AjdemeSi.DomainModel.RidePassanger" Width="1.5" PointX="7.5" PointY="12" />
-        <EntityTypeShape EntityType="AjdemeSi.DomainModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="AjdemeSi.DomainModel.UserSetting" Width="1.5" PointX="5.25" PointY="5.375" />
         <EntityTypeShape EntityType="AjdemeSi.DomainModel.UsersGroup" Width="1.5" PointX="10.5" PointY="12" />
         <AssociationConnector Association="AjdemeSi.DomainModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
@@ -37,6 +36,7 @@
         <AssociationConnector Association="AjdemeSi.DomainModel.FK_dbo_RidePassengers_dbo_Driving_Id" />
         <AssociationConnector Association="AjdemeSi.DomainModel.FK_dbo_UsersGroup_dbo_Ride_RideId" />
         <AssociationConnector Association="AjdemeSi.DomainModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="AjdemeSi.DomainModel.City" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

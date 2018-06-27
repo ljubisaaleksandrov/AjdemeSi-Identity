@@ -42,7 +42,6 @@
     <EntitySet Name="GroupMembers" EntityType="AjdemeSi.DomainModel.GroupMember" />
     <EntitySet Name="Rides" EntityType="AjdemeSi.DomainModel.Ride" />
     <EntitySet Name="RidePassangers" EntityType="AjdemeSi.DomainModel.RidePassanger" />
-    <EntitySet Name="sysdiagrams" EntityType="AjdemeSi.DomainModel.sysdiagram" />
     <EntitySet Name="UserSettings" EntityType="AjdemeSi.DomainModel.UserSetting" />
     <EntitySet Name="UsersGroups" EntityType="AjdemeSi.DomainModel.UsersGroup" />
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -117,6 +116,7 @@
       <End Role="AspNetRole" EntitySet="AspNetRoles" />
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
     </AssociationSet>
+    <EntitySet Name="Cities" EntityType="AjdemeSi.DomainModel.City" />
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -281,16 +281,6 @@
     <Property Name="RateComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_RidePassengers_dbo_AspNetUsers_UserId" FromRole="RidePassanger" ToRole="AspNetUser" />
     <NavigationProperty Name="Ride" Relationship="AjdemeSi.DomainModel.FK_dbo_RidePassengers_dbo_Driving_Id" FromRole="RidePassanger" ToRole="Ride" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="UserSetting">
     <Key>
@@ -535,4 +525,14 @@
     <End Type="AjdemeSi.DomainModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
     <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
   </Association>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NameAlternative" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CountryAlternative" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

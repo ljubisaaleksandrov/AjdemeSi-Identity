@@ -4,16 +4,17 @@ namespace AjdemeSi.Controllers
 {
     public class HomeController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Index()
         { 
-            if (User.IsInRole("Admin"))
-                return RedirectToAction("Index", "Home", new { area = "Administration" });
-            else if (User.Identity.IsAuthenticated)
+            if(User.Identity.IsAuthenticated)
             {
-                if (User.IsInRole("Driver"))
+                if (User.IsInRole("Admin"))
+                    return RedirectToAction("Index", "Home", new { area = "Administration" });
+                else if (User.IsInRole("Driver"))
                     return RedirectToAction("Routes", "Index");
                 else
-                    return RedirectToAction("Index", "Ride");
+                    return RedirectToAction("Index", "Rides");
             }
             else
                 return View();

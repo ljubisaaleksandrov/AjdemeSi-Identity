@@ -51,8 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ICitiesService.cs" />
     <Compile Include="Interfaces\IRideService.cs" />
     <Compile Include="Interfaces\Identity\IAspNetUsersService.cs" />
+    <Compile Include="Logic\CitiesService.cs" />
     <Compile Include="Logic\RideService.cs" />
     <Compile Include="Logic\Identity\AspNetUsersService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

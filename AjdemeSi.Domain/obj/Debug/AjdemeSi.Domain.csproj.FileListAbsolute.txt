@@ -91,3 +91,24 @@ C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\Ajdem
 C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.csprojResolveAssemblyReference.cache
 C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.dll
 C:\Users\Kika Atov\Documents\Visual Studio 2017\Projects\AjdemeSi-Identity\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.pdb
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\AjdemeSi.Domain.dll.config
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\AjdemeSi.Domain.dll
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\AjdemeSi.Domain.pdb
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\AutoMapper.dll
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\EntityFramework.dll
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\PagedList.dll
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\PagedList.Mvc.dll
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\System.Web.Mvc.dll
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\AutoMapper.xml
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\EntityFramework.xml
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\PagedList.xml
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\PagedList.Mvc.xml
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\System.Web.Mvc.xml
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\bin\Debug\Microsoft.Web.Infrastructure.xml
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.csprojResolveAssemblyReference.cache
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.csproj.CoreCompileInputs.cache
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.dll
+C:\Users\lyubisha aleksandrov\Documents\GitHub\AjdemeSi-Identity\AjdemeSi.Domain\obj\Debug\AjdemeSi.Domain.pdb

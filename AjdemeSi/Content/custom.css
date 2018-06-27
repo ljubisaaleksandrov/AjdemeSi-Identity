@@ -46,10 +46,20 @@
 
 
 /*------ custom ------*/
-span.highlight {
-    color: gray;
-    font-weight: bold;
-}
+
+/*------ ride list ----- start */
+
+.driver-ride-field                      { float: left; margin-right: 10px; }
+.driver-ride-field input[type=text]     { font-size: 16px !important; }
+.driver-ride-field .input-datepicker    { width: 120px; }
+.driver-ride-field .timepicker          { width: 70px; }
+.driver-ride-field .timepicker_wrap     { width: 182px; }
+
+span.highlight                      { color: gray; font-weight: bold; }
+.ui-menu .ui-menu-item-wrapper      { width: 100% !important; }
+.driver-ride-field-arrival-wrapper  { display: none; }
+
+/*------ ride list ----- end */
 .home-content-wrapper {
     background-image: url("../Images/cheap-rental-cars-credit-card.jpg");
 }

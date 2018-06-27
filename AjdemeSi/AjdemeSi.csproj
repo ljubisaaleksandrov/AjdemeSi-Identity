@@ -254,6 +254,7 @@
     <Content Include="Content\sbAdmin\font-awesome.min.css" />
     <Content Include="Content\sbAdmin\metisMenu.min.css" />
     <Content Include="Content\sbAdmin\sb-admin-2.min.css" />
+    <Content Include="Content\timepicki.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -287,13 +288,15 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="Areas\Administration\Views\Home\IndexData.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Images\arrow.png" />
     <Content Include="Images\cheap-rental-cars-credit-card.jpg" />
+    <Content Include="Images\top_arr.png" />
     <Content Include="Scripts\Custom\account.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom.js" />
-    <Content Include="Scripts\Custom\autocomplete.js" />
+    <Content Include="Scripts\Custom\filters.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -308,6 +311,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\sbAdmin\metisMenu.js" />
     <Content Include="Scripts\sbAdmin\sb-admin-2.js" />
+    <Content Include="Scripts\timepicki.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

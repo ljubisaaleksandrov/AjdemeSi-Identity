@@ -38,9 +38,9 @@ namespace AjdemeSi.Domain
         public virtual DbSet<GroupMember> GroupMembers { get; set; }
         public virtual DbSet<Ride> Rides { get; set; }
         public virtual DbSet<RidePassanger> RidePassangers { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UserSetting> UserSettings { get; set; }
         public virtual DbSet<UsersGroup> UsersGroups { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

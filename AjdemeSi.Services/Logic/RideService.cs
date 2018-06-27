@@ -1,10 +1,8 @@
 ﻿using AjdemeSi.Domain;
-using AjdemeSi.Domain.Models.Identity;
 using AjdemeSi.Domain.Models.Ride;
-using AjdemeSi.Services.Interfaces.Identity;
+using AjdemeSi.Services.Interfaces;
 using AutoMapper;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 

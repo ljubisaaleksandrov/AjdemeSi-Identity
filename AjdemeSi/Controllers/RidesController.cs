@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Linq;
+using AjdemeSi.Services.Interfaces;
 
 namespace AjdemeSi.Controllers
 {
@@ -12,10 +13,12 @@ namespace AjdemeSi.Controllers
     public class RidesController : Controller
     {
         private readonly IRideService _rideService;
+        private readonly ICitiesService _citiesService;
 
-        public RidesController(IRideService rideService)
+        public RidesController(IRideService rideService, ICitiesService citiesService)
         {
             _rideService = rideService;
+            _citiesService = citiesService;
         }
 
         public ActionResult Index(DateTime? dateFrom, DateTime? dateTo, string countryFrom = "", string cityFrom = "", string countryTo = "", string cityTo = "")
@@ -42,10 +45,12 @@ namespace AjdemeSi.Controllers
             return View(model);
         }
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         public ActionResult GetCities(string term)
         {
-            var data = new List<string>() { "test", "test1", "test11", "test2" };
-            return Json(new { results = data.Where(x => x.Contains(term)).ToArray() }, JsonRequestBehavior.AllowGet);
+            var data = _citiesService.GetCities(term, 5);
+            return Json(new { results = data }, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -78,6 +78,16 @@
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="DateModified" Type="datetime" />
         </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NameAlternative" Type="nvarchar" MaxLength="50" />
+          <Property Name="CountryAlternative" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Driver">
           <Key>
             <PropertyRef Name="UserId" />
@@ -134,16 +144,6 @@
           <Property Name="RideId" Type="int" Nullable="false" />
           <Property Name="Rate" Type="int" />
           <Property Name="RateComment" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="UserSettings">
           <Key>
@@ -415,12 +415,12 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChatMessage" EntityType="Self.ChatMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Friends" EntityType="Self.Friends" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupMembers" EntityType="Self.GroupMembers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ride" EntityType="Self.Ride" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RidePassangers" EntityType="Self.RidePassangers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserSettings" EntityType="Self.UserSettings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersGroup" EntityType="Self.UsersGroup" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -546,7 +546,6 @@
           <EntitySet Name="GroupMembers" EntityType="AjdemeSi.DomainModel.GroupMember" />
           <EntitySet Name="Rides" EntityType="AjdemeSi.DomainModel.Ride" />
           <EntitySet Name="RidePassangers" EntityType="AjdemeSi.DomainModel.RidePassanger" />
-          <EntitySet Name="sysdiagrams" EntityType="AjdemeSi.DomainModel.sysdiagram" />
           <EntitySet Name="UserSettings" EntityType="AjdemeSi.DomainModel.UserSetting" />
           <EntitySet Name="UsersGroups" EntityType="AjdemeSi.DomainModel.UsersGroup" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -621,6 +620,7 @@
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="Cities" EntityType="AjdemeSi.DomainModel.City" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -785,16 +785,6 @@
           <Property Name="RateComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_RidePassengers_dbo_AspNetUsers_UserId" FromRole="RidePassanger" ToRole="AspNetUser" />
           <NavigationProperty Name="Ride" Relationship="AjdemeSi.DomainModel.FK_dbo_RidePassengers_dbo_Driving_Id" FromRole="RidePassanger" ToRole="Ride" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="UserSetting">
           <Key>
@@ -1039,6 +1029,16 @@
           <End Type="AjdemeSi.DomainModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NameAlternative" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryAlternative" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1176,17 +1176,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="AjdemeSi.DomainModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserSettings">
             <EntityTypeMapping TypeName="AjdemeSi.DomainModel.UserSetting">
               <MappingFragment StoreEntitySet="UserSettings">
@@ -1217,6 +1206,17 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="AjdemeSi.DomainModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="CountryAlternative" ColumnName="CountryAlternative" />
+                <ScalarProperty Name="NameAlternative" ColumnName="NameAlternative" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

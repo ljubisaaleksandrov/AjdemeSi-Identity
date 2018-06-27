@@ -26,7 +26,7 @@ namespace AjdemeSi.Domain.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DXC-24\\SQLEXPRESS;Initial Catalog=AjdemeSi;Integrated Security=True;M" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DXC-24\\SQLEXPRESS;Initial Catalog=Default AS;Integrated Security=True;M" +
             "ultipleActiveResultSets=True;Application Name=EntityFramework")]
         public string AjdemeSiConnectionString {
             get {
