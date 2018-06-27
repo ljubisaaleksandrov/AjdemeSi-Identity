@@ -1,0 +1,20 @@
+C:\Users\lyubisha aleksandrov\source\repos\DBImporter\DBImporter\obj\Debug\DBImporter.csprojResolveAssemblyReference.cache
+C:\Users\lyubisha aleksandrov\source\repos\DBImporter\DBImporter\obj\Debug\DBImporter.csproj.CoreCompileInputs.cache
+C:\Users\lyubisha aleksandrov\source\repos\DBImporter\DBImporter\bin\Debug\DBImporter.exe.config
+C:\Users\lyubisha aleksandrov\source\repos\DBImporter\DBImporter\bin\Debug\DBImporter.exe
+C:\Users\lyubisha aleksandrov\source\repos\DBImporter\DBImporter\bin\Debug\DBImporter.pdb
+C:\Users\lyubisha aleksandrov\source\repos\DBImporter\DBImporter\bin\Debug\TinyCsvParser.dll
+C:\Users\lyubisha aleksandrov\source\repos\DBImporter\DBImporter\obj\Debug\DBImporter.exe
+C:\Users\lyubisha aleksandrov\source\repos\DBImporter\DBImporter\obj\Debug\DBImporter.pdb
+C:\Users\lyubisha aleksandrov\Documents\Visual Studio 2017\Projects\DBImporter\DBImporter\bin\Debug\DBImporter.exe.config
+C:\Users\lyubisha aleksandrov\Documents\Visual Studio 2017\Projects\DBImporter\DBImporter\bin\Debug\DBImporter.exe
+C:\Users\lyubisha aleksandrov\Documents\Visual Studio 2017\Projects\DBImporter\DBImporter\bin\Debug\DBImporter.pdb
+C:\Users\lyubisha aleksandrov\Documents\Visual Studio 2017\Projects\DBImporter\DBImporter\bin\Debug\TinyCsvParser.dll
+C:\Users\lyubisha aleksandrov\Documents\Visual Studio 2017\Projects\DBImporter\DBImporter\obj\Debug\DBImporter.csprojResolveAssemblyReference.cache
+C:\Users\lyubisha aleksandrov\Documents\Visual Studio 2017\Projects\DBImporter\DBImporter\obj\Debug\DBImporter.csproj.CoreCompileInputs.cache
+C:\Users\lyubisha aleksandrov\Documents\Visual Studio 2017\Projects\DBImporter\DBImporter\obj\Debug\DBImporter.exe
+C:\Users\lyubisha aleksandrov\Documents\Visual Studio 2017\Projects\DBImporter\DBImporter\obj\Debug\DBImporter.pdb
+C:\Users\lyubisha aleksandrov\Documents\Visual Studio 2017\Projects\DBImporter\DBImporter\bin\Debug\EntityFramework.dll
+C:\Users\lyubisha aleksandrov\Documents\Visual Studio 2017\Projects\DBImporter\DBImporter\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\lyubisha aleksandrov\Documents\Visual Studio 2017\Projects\DBImporter\DBImporter\bin\Debug\EntityFramework.xml
+C:\Users\lyubisha aleksandrov\Documents\Visual Studio 2017\Projects\DBImporter\DBImporter\bin\Debug\EntityFramework.SqlServer.xml
