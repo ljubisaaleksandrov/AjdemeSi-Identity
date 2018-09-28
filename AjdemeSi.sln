@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjdemeSi", "AjdemeSi\AjdemeSi.csproj", "{DF751F2C-0554-43E5-B0E1-B36EA2E5AA6C}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AjdemeSi.Database", "AjdemeSi.Database\AjdemeSi.Database.sqlproj", "{6FFC4F2A-C576-4063-9DB9-6FA6F155AD47}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjdemeSi.Services", "AjdemeSi.Services\AjdemeSi.Services.csproj", "{F3997988-7495-4098-ADEB-06ED88E2BD53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjdemeSi.Business", "AjdemeSi.Business\AjdemeSi.Business.csproj", "{E08836B4-E4BD-4248-B066-7DC9C95D9FFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,8 +37,15 @@ Global
 		{F3997988-7495-4098-ADEB-06ED88E2BD53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3997988-7495-4098-ADEB-06ED88E2BD53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3997988-7495-4098-ADEB-06ED88E2BD53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E08836B4-E4BD-4248-B066-7DC9C95D9FFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E08836B4-E4BD-4248-B066-7DC9C95D9FFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E08836B4-E4BD-4248-B066-7DC9C95D9FFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E08836B4-E4BD-4248-B066-7DC9C95D9FFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {60B331CF-990A-4658-9AAD-4AE79FE18CE3}
 	EndGlobalSection
 EndGlobal

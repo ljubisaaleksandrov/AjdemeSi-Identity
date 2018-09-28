@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNet.Identity;
+@using AjdemeSi.Domain.Models.UserGroups
+@model UserGroupWithMessagesViewModel
+
+@if(Model != null)
+{
+    string userGroupId = Model.Id != 0 ? ("user-group-chat-" + Model.Id.ToString()) : "EmptyUserGroup";
+
+    <div class="user-group-chat" id='@userGroupId'>
+        <div class="user-group-chat-header">
+            <div class="user-group-chat-header-username"></div>
+        </div>
+        <div class="user-group-chat-messages-container">
+            @Html.Partial("_UserGroupChatMessagesBody")
+        </div>
+        <div class="new-message-container">
+            <textarea data-user-group-id="@userGroupId" class="user-group-chat-new-message">
+        </textarea>
+        </div>
+    </div>
+}

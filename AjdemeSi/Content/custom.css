@@ -49,17 +49,75 @@
 
 /*------ ride list ----- start */
 
-.driver-ride-field                      { float: left; margin-right: 10px; }
+.driver-ride-filters-container          { width: 100%; height: auto; display: inline-block; }
+.driver-ride-field-arrival-wrapper.show { height: auto; display: inline-block; }
+.diver-ride-fields-section              { display: inline-block }
+.driver-ride-field                      { float: left; margin-right: 10px; height: 60px; margin-bottom: 10px; }
 .driver-ride-field input[type=text]     { font-size: 16px !important; }
 .driver-ride-field .input-datepicker    { width: 120px; }
 .driver-ride-field .timepicker          { width: 70px; }
 .driver-ride-field .timepicker_wrap     { width: 182px; }
 
-span.highlight                      { color: gray; font-weight: bold; }
-.ui-menu .ui-menu-item-wrapper      { width: 100% !important; }
-.driver-ride-field-arrival-wrapper  { display: none; }
+span.highlight                          { color: gray; font-weight: bold; }
+.ui-menu .ui-menu-item-wrapper          { width: 100% !important; }
+.driver-ride-field-arrival-wrapper      { display: none; }
+
+.driver-ride-price-option               { margin-bottom: 5px; }
+.driver-ride-field .driver-ride-price   { max-width: 150px; }
+
 
 /*------ ride list ----- end */
+/*------ user groups ----- start */
+.user-groups-body                   { padding-bottom: 0 }
+
+.user-groups-field > div.ui-widget  { width: 100%; display: inline-block; }
+
+.required-drop-chat                 { margin: 10px; }
+
+.user-group-item                    { border: 2px solid #fff; padding: 8px 5px; margin-bottom: 2px; cursor: pointer; }
+.user-group-item:hover              { border-color: #990000 }                    
+.user-group-item-active             { border-color: #990000; cursor: default }
+.user-group-item-new-msgs-count     { position: absolute; right: 20px; background-color: #990000; color: white; padding: 2px 4px; margin-top: -5px; min-width: 24px; text-align: center; }
+.user-group-item-new-msgs-count.no-new-msgs { display: none }
+.user-group-item-members            { display: block }
+
+.form-control.user-groups-search    { max-width: 100% }
+
+.user-groups-sidebar-container      { padding-left: 0px; border-right: 1px solid black }
+.user-group-chat                    { display: none; }
+.user-group-chat-active             { display: block; }
+.user-group-chat-header             { height: 50px; width: 100%; border-top: 2px solid #990000; border-bottom: 2px solid #990000; }
+.user-group-chat-new-message        { width: 100%; max-width: 100%  }
+.user-group-chat-message            { width: 100%; padding-right: 20px }
+.user-group-chat-message.right      { float:right; text-align: right; padding-left: 20px }
+.user-group-chat-messages-container { overflow-y: scroll; overflow-x: hidden; margin-top: 10px; margin-bottom: 20px }
+.user-group-chat-messages-date      { width: 100%; }
+.user-group-chat-messages-date > span       { width: 20%; float: left; margin-top: 10px; text-align: center; font-weight: bold }
+.user-group-chat-messages-date > .separator { width: 40%; float: left; text-align: center; }
+
+.user-group-chat-message-avatar     { display: inline-block; font-size: 32px; float: left; line-height: 1; } 
+.user-group-chat-message-time       { width: 100%; display: block; padding-left: 40px; }
+.user-group-chat-message-content    { width: 100%; display: block; padding: 0px 36px; }
+.user-group-chat-message-content > span    { display:inline-block; padding: 0px 4px; }
+.user-group-chat-message-content.not-seen > span    { background-color: dodgerblue; color: white; }
+
+.user-group-chat-message.right >
+.user-group-chat-message-avatar     { float: right; } 
+.user-group-chat-message.right >
+.user-group-chat-message-time       { padding-right: 40px; }
+.user-group-chat-message.right >
+.user-group-chat-message-content    { padding-right: 40px; }
+
+
+
+/*------ user groups ----- end */
+/*------ user settings ----- start */
+.existing-car-wrapper {
+    padding: 0 !important;
+}
+
+/*------ user settings ----- end */
+
 .home-content-wrapper {
     background-image: url("../Images/cheap-rental-cars-credit-card.jpg");
 }

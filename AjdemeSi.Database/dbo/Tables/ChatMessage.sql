@@ -3,8 +3,10 @@
 	[UsersGroupId] int NOT NULL,
 	[SenderId] [nvarchar](128) NOT NULL,
 	[Message] [nvarchar](max) NOT NULL,
+	[IsEdited] [bit] NOT NULL,
+	[IsRemoved] [bit] NOT NULL,
 	[DateCreated] Datetime NOT NULL,
-	[DateModified] Datetime NULL,
+	[SeenBy] [nvarchar](max) NOT NULL,
 	
 	CONSTRAINT [PK_dbo.ChatMessage] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.ChatMessage_dbo.UsersGroup_UsersGroupId] FOREIGN KEY([UsersGroupId]) REFERENCES [dbo].[UsersGroup] ([Id]),

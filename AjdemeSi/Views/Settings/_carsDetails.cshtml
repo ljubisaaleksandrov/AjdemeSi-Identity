@@ -1,0 +1,16 @@
+﻿@using AjdemeSi.Domain.Models.Settings
+@model List<CarViewModel>
+
+<div id="ExistingCars">
+    <h4>My Cars</h4>
+    <hr />
+
+    @foreach (CarViewModel car in Model)
+    {
+        @Html.Partial("_carDetails", car)
+    }
+</div>
+
+<div id="FormAddNewCarWrapper">
+    @Html.Partial("_addNewCar", new CarViewModel())
+</div>

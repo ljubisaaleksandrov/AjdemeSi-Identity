@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using AjdemeSi.Business.Helpers;
 
 namespace AjdemeSi
 {
@@ -15,5 +16,13 @@ namespace AjdemeSi
             BundleConfig.RegisterBundles(BundleTable.Bundles); 
             AutofacConfig.Configure();
         }
-    }
+
+        protected void Application_Error()
+        {
+            var ex = Server.GetLastError();
+            //log the error!
+            ExceptionLogingHelper.LogException(ex);
+
+        }
+}
 }

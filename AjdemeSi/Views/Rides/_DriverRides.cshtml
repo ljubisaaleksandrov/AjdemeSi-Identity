@@ -2,85 +2,57 @@
 @model RidePagedListViewModel
 
 <div class="col-lg-12">
-    @using (Html.BeginForm("CreateRide", "Rides", FormMethod.Post, new { id = "DriverNewRide" }))
-    {
-        @Html.AntiForgeryToken()
+    @if(Model.ListEntries != null && Model.ListEntries.Any()){
+        <div class="row">
+            <div class="col-sm-12">
+                <table width="100%" class="table table-striped table-hover dataTable no-footer dtr-inline" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;">
+                    <thead>
+                        <tr role="row">
+                            <th class="filters-sort sorting" data-filter-name="ridename">ride Name</th>
+                            <th class="filters-sort sorting" data-filter-name="email">Email</th>
+                            <th class="filters-sort sorting" data-filter-name="email">Role</th>
+                            <th class="filters-sort sorting_desc" data-filter-name="registrationDate">Registration Date</th>
+                            <th class="filters-sort sorting" data-filter-name="isConfirmed">Confirmed</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-data">
+                        @{
+                            int i = 0;
+                            foreach (var ride in Model.ListEntries)
+                            {
+                                <tr class="gradeA @(i % 2 == 0 ? "even" : "odd")" role="row">
+                                    <td class="sorting_1">
+                                        @Html.DisplayFor(modelItem => ride.FromCity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => ride.ToCity)
+                                    </td>
+                                    <td>
+                                        @{
 
-        <div class="driver-ride-fields">
-            <div class="driver-ride-field">
-                <label>From Place:</label>
-                <div class="ui-widget">
-                    <input type="text" class="input-autocomplete form-control driver-ride-field-place-from" />
-                    <ul class="autocomplete autocomplete-place-from"></ul>
-                </div>
-            </div>
-            <div class="driver-ride-field">
-                <label>To Place:</label>
-                <div class="ui-widget">
-                    <input type="text" class="input-autocomplete form-control driver-ride-field-place-to" />
-                    <ul class="autocomplete autocomplete-place-to"></ul>
-                </div>
-            </div>
-            <div class="driver-ride-field">
-                <label>Start Date</label>
-                <div class="ui-widget">
-                    <input type="text" class="input-datepicker form-control driver-ride-field-date-from" />
-                </div>
-            </div>
-            <div class="driver-ride-field">
-                <label>Start Time</label>
-                <div class="ui-widget">
-                    <input class='timepicker form-control driver-ride-field-start-time' type='text' name='timepicker' />
-                </div>
-            </div>
-            <div class="driver-ride-field">
-                <label>Delayed start</label>
-                <div class="ui-widget">
-                    <input class='timepicker form-control driver-ride-field-dalayed-start' type='text' name='timepicker' />
-                </div>
-            </div>
-            <div class="driver-ride-field">
-                <label>Travel time</label>
-                <div class="ui-widget">
-                    <input class='timepicker form-control driver-ride-field-travel-time' type='text' name='timepicker' />
-                </div>
-            </div>
-            <div class="driver-ride-field">
-                <label>Break time</label>
-                <div class="ui-widget">
-                    <input class='timepicker form-control driver-ride-field-break-time' type='text' name='timepicker' />
-                </div>
-            </div>
-
-            <input type="button" class="btn btn-primary" id="CreateRide" disabled="disabled" value="Create Ride" />
-        </div>
-        <div>
-            <div class="driver-ride-field driver-ride-field-arrival-wrapper">
-                <label>Ride Summary</label>
-                <h2 id="RideDestination"></h2>
-                <h3 id="RideDate"></h3>
-                <table class="driver-ride-field-arrival-time-table">
-                    <tr>
-                        <td></td>
-                        <td id="RideTravelTime"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="RideStartTime"></td>
-                        <td>Arrow</td>
-                        <td id="RideArivalTime"></td>
-                    </tr>
-                    <tr>
-                        <td id="RideStartTimeMeridian"></td>
-                        <td></td>
-                        <td id="RideArrivalTimeMeridian"></td>
-                    </tr>
+                                        }
+                                    </td>
+                                    <td class="center">
+                                        @Html.DisplayFor(modelItem => ride.StartTime)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => ride.EndTime)
+                                    </td>
+                                    <td class="table-buttons-bar">
+                                        <span class="glyphicon glyphicon-pencil color-primary table-button"></span>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
                 </table>
             </div>
         </div>
     }
+    else{
+        <hr />
+        <h4>You don't have any registered ride at the moment</h4>
+    }
 
-    <div class="driver-rides-list-wrapper">
-        
-    </div>
 </div>

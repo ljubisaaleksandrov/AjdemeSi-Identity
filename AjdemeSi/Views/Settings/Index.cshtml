@@ -1,0 +1,26 @@
+﻿@model AjdemeSi.Domain.Models.Settings.SettingsViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div class="form-horizontal" id="MySettings">
+ 
+    @Html.Partial("_userGeneralStatistics", Model.UserGeneralViewModel)
+
+    @if (Model.UserGeneralViewModel.IsDriver)
+    {
+        @Html.Partial("_carsDetails", Model.CarsViewModel)
+    }
+
+    @Html.Partial("_userResultsStatistics", Model.UserResultsViewModel)
+
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/Scripts/Custom/settings.js"></script>
+}

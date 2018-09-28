@@ -7,6 +7,9 @@ var timeDelay = '.driver-ride-field-dalayed-start';
 var timeTravel = '.driver-ride-field-travel-time';
 var timeBreak = '.driver-ride-field-break-time';
 var rsWrapper = '.driver-ride-field-arrival-wrapper';
+var rsPrice = '.driver-ride-price';
+var rsPriceOption = '.driver-ride-price-option';
+var rsPassengersNo = '.driver-ride-field-passengers-number';
 var rSDestination = "#RideDestination";
 var rSDate = "#RideDate";
 var rSTravelTime = "#RideTravelTime";
@@ -14,10 +17,13 @@ var rSStartTime = "#RideStartTime";
 var rSArrivalTime = "#RideArivalTime";
 var rSStartTimeMeridian = "#RideStartTimeMeridian";
 var rSArrivalTimeMeridian = "#RideArrivalTimeMeridian";
+var rsPassengersNoFinal = "#PassengersNo";
+var btnCreateRide = "#CreateRide";
 
 var lineDelimiter = ' - ';
 var blankDelimiter = ' ';
 var timeDelimiter = ':';
+var bracketsPatter = /\(([^)]+)\)/;
 
 
 var addTime = function (baseTime, timeToAdd) {
@@ -76,11 +82,14 @@ var checkCreateRideFormFields = function (formElement) {
     var timeDelayValue = $(timeDelay).val();
     var timeTravelValue = $(timeTravel).val();
     var timeBreakValue = $(timeBreak).val();
+    var price = $(rsPrice).val();
+    var isTotalPrice = $(rsPriceOption).val() == "TP";
+    var passengersNo = $(rsPassengersNo).val();
 
-    console.log(timeFromValue + " " + timeDelayValue);
-    console.log(addTime(timeFromValue, timeDelayValue));
+    var isPlaceFromValid = bracketsPatter.exec(placeFromValue) !== null;
+    var isPlaceToValid = bracketsPatter.exec(placeToValue) !== null;
 
-    if (placeFromValue != '' && placeToValue != '' && dateFromValue != '' && timeFromValue != '' && timeTravelValue != '') {
+    if (isPlaceFromValid && isPlaceToValid && dateFromValue != '' && timeFromValue != '' && timeTravelValue != '' && price != '' && passengersNo != '') {
         $(rSDestination).html(placeFromValue + lineDelimiter + placeToValue);
         $(rSDate).html(dateFromValue + lineDelimiter + "????");
 
@@ -109,10 +118,13 @@ var checkCreateRideFormFields = function (formElement) {
             $(rSArrivalTimeMeridian).html(toMeridianTime(timeToValueFormated) + lineDelimiter + toMeridianTime(delayTime));
         }
 
-        $(rsWrapper).show();
+        $(rsPassengersNoFinal).val(passengersNo);
+
+        $(rsWrapper).addClass("show");
+        $(btnCreateRide).prop("disabled", false);
     }
     else {
-        $(rsWrapper).hide();
+        $(btnCreateRide).prop("disabled", true);
     }
 }
 
@@ -121,7 +133,6 @@ $(document).ready(function (e) {
     $.each($('.input-autocomplete'), function (index, input) {
         $(input).autocomplete({
             source: function (request, response) {
-                //request['__RequestVerificationToken'] = $('input[name="__RequestVerificationToken"]', $(driver)).val();
                 $.ajax({
                     url: "/Rides/GetCities",
                     type: "GET",
@@ -169,7 +180,6 @@ $(document).ready(function (e) {
             return listItem.appendTo(ul);
         };
 
-        //$(input).on("autocompletechange", function (event, ui) { console.log(ui) });
     });
 
     $(".input-datepicker").datepicker();
@@ -179,23 +189,47 @@ $(document).ready(function (e) {
     });
 });
 
-$(".input-autocomplete").on("change paste keyup", function () {
-    alert($(this).val());
-});
 
 $(".timepicker").on("change", function () {
     checkCreateRideFormFields($(this).parents(driverNewRideForm)[0]);
 });
 
-
-
-//$(document).on('change', $('.driver-ride-field .input-datepicker'), function (event) {
-//    console.log(event.currentTarget);
-//});
+$(document).on('change', $('.driver-ride-field .input-datepicker'), function (event) {
+    checkCreateRideFormFields($(this).parents(driverNewRideForm)[0]);
+});
 
 //$(document).on('change', $('.driver-ride-field .timepicker'), function (event) {
 //    console.log(event.currentTarget);
 //});
 
 
+
+$(btnCreateRide).on("click", function () {
+    var data = {
+        placeFrom: $(placeFrom).val(),
+        placeTo: $(placeTo).val(),
+        dateFrom: $(dateFrom).val(),
+        timeFrom: $(timeFrom).val(),
+        timeDelay: $(timeDelay).val(),
+        timeTravel: $(timeTravel).val(),
+        timeBreak: $(timeBreak).val(),
+        passengersNomber: $(rsPassengersNo).val(),
+        isTotalPrice: $(rsPriceOption).val() == "TP",
+        price: $(rsPrice).val(),
+        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+    };
+
+    $.ajax({
+        url: "/Rides/CreateRide",
+        type: "POST",
+        dataType: "json",
+        data: data,
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (request, status, error) {
+            console.log(request.responseText);
+        }
+    });
+});
 

@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNet.Identity;
+@using AjdemeSi.Domain.Models.UserGroups
+@model UserGroupsListViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <input type="hidden" id="CurrentUserId" value="@Context.User.Identity.GetUserId()" />
+        <input type="hidden" id="CurrentUserEmail" value="@Context.User.Identity.Name" />
+
+        <h2>User Groups</h2>
+        <div class="col-md-4 col-sm-4 col-xs-12 user-groups-sidebar-container">
+            @Html.Partial("_UserGroupsSidebar")
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 user-groups-chat-container">
+            @Html.Partial("_UserGroupsChats")
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/signalr")
+    @Scripts.Render("/signalr/hubs")
+    <script src="~/Scripts/Custom/user-groups.js"></script>
+}

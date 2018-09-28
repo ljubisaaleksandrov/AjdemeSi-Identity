@@ -1,0 +1,28 @@
+﻿@model AjdemeSi.Domain.Models.UserGroups.UserGroupsListViewModel
+
+<div class="user-groups-field">
+    <div class="ui-widget">
+        <input type="text" class="input-autocomplete form-control user-groups-search" />
+        <ul class="autocomplete autocomplete-place-from"></ul>
+    </div>
+</div>
+
+@if (Model != null)
+{
+    <div id="UserGroupsListContainer">
+        @if (Model.UserGroupsList != null && Model.UserGroupsList.Any())
+        {
+            for (int i = 0; i < Model.UserGroupsList.Count; i++)
+            {
+                var group = Model.UserGroupsList[i];
+                <div class='user-group-item @(i == 0 ? "user-group-item-active" : String.Empty)' data-user-group-item-id="@group.Id">
+                    <span class="user-group-item-new-msgs-count @(group.NewMessagesCount == 0 ? "no-new-msgs" : String.Empty)">@group.NewMessagesCount</span>
+                    <span class="user-group-item-members">@String.Join(", ", group.UserGroupMembers.Where(gm => gm.UserName != Context.User.Identity.Name).Select(gm => gm.UserName))</span>
+                    <span>@group.LastChatMessages.Message</span>
+                </div>
+            }
+        }
+    </div>
+}
+
+

@@ -1,12 +1,11 @@
 ﻿using AjdemeSi.Models;
+using AjdemeSi.Services.Logic;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -188,11 +187,45 @@ namespace AjdemeSi.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, IsDriver = model.IsDriver };
                 var result = UserManager.Create(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    var roleResult = UserManager.AddToRole(user.Id, "User");
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("EmailNotConfirmed", "Account");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        //
+        // POST: /Account/RegisterDriver
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterDriver(RegisterDriverViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, IsDriver = model.IsDriver };
+                var result = UserManager.Create(user, model.Password);
+                if (result.Succeeded)
+                {
+                    var roleResult = UserManager.AddToRole(user.Id, "Driver");
+                    DriverService driverService = new DriverService();
+                    driverService.AddDriver(user.Id, !String.IsNullOrEmpty(model.LicenceRegistrationDate) ? Convert.ToDateTime(model.LicenceRegistrationDate) : DateTime.Now.AddYears(-18), DateTime.Now);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -214,9 +247,9 @@ namespace AjdemeSi.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RegisterAsync(string email, string password)
+        public async Task<ActionResult> RegisterAsync(string email, string password, bool isDriver)
         {
-            var user = new ApplicationUser { UserName = email, Email = email };
+            var user = new ApplicationUser { UserName = email, Email = email, IsDriver = isDriver };
             var result = await UserManager.CreateAsync(user, password);
             if (result.Succeeded)
             {

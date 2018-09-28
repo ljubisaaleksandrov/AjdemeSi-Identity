@@ -12,6 +12,7 @@
 	[LockoutEnabled]		[bit] NOT NULL,
 	[AccessFailedCount]		[int] NOT NULL,
 	[DateCreated]			DATETIME NULL		DEFAULT(getdate()),
+	[IsDriver]				[bit] NOT NULL,
 	
 	CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED (	[Id] ASC )
 )

@@ -56,6 +56,7 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" />
+          <Property Name="IsDriver" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Car">
           <Key>
@@ -65,7 +66,9 @@
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Make" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Model" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="NumberOfSits" Type="int" Nullable="false" />
           <Property Name="YearOfManufacture" Type="int" Nullable="false" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ChatMessage">
           <Key>
@@ -75,8 +78,10 @@
           <Property Name="UsersGroupId" Type="int" Nullable="false" />
           <Property Name="SenderId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsEdited" Type="bit" Nullable="false" />
+          <Property Name="IsRemoved" Type="bit" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateModified" Type="datetime" />
+          <Property Name="SeenBy" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -121,13 +126,13 @@
           <Property Name="DriverUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="FromCounty" Type="nvarchar" MaxLength="128" />
           <Property Name="FromCity" Type="nvarchar" MaxLength="128" />
-          <Property Name="FromPlace" Type="nvarchar" MaxLength="128" />
           <Property Name="ToCounty" Type="nvarchar" MaxLength="128" />
           <Property Name="ToCity" Type="nvarchar" MaxLength="128" />
-          <Property Name="ToPlace" Type="nvarchar" MaxLength="128" />
           <Property Name="StartTime" Type="datetime" Nullable="false" />
           <Property Name="EndTime" Type="datetime" Nullable="false" />
           <Property Name="TravelTime" Type="int" Nullable="false" />
+          <Property Name="DelayedStartTime" Type="int" />
+          <Property Name="BreakTime" Type="int" />
           <Property Name="MaxPassengers" Type="int" Nullable="false" />
           <Property Name="TotalPrice" Type="real" Nullable="false" />
           <Property Name="MinTotalPrice" Type="real" Nullable="false" />
@@ -540,7 +545,6 @@
           <EntitySet Name="AspNetUserLogins" EntityType="AjdemeSi.DomainModel.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="AjdemeSi.DomainModel.AspNetUser" />
           <EntitySet Name="Cars" EntityType="AjdemeSi.DomainModel.Car" />
-          <EntitySet Name="ChatMessages" EntityType="AjdemeSi.DomainModel.ChatMessage" />
           <EntitySet Name="Drivers" EntityType="AjdemeSi.DomainModel.Driver" />
           <EntitySet Name="Friends" EntityType="AjdemeSi.DomainModel.Friend" />
           <EntitySet Name="GroupMembers" EntityType="AjdemeSi.DomainModel.GroupMember" />
@@ -555,10 +559,6 @@
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_ChatMessage_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="ChatMessage" EntitySet="ChatMessages" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_Driver_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_Driver_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
@@ -596,10 +596,6 @@
             <End Role="Driver" EntitySet="Drivers" />
             <End Role="Car" EntitySet="Cars" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_ChatMessage_dbo_UsersGroup_UsersGroupId" Association="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_UsersGroup_UsersGroupId">
-            <End Role="UsersGroup" EntitySet="UsersGroups" />
-            <End Role="ChatMessage" EntitySet="ChatMessages" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_GroupMembers_dbo_UsersGroup_UsersGroupId" Association="AjdemeSi.DomainModel.FK_dbo_GroupMembers_dbo_UsersGroup_UsersGroupId">
             <End Role="UsersGroup" EntitySet="UsersGroups" />
             <End Role="GroupMember" EntitySet="GroupMembers" />
@@ -621,6 +617,15 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
           <EntitySet Name="Cities" EntityType="AjdemeSi.DomainModel.City" />
+          <EntitySet Name="ChatMessages" EntityType="AjdemeSi.DomainModel.ChatMessage" />
+          <AssociationSet Name="FK_dbo_ChatMessage_dbo_AspNetUsers_UserId" Association="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="ChatMessage" EntitySet="ChatMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ChatMessage_dbo_UsersGroup_UsersGroupId" Association="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_UsersGroup_UsersGroupId">
+            <End Role="UsersGroup" EntitySet="UsersGroups" />
+            <End Role="ChatMessage" EntitySet="ChatMessages" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -681,7 +686,6 @@
           <Property Name="DateCreated" Type="DateTime" Precision="3" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="AjdemeSi.DomainModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="AjdemeSi.DomainModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
-          <NavigationProperty Name="ChatMessages" Relationship="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="ChatMessage" />
           <NavigationProperty Name="Driver" Relationship="AjdemeSi.DomainModel.FK_dbo_Driver_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="Driver" />
           <NavigationProperty Name="Friends" Relationship="AjdemeSi.DomainModel.FK_dbo_Friends1_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="Friend" />
           <NavigationProperty Name="Friends1" Relationship="AjdemeSi.DomainModel.FK_dbo_Friends2_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="Friend" />
@@ -691,6 +695,8 @@
           <NavigationProperty Name="UserSettings" Relationship="AjdemeSi.DomainModel.FK_dbo_UserSettings_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="UserSetting" />
           <NavigationProperty Name="UsersGroups" Relationship="AjdemeSi.DomainModel.FK_dbo_UsersGroup_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="UsersGroup" />
           <NavigationProperty Name="AspNetRoles" Relationship="AjdemeSi.DomainModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+          <Property Name="IsDriver" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ChatMessages" Relationship="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="ChatMessage" />
         </EntityType>
         <EntityType Name="Car">
           <Key>
@@ -702,19 +708,8 @@
           <Property Name="Model" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="YearOfManufacture" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Driver" Relationship="AjdemeSi.DomainModel.FK_dbo_Car_dbo_Driver_UserId" FromRole="Car" ToRole="Driver" />
-        </EntityType>
-        <EntityType Name="ChatMessage">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UsersGroupId" Type="Int32" Nullable="false" />
-          <Property Name="SenderId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateModified" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_AspNetUsers_UserId" FromRole="ChatMessage" ToRole="AspNetUser" />
-          <NavigationProperty Name="UsersGroup" Relationship="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_UsersGroup_UsersGroupId" FromRole="ChatMessage" ToRole="UsersGroup" />
+          <Property Name="NumberOfSits" Type="Int32" Nullable="false" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Driver">
           <Key>
@@ -755,10 +750,8 @@
           <Property Name="DriverUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="FromCounty" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="FromCity" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="FromPlace" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ToCounty" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ToCity" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ToPlace" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TravelTime" Type="Int32" Nullable="false" />
@@ -773,6 +766,8 @@
           <NavigationProperty Name="Ride2" Relationship="AjdemeSi.DomainModel.FK_dbo_Ride_dbo_Ride_Id" FromRole="Ride1" ToRole="Ride" />
           <NavigationProperty Name="RidePassangers" Relationship="AjdemeSi.DomainModel.FK_dbo_RidePassengers_dbo_Driving_Id" FromRole="Ride" ToRole="RidePassanger" />
           <NavigationProperty Name="UsersGroups" Relationship="AjdemeSi.DomainModel.FK_dbo_UsersGroup_dbo_Ride_RideId" FromRole="Ride" ToRole="UsersGroup" />
+          <Property Name="DelayedStartTime" Type="Int32" />
+          <Property Name="BreakTime" Type="Int32" />
         </EntityType>
         <EntityType Name="RidePassanger">
           <Key>
@@ -807,9 +802,9 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="RideId" Type="Int32" />
           <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_UsersGroup_dbo_AspNetUsers_UserId" FromRole="UsersGroup" ToRole="AspNetUser" />
-          <NavigationProperty Name="ChatMessages" Relationship="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_UsersGroup_UsersGroupId" FromRole="UsersGroup" ToRole="ChatMessage" />
           <NavigationProperty Name="GroupMembers" Relationship="AjdemeSi.DomainModel.FK_dbo_GroupMembers_dbo_UsersGroup_UsersGroupId" FromRole="UsersGroup" ToRole="GroupMember" />
           <NavigationProperty Name="Ride" Relationship="AjdemeSi.DomainModel.FK_dbo_UsersGroup_dbo_Ride_RideId" FromRole="UsersGroup" ToRole="Ride" />
+          <NavigationProperty Name="ChatMessages" Relationship="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_UsersGroup_UsersGroupId" FromRole="UsersGroup" ToRole="ChatMessage" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
@@ -836,18 +831,6 @@
             </Principal>
             <Dependent Role="AspNetUserLogin">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_ChatMessage_dbo_AspNetUsers_UserId">
-          <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="AjdemeSi.DomainModel.ChatMessage" Role="ChatMessage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ChatMessage">
-              <PropertyRef Name="SenderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -965,18 +948,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_ChatMessage_dbo_UsersGroup_UsersGroupId">
-          <End Type="AjdemeSi.DomainModel.UsersGroup" Role="UsersGroup" Multiplicity="1" />
-          <End Type="AjdemeSi.DomainModel.ChatMessage" Role="ChatMessage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UsersGroup">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ChatMessage">
-              <PropertyRef Name="UsersGroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_GroupMembers_dbo_UsersGroup_UsersGroupId">
           <End Type="AjdemeSi.DomainModel.UsersGroup" Role="UsersGroup" Multiplicity="1" />
           <End Type="AjdemeSi.DomainModel.GroupMember" Role="GroupMember" Multiplicity="*" />
@@ -1039,6 +1010,45 @@
           <Property Name="NameAlternative" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CountryAlternative" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="ChatMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UsersGroupId" Type="Int32" Nullable="false" />
+          <Property Name="SenderId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsEdited" Type="Boolean" Nullable="false" />
+          <Property Name="IsRemoved" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SeenBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_AspNetUsers_UserId" FromRole="ChatMessage" ToRole="AspNetUser" />
+          <NavigationProperty Name="UsersGroup" Relationship="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_UsersGroup_UsersGroupId" FromRole="ChatMessage" ToRole="UsersGroup" />
+        </EntityType>
+        <Association Name="FK_dbo_ChatMessage_dbo_AspNetUsers_UserId">
+          <End Type="AjdemeSi.DomainModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="AjdemeSi.DomainModel.ChatMessage" Role="ChatMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChatMessage">
+              <PropertyRef Name="SenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ChatMessage_dbo_UsersGroup_UsersGroupId">
+          <End Type="AjdemeSi.DomainModel.UsersGroup" Role="UsersGroup" Multiplicity="1" />
+          <End Type="AjdemeSi.DomainModel.ChatMessage" Role="ChatMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChatMessage">
+              <PropertyRef Name="UsersGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1075,6 +1085,7 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="AjdemeSi.DomainModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="IsDriver" ColumnName="IsDriver" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
@@ -1094,22 +1105,12 @@
           <EntitySetMapping Name="Cars">
             <EntityTypeMapping TypeName="AjdemeSi.DomainModel.Car">
               <MappingFragment StoreEntitySet="Car">
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="NumberOfSits" ColumnName="NumberOfSits" />
                 <ScalarProperty Name="YearOfManufacture" ColumnName="YearOfManufacture" />
                 <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="Make" ColumnName="Make" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ChatMessages">
-            <EntityTypeMapping TypeName="AjdemeSi.DomainModel.ChatMessage">
-              <MappingFragment StoreEntitySet="ChatMessage">
-                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
-                <ScalarProperty Name="UsersGroupId" ColumnName="UsersGroupId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1145,6 +1146,8 @@
           <EntitySetMapping Name="Rides">
             <EntityTypeMapping TypeName="AjdemeSi.DomainModel.Ride">
               <MappingFragment StoreEntitySet="Ride">
+                <ScalarProperty Name="BreakTime" ColumnName="BreakTime" />
+                <ScalarProperty Name="DelayedStartTime" ColumnName="DelayedStartTime" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="ReturnDrivingId" ColumnName="ReturnDrivingId" />
                 <ScalarProperty Name="PricePerPassenger" ColumnName="PricePerPassenger" />
@@ -1154,10 +1157,8 @@
                 <ScalarProperty Name="TravelTime" ColumnName="TravelTime" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="ToPlace" ColumnName="ToPlace" />
                 <ScalarProperty Name="ToCity" ColumnName="ToCity" />
                 <ScalarProperty Name="ToCounty" ColumnName="ToCounty" />
-                <ScalarProperty Name="FromPlace" ColumnName="FromPlace" />
                 <ScalarProperty Name="FromCity" ColumnName="FromCity" />
                 <ScalarProperty Name="FromCounty" ColumnName="FromCounty" />
                 <ScalarProperty Name="DriverUserId" ColumnName="DriverUserId" />
@@ -1213,6 +1214,20 @@
                 <ScalarProperty Name="NameAlternative" ColumnName="NameAlternative" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatMessages">
+            <EntityTypeMapping TypeName="AjdemeSi.DomainModel.ChatMessage">
+              <MappingFragment StoreEntitySet="ChatMessage">
+                <ScalarProperty Name="SeenBy" ColumnName="SeenBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsRemoved" ColumnName="IsRemoved" />
+                <ScalarProperty Name="IsEdited" ColumnName="IsEdited" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+                <ScalarProperty Name="UsersGroupId" ColumnName="UsersGroupId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

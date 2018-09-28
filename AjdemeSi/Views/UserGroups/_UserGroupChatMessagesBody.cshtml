@@ -1,0 +1,73 @@
+﻿@using Microsoft.AspNet.Identity;
+@using AjdemeSi.Domain.Models.UserGroups
+@model UserGroupWithMessagesViewModel
+
+@if(Model != null)
+{
+    string currentUserId = Context.User.Identity.GetUserId();
+
+    if (Model != null && Model.ChatMessagesByDay != null)
+    {
+        if (Model.ChatMessagesByDay.Any())
+        {
+            var lastMessage = Model.ChatMessagesByDay.LastOrDefault().LastOrDefault();
+
+            if (lastMessage != null)
+            {
+                <input type="hidden" class="last-message-sender" value="@lastMessage.SenderId" />
+                <input type="hidden" class="last-message-date" value="@lastMessage.DateCreated.ToShortDateString()" />
+                <input type="hidden" class="last-message-time" value="@lastMessage.DateCreated.ToString("hh:mm")" />
+            }
+
+            foreach (var group in Model.ChatMessagesByDay)
+            {
+                string date = group.Key.Date.ToShortDateString();
+                var prevSender = String.Empty;
+                var preHour = 99;
+                var prevMinute = 99;
+                var lastDate = date;
+
+                if (group.Key.Date == DateTime.Today)
+                {
+                    date = "Today";
+                }
+                else if (DateTime.Today - group.Key.Date == TimeSpan.FromDays(1))
+                {
+                    date = "Yesterday";
+                }
+                <div></div>
+                <div class="user-group-chat-messages-date">
+                    <div class="separator"><hr></div>
+                    <span>@date</span>
+                    <div class="separator"><hr></div>
+                </div>
+
+                foreach (var message in group)
+                {
+                    var isCurrentUser = message.SenderId == currentUserId;
+                    var messageClass = "user-group-chat-message" + (isCurrentUser ? " right" : String.Empty);
+                    <div class="@messageClass">
+                        @if(prevSender != message.SenderId || preHour != message.DateCreated.Hour || prevMinute != message.DateCreated.Minute)
+                        {
+                            <br>
+                            <div class="user-group-chat-message-avatar">
+                                <span class="glyphicon glyphicon-user"></span>
+                            </div>
+                            <span class="user-group-chat-message-time">@message.DateCreated.ToString("hh:mm")</span>
+                        }
+
+                        <div class="user-group-chat-message-content @(!message.SeenBy.Contains(currentUserId) && !isCurrentUser ? "not-seen" : String.Empty)" data-id="@message.Id">
+                            <span>@message.Message</span>
+                        </div>
+
+                        @{ 
+                            prevSender = message.SenderId;
+                            preHour = message.DateCreated.Hour;
+                            prevMinute = message.DateCreated.Minute;
+                        }
+                    </div>
+                }
+            }
+        }
+    }
+}

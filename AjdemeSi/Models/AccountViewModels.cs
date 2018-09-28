@@ -79,13 +79,16 @@ namespace AjdemeSi.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        public bool IsDriver { get; set; }
     }
 
     public class RegisterDriverViewModel : RegisterViewModel
     {
         [Required]
-        [DataType(DataType.Date)]
-        [Display(Name = "Licence Date")]
+        [StringLength(128)]
+        [DataType(DataType.Text)]
         public string LicenceRegistrationDate { get; set; }
 
         [Required]

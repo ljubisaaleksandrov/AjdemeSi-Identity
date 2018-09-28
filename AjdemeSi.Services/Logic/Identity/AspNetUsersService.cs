@@ -159,7 +159,6 @@ namespace AjdemeSi.Services.Logic.Identity
             }
         }
 
-
         public bool BlockUser(string id, string email)
         {
             using (DataContext dc = new DataContext())
@@ -177,6 +176,5 @@ namespace AjdemeSi.Services.Logic.Identity
                 return false;
             }
         }
-
     }
 }

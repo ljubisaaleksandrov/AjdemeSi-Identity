@@ -1,0 +1,12 @@
+﻿@using AjdemeSi.Domain.Models.UserGroups
+@model UserGroupsListViewModel
+
+@if (Model != null)
+{
+    bool hasCurrentGroup = Model.CurrentUserGroup != null && Model.CurrentUserGroup.Id != 0;
+    @Html.Partial("_UserGroupChatMessages", new UserGroupWithMessagesViewModel())
+    if (hasCurrentGroup)
+    {
+        @Html.Partial("_UserGroupChatMessages", Model.CurrentUserGroup)
+    }
+}   

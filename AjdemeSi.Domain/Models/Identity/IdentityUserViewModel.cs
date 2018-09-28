@@ -16,5 +16,6 @@ namespace AjdemeSi.Domain.Models.Identity
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy hh:mm:ss}")]
         public DateTime DateCreated { get; set; }
         public List<string> UserRoles { get; set; }
+        public bool IsDriver { get; set; }
     }
 }

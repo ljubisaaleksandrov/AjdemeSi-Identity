@@ -34,6 +34,9 @@ namespace AjdemeSi
             bundles.Add(new ScriptBundle("~/bundles/autocomplete").Include(
                       "~/Scripts/Custom/autocomplete.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/signalr").Include(
+                              "~/Scripts/jquery.signalR-{version}.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/jquery-ui.css",
                       "~/Content/bootstrap.css",

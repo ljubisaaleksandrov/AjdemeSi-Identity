@@ -8,13 +8,14 @@
     <ul class="nav navbar-nav navbar-right">
         @*<li>@Html.ActionLink("Index", "Index", "Contacts", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
         <li>@Html.ActionLink("Rides", "Index", "Rides")</li>
+        <li>@Html.ActionLink("User Groups", "Index", "UserGroups")</li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="@User.Identity.GetUserName()">
-                My Profile
+                @User.Identity.GetUserName()
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li>@Html.ActionLink("Profile Setting", "Index", "UserSettings")</li>
+                <li>@Html.ActionLink("My Setting", "Index", "Settings")</li>
                 <li>@Html.ActionLink("Identity Setting", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
                 <li>@Html.ActionLink("logins", "ManageLogins", "Manage", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>

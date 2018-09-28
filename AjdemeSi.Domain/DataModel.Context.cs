@@ -32,7 +32,6 @@ namespace AjdemeSi.Domain
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Car> Cars { get; set; }
-        public virtual DbSet<ChatMessage> ChatMessages { get; set; }
         public virtual DbSet<Driver> Drivers { get; set; }
         public virtual DbSet<Friend> Friends { get; set; }
         public virtual DbSet<GroupMember> GroupMembers { get; set; }
@@ -41,6 +40,7 @@ namespace AjdemeSi.Domain
         public virtual DbSet<UserSetting> UserSettings { get; set; }
         public virtual DbSet<UsersGroup> UsersGroups { get; set; }
         public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<ChatMessage> ChatMessages { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

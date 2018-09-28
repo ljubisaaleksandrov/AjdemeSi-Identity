@@ -26,10 +26,8 @@ namespace AjdemeSi.Domain
         public string DriverUserId { get; set; }
         public string FromCounty { get; set; }
         public string FromCity { get; set; }
-        public string FromPlace { get; set; }
         public string ToCounty { get; set; }
         public string ToCity { get; set; }
-        public string ToPlace { get; set; }
         public System.DateTime StartTime { get; set; }
         public System.DateTime EndTime { get; set; }
         public int TravelTime { get; set; }
@@ -39,6 +37,8 @@ namespace AjdemeSi.Domain
         public float PricePerPassenger { get; set; }
         public Nullable<int> ReturnDrivingId { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
+        public Nullable<int> DelayedStartTime { get; set; }
+        public Nullable<int> BreakTime { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -7,13 +7,21 @@
 }
 
 <div class="container">
-    @if(Model.UserCommonViewModel.IsDriver)
+    @if (Model.UserCommonViewModel.IsDriver)
     {
-        @Html.Partial("_DriverRides", Model.DriverRidePagedListViewModel)
+        if (Model.CarDetails != null)
+        {
+            @Html.Partial("_DriverNewRide", Model.CarDetails)
+            @Html.Partial("_DriverRides", Model.MyRidesListViewModel)
+        }
+        else
+        {
+            <div>Please update yout car details - you don't have a default car</div>
+        }
     }
     @if (!Model.UserCommonViewModel.IsDriver || Model.UserCommonViewModel.LoadResults)
     {
-        @Html.Partial("_RidesList", Model.RidePagedListViewModel)
+        @Html.Partial("_RidesList", Model.SuggestedRidesListViewModel)
     }
 </div>
 

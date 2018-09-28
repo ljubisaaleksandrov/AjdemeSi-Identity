@@ -18,8 +18,10 @@ namespace AjdemeSi.Domain
         public int UsersGroupId { get; set; }
         public string SenderId { get; set; }
         public string Message { get; set; }
+        public bool IsEdited { get; set; }
+        public bool IsRemoved { get; set; }
         public System.DateTime DateCreated { get; set; }
-        public Nullable<System.DateTime> DateModified { get; set; }
+        public string SeenBy { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual UsersGroup UsersGroup { get; set; }

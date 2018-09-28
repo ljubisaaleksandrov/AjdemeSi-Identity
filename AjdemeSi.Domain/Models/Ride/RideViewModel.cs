@@ -11,28 +11,29 @@ namespace AjdemeSi.Domain.Models.Ride
         //this.UsersGroups = new HashSet<UsersGroup>();
 
         public int Id { get; set; }
+        public string DriverUserId { get; set; }
         public string FromCounty { get; set; }
         public string FromCity { get; set; }
-        public string FromPlace { get; set; }
         public string ToCounty { get; set; }
         public string ToCity { get; set; }
-        public string ToPlace { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public System.DateTime StartTime { get; set; }
+        public System.DateTime EndTime { get; set; }
         public int TravelTime { get; set; }
         public int MaxPassengers { get; set; }
         public float TotalPrice { get; set; }
         public float MinTotalPrice { get; set; }
         public float PricePerPassenger { get; set; }
-        public int? ReturnDrivingId { get; set; }
-        public DateTime? DateCreated { get; set; }
+        public Nullable<int> ReturnDrivingId { get; set; }
+        public Nullable<System.DateTime> DateCreated { get; set; }
+        public Nullable<int> DelayedStartTime { get; set; }
+        public Nullable<int> BreakTime { get; set; }
 
-        public RideDriverViewModel Driver { get; set; }
+        public RideDriverViewModel DriverDetails { get; set; }
         public List<RidePassengerViewModel> Passengers { get; set; }
 
         public RideViewModel()
         {
-            Driver = new RideDriverViewModel();
+            DriverDetails = new RideDriverViewModel();
             Passengers = new List<RidePassengerViewModel>();
         }
     }

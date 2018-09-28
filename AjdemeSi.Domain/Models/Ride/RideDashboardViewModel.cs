@@ -1,11 +1,12 @@
-﻿using AjdemeSi.Domain.Models.Common;
+﻿using AjdemeSi.Domain.Models.Settings;
 
 namespace AjdemeSi.Domain.Models.Ride
 {
     public class RideDashboardViewModel
     {
-        public RidePagedListViewModel RidePagedListViewModel { get; set; }
-        public RidePagedListViewModel DriverRidePagedListViewModel { get; set; }
-        public UserCommonViewModel UserCommonViewModel { get; set; }
+        public RidePagedListViewModel SuggestedRidesListViewModel { get; set; }
+        public RidePagedListViewModel MyRidesListViewModel { get; set; }
+        public UserResultsSettingsExtendedViewModel UserCommonViewModel { get; set; }
+        public CarViewModel CarDetails { get; set; }
     }
 }

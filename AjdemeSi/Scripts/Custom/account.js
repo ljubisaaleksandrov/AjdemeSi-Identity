@@ -93,29 +93,60 @@
         }
     },
     frfs = function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+
         var isFormValid = true;
 
         var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 
-        var email = $(t.registerForm).find('#Email').val();
-        var pass = $(t.registerForm).find('#Password').val();
-        var passConfirmed = $(t.registerForm).find('#ConfirmPassword').val();
+        var email = $(settings.registerForm).find('#Email').val();
+        var pass = $(settings.registerForm).find('#Password').val();
+        var passConfirmed = $(settings.registerForm).find('#ConfirmPassword').val();
 
         if ($.trim(email) == '') { isFormValid = false; }
         else if (!emailReg.test(email)) { isFormValid = false; }
         if ($.trim(pass) == '') { isFormValid = false; }
         if ($.trim(passConfirmed) == '') { isFormValid = false; }
         else if (pass != passConfirmed) { isFormValid = false; }
+        var isDriver = $(e.target).attr('action') == settings.ajaxMenuRegisterDriverBtnAction;
+        var url = $(e.target).attr('action');
+
+        if(isDriver){
+            var licenceDate = $(settings.registerForm).find('#LicenceRegistrationDate').val();
+            var make = $(settings.registerForm).find('#Make').val();
+            //var model = $(settings.registerForm).find('#Model').val();
+            var model = "A4";
+            //var yearOfManufacture = $(settings.registerForm).find('#YearOfManufacture').val();
+            var yearOfManufacture = 2006;
+
+            //if ($.trim(licenceDate) == '') { isFormValid = false; }
+            //if ($.trim(make) == '') { isFormValid = false; }
+            //if ($.trim(model) == '') { isFormValid = false; }
+            //if ($.trim(yearOfManufacture) == '') { isFormValid = false; }
+        }
 
         if (isFormValid) {
+            var data = {
+                email: email,
+                password: pass,
+                confirmPassword: passConfirmed,
+                isDriver: isDriver,
+                __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val()
+            };
+
+            if (isDriver) {
+                data["LicenceRegistrationDate"] = licenceDate;
+                data["make"] = make;
+                data["model"] = model;
+                data["yearOfManufacture"] = yearOfManufacture;
+                data["MakesList"] = null
+            }
+
             $.ajax({
-                url: '/umbraco/Surface/Users/RegisterAsync',
+                url: url,
                 type: 'POST',
-                data: {
-                    email: email,
-                    password: pass,
-                    __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val()
-                },
+                data: { __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(), model: data },
                 context: this,
                 success: function (data) {
                     if (!data.isValid) { console.log(data.error); }

@@ -12,7 +12,7 @@ namespace AjdemeSi.Controllers
                 if (User.IsInRole("Admin"))
                     return RedirectToAction("Index", "Home", new { area = "Administration" });
                 else if (User.IsInRole("Driver"))
-                    return RedirectToAction("Routes", "Index");
+                    return RedirectToAction("Index", "Rides");
                 else
                     return RedirectToAction("Index", "Rides");
             }
