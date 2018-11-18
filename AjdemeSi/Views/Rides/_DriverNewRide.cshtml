@@ -1,0 +1,114 @@
+﻿@using AjdemeSi.Domain.Models.Settings
+@model CarViewModel
+
+<div class="driver-ride-filters-container">
+    @using (Html.BeginForm("CreateRide", "Rides", FormMethod.Post, new { id = "DriverNewRide" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="driver-ride-fields col-md-11 col-sm-10 col-xs-12">
+            <div class="diver-ride-fields-section">
+                <div class="driver-ride-field">
+                    <label>From Place:</label>
+                    <div class="ui-widget">
+                        <input type="text" class="input-autocomplete form-control driver-ride-field-place-from" />
+                        <ul class="autocomplete autocomplete-place-from"></ul>
+                    </div>
+                </div>
+                <div class="driver-ride-field">
+                    <label>To Place:</label>
+                    <div class="ui-widget">
+                        <input type="text" class="input-autocomplete form-control driver-ride-field-place-to" />
+                        <ul class="autocomplete autocomplete-place-to"></ul>
+                    </div>
+                </div>
+                <div class="driver-ride-field">
+                    <label>Start Date</label>
+                    <div class="ui-widget">
+                        <input type="text" class="input-datepicker form-control driver-ride-field-date-from" />
+                    </div>
+                </div>
+                <div class="driver-ride-field">
+                    <label>Start Time</label>
+                    <div class="ui-widget">
+                        <input class='timepicker form-control driver-ride-field-start-time' type='text' name='timepicker' />
+                    </div>
+                </div>
+                <div class="driver-ride-field">
+                    <label>Travel time</label>
+                    <div class="ui-widget">
+                        <input class='timepicker form-control driver-ride-field-travel-time' type='text' name='timepicker' />
+                    </div>
+                </div>
+
+                <div class="driver-ride-field">
+                    <select class="driver-ride-price-option">
+                        <option value="PPP">Price per passenger</option>
+                        <option value="TP">Total Price</option>
+                    </select>
+                    <div class="ui-widget">
+                        <input class='form-control driver-ride-price' type='text' />
+                    </div>
+                </div>
+            </div>
+
+            <div class="diver-ride-fields-section">
+                <div class="driver-ride-field">
+                    <label>Delay</label>
+                    <div class="ui-widget">
+                        <input class='timepicker form-control driver-ride-field-dalayed-start' type='text' name='timepicker' />
+                    </div>
+                </div>
+                <div class="driver-ride-field">
+                    <label>Break time</label>
+                    <div class="ui-widget">
+                        <input class='timepicker form-control driver-ride-field-break-time' type='text' name='timepicker' />
+                    </div>
+                </div>
+
+                <div class="driver-ride-field">
+                    <label>Passengers Number</label>
+                    <div class="ui-widget">
+                        <input class='form-control driver-ride-field-passengers-number' type='text' value="@(Model.NumberOfSits - 1)" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-1 col-sm-2 col-xs-12">
+            <input type="button" class="btn btn-primary" id="CreateRide" disabled="disabled" value="Create Ride" />
+        </div>
+        <div>
+            <div class="driver-ride-field driver-ride-field-arrival-wrapper">
+                <label>Ride Summary</label>
+                <h2 id="RideDestination"></h2>
+                <h3 id="RideDate"></h3>
+                <table class="driver-ride-field-arrival-time-table">
+                    <tr>
+                        <td></td>
+                        <td id="RideTravelTime"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td id="RideStartTime"></td>
+                        <td>Arrow</td>
+                        <td id="RideArivalTime"></td>
+                    </tr>
+                    <tr>
+                        <td id="RideStartTimeMeridian"></td>
+                        <td></td>
+                        <td id="RideArrivalTimeMeridian"></td>
+                    </tr>
+                    <tr>
+                        <td>@Model.Model @Model.Make (@Model.YearOfManufacture)</td>
+                        <td id="PassengersNo"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    }
+
+    <div class="driver-rides-list-wrapper">
+        
+    </div>
+</div>

@@ -218,24 +218,31 @@ namespace AjdemeSi.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, IsDriver = model.IsDriver };
-                var result = UserManager.Create(user, model.Password);
-                if (result.Succeeded)
+                try
                 {
-                    var roleResult = UserManager.AddToRole(user.Id, "Driver");
-                    DriverService driverService = new DriverService();
-                    driverService.AddDriver(user.Id, !String.IsNullOrEmpty(model.LicenceRegistrationDate) ? Convert.ToDateTime(model.LicenceRegistrationDate) : DateTime.Now.AddYears(-18), DateTime.Now);
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, IsDriver = model.IsDriver };
+                    var result = UserManager.Create(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        var roleResult = UserManager.AddToRole(user.Id, "Driver");
+                        DriverService driverService = new DriverService();
+                        driverService.AddDriver(user.Id, !String.IsNullOrEmpty(model.LicenceRegistrationDate) ? Convert.ToDateTime(model.LicenceRegistrationDate) : DateTime.Now.AddYears(-18), DateTime.Now);
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("EmailNotConfirmed", "Account");
+                        return RedirectToAction("EmailNotConfirmed", "Account");
+                    }
+                    AddErrors(result);
                 }
-                AddErrors(result);
+                catch(Exception ex)
+                {
+                    var t = ex.Message;
+                }
             }
 
             // If we got this far, something failed, redisplay form
