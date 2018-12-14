@@ -514,3 +514,5 @@
 /packages/log4net.2.0.8/lib/net40-full/log4net.xml
 /packages/log4net.2.0.8/lib/net45-full/log4net.xml
 /packages/log4net.2.0.8/log4net.2.0.8.nupkg
+/AjdemeSi.Database/bin/Release
+/AjdemeSi/App_Data/logs
