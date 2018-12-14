@@ -1,0 +1,101 @@
+﻿.adroid-button {
+    position: relative;
+    display:inline-block;
+    width: 90px;
+}
+
+.adroid-button-checkbox {
+    display: none;
+}
+
+.adroid-button-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 0px solid #999999;
+    border-radius: 0px;
+}
+
+.adroid-button-inner {
+    width: 200%;
+    margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s;
+    -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s;
+    transition: margin 0.3s ease-in 0s;
+}
+
+.adroid-button-inner > div {
+    float: left;
+    position: relative;
+    width: 50%;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+    font-size: 14px;
+    color: white;
+    font-family: Trebuchet, Arial, sans-serif;
+    font-weight: bold;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.adroid-button-inner .adroid-button-active {
+    padding-left: 15px;
+    background-color: #C2C2C2;
+    color: #FFFFFF;
+}
+
+.adroid-button-inner .adroid-button-inactive {
+    padding-right: 15px;
+    background-color: #C2C2C2;
+    color: #FFFFFF;
+    text-align: right;
+}
+
+.adroid-button-switch {
+    width: 40px;
+    margin: 0px;
+    text-align: center;
+    border: 0px solid #999999;
+    border-radius: 0px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+.adroid-button-active .adroid-button-switch {
+    background: #2e6da4;
+    left: 0;
+}
+
+.adroid-button-inactive .adroid-button-switch {
+    background: #A1A1A1;
+    right: 0;
+}
+
+.adroid-button-active .adroid-button-switch:before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 40px;
+    border-style: solid;
+    border-color: #2e6da4;
+    transparent transparent #2e6da4;
+    border-width: 15px 10px;
+}
+
+.adroid-button-inactive .adroid-button-switch:before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    right: 40px;
+    border-style: solid;
+    border-color: transparent #A1A1A1 #A1A1A1 transparent;
+    border-width: 15px 10px;
+}
+
+.adroid-button-checkbox:checked + .adroid-button-label .adroid-button-inner {
+    margin-left: 0;
+}

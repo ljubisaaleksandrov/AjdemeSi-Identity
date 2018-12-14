@@ -106,6 +106,7 @@
     <Compile Include="GroupMember.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Ride\RideSiteLabelsViewModel.cs" />
     <Compile Include="Models\Settings\CarViewModel.cs" />
     <Compile Include="Models\Settings\SettingsViewModel.cs" />
     <Compile Include="Models\Settings\UserGeneralViewModel.cs" />
@@ -133,6 +134,9 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="RidePassanger.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SiteLabel.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">

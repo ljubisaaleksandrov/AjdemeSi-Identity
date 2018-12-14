@@ -6,6 +6,10 @@
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("English", ViewContext.RouteData.Values["action"].ToString(), new { language = "en" })</li>
+        <li>@Html.ActionLink("Српски", ViewContext.RouteData.Values["action"].ToString(), new { language = "rs" })</li>
+        <li>@Html.ActionLink("Български", ViewContext.RouteData.Values["action"].ToString(), new { language = "bg" })</li>
+
         @*<li>@Html.ActionLink("Index", "Index", "Contacts", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
         <li>@Html.ActionLink("Rides", "Index", "Rides")</li>
         <li>@Html.ActionLink("User Groups", "Index", "UserGroups")</li>

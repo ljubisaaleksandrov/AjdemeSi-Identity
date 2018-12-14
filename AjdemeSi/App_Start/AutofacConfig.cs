@@ -50,6 +50,8 @@ namespace AjdemeSi.App_Start
                 cfg.CreateMap<ChatMessage, ChatMessageViewModel>();
                 cfg.CreateMap<ChatMessageViewModel, ChatMessage>();
 
+                cfg.CreateMap<SiteLabel, RideSiteLabelsViewModel>();
+
             }).CreateMapper());
 
             var container = builder.Build();

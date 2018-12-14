@@ -15,15 +15,46 @@ var rSDate = "#RideDate";
 var rSTravelTime = "#RideTravelTime";
 var rSStartTime = "#RideStartTime";
 var rSArrivalTime = "#RideArivalTime";
+var rSArrivalTimeXS = "RideArivalTimeXS";
 var rSStartTimeMeridian = "#RideStartTimeMeridian";
 var rSArrivalTimeMeridian = "#RideArrivalTimeMeridian";
-var rsPassengersNoFinal = "#PassengersNo";
+var rsPassengersNoFinal = "#RidePassengersNo";
+var rsSummaryPrice = "#RidePrice";
 var btnCreateRide = "#CreateRide";
+
+var placeFromReturn = '.driver-ride-return-field-place-from';
+var placeToReturn = '.driver-ride-return-field-place-to';
+var dateFromReturn = '.driver-ride-return-field-date-from';
+var timeFromReturn = '.driver-ride-return-field-start-time';
+var timeDelayReturn = '.driver-ride-return-field-dalayed-start';
+var timeTravelReturn = '.driver-ride-return-field-travel-time';
+var timeBreakReturn = '.driver-ride-return-field-break-time';
+var returnRideEnabled = '.driver-ride-return-return-enabled-checkbox';
+var rsrWrapper = '.driver-ride-return-field-arrival-wrapper';
+var rsrPrice = '.driver-ride-return-price';
+var rsrPriceOption = '.driver-ride-return-price-option';
+var rsrPassengersNo = '.driver-ride-return-field-passengers-number';
+var rrSDestination = "#ReturnRideDestination";
+var rrSDate = "#ReturnRideDate";
+var rrSTravelTime = "#ReturnRideTravelTime";
+var rrSStartTime = "#ReturnRideStartTime";
+var rrSArrivalTime = "#ReturnRideArivalTime";
+var rrSArrivalTimeXS = "ReturnRideArivalTimeXS";
+var rrSStartTimeMeridian = "#ReturnRideStartTimeMeridian";
+var rrSArrivalTimeMeridian = "#ReturnRideArrivalTimeMeridian";
+var rrsPassengersNoFinal = "#ReturnRidePassengersNo";
+var rrsSummaryPrice = "#ReturnRidePrice";
+var btnCreateRideReturn = "#CreateRideReturn";
+
+var isReturnRideEnabled = $(returnRideEnabled).prop('checked');
+
 
 var lineDelimiter = ' - ';
 var blankDelimiter = ' ';
 var timeDelimiter = ':';
 var bracketsPatter = /\(([^)]+)\)/;
+
+var timeEmpty = "00:00";
 
 
 var addTime = function (baseTime, timeToAdd) {
@@ -52,15 +83,15 @@ var addTime = function (baseTime, timeToAdd) {
     };
 
     return result;
-}
+};
 
-var formatLeadingZero = function(number){
+var formatLeadingZero = function (number) {
     return number >= 10 ? number : "0" + number;
-}
+};
 
 var toString = function (day, minute) {
     return formatLeadingZero(day) + timeDelimiter + formatLeadingZero(minute);
-}
+};
 
 var toMeridianTime = function (time) {
     var timeHI = parseInt(time.split(timeDelimiter)[0]);
@@ -72,7 +103,7 @@ var toMeridianTime = function (time) {
     else {
         return formatLeadingZero(timeHI) + timeDelimiter + timeM + blankDelimiter + "AM";
     }
-}
+};
 
 var checkCreateRideFormFields = function (formElement) {
     var placeFromValue = $(placeFrom).val();
@@ -83,17 +114,22 @@ var checkCreateRideFormFields = function (formElement) {
     var timeTravelValue = $(timeTravel).val();
     var timeBreakValue = $(timeBreak).val();
     var price = $(rsPrice).val();
-    var isTotalPrice = $(rsPriceOption).val() == "TP";
+    var isTotalPrice = $(rsPriceOption).val() === "TP";
     var passengersNo = $(rsPassengersNo).val();
 
     var isPlaceFromValid = bracketsPatter.exec(placeFromValue) !== null;
     var isPlaceToValid = bracketsPatter.exec(placeToValue) !== null;
 
-    if (isPlaceFromValid && isPlaceToValid && dateFromValue != '' && timeFromValue != '' && timeTravelValue != '' && price != '' && passengersNo != '') {
-        $(rSDestination).html(placeFromValue + lineDelimiter + placeToValue);
-        $(rSDate).html(dateFromValue + lineDelimiter + "????");
+    if (isPlaceFromValid && isPlaceToValid && dateFromValue !== '' && timeFromValue !== '' && passengersNo !== '') {
+        timeTravelValue = timeTravelValue !== '' ? timeTravelValue : 0;
+        price = price !== '' ? price : 0;
 
-        if (timeDelayValue == '') {
+        $(rSDestination).children('.driver-ride-summary-from').html(placeFromValue);
+        $(rSDestination).children('.driver-ride-summary-to').html(placeToValue);
+        
+        $(rSDate).html(dateFromValue);
+
+        if (timeDelayValue === '') {
             $(rSStartTime).html(timeFromValue);
             $(rSStartTimeMeridian).html(toMeridianTime(timeFromValue));
         }
@@ -104,29 +140,102 @@ var checkCreateRideFormFields = function (formElement) {
             $(rSStartTimeMeridian).html(toMeridianTime(timeFromValue) + lineDelimiter + toMeridianTime(delayTime));
         }
 
-        var totalTravelTime = addTime(timeTravelValue, timeBreakValue);
+        var totalTravelTime = addTime(timeTravelValue, timeEmpty);
         var timeToValue = addTime(timeFromValue, toString(totalTravelTime.hours, totalTravelTime.minutes));
         var timeToValueFormated = toString(timeToValue.hours, timeToValue.minutes);
-        if (timeDelayValue == '') {
+        if (timeDelayValue === '') {
             $(rSArrivalTime).html(timeToValueFormated);
+            $(rSArrivalTimeXS).html(timeToValueFormated);
             $(rSArrivalTimeMeridian).html(toMeridianTime(timeToValueFormated));
         }
         else {
             var delayedTimeObject = addTime(timeToValueFormated, timeDelayValue);
             var delayTime = toString(delayedTimeObject.hours, delayedTimeObject.minutes);
-            $(rSArrivalTime).html(timeToValueFormated + lineDelimiter + delayTime);
-            $(rSArrivalTimeMeridian).html(toMeridianTime(timeToValueFormated) + lineDelimiter + toMeridianTime(delayTime));
+            var fullDelayedTimeObject = addTime(delayTime, timeBreakValue);
+            var fullDelayTime = toString(fullDelayedTimeObject.hours, fullDelayedTimeObject.minutes);
+            $(rSArrivalTime).html(timeToValueFormated + lineDelimiter + fullDelayTime);
+            $(rSArrivalTimeXS).html(timeToValueFormated);
+            $(rSArrivalTimeMeridian).html(toMeridianTime(timeToValueFormated) + lineDelimiter + toMeridianTime(fullDelayTime));
         }
 
-        $(rsPassengersNoFinal).val(passengersNo);
+        $(rsPassengersNoFinal).text(passengersNo);
+        $(rsSummaryPrice).text($(rsPriceOption + " option:selected").text().substring(1) + ": " + price);
 
         $(rsWrapper).addClass("show");
         $(btnCreateRide).prop("disabled", false);
+
+
+        // ---------------- return ride enabled ----------------
+
+        if (isReturnRideEnabled) {
+            var returnPlaceFromValue = $(placeFromReturn).val();
+            var returnPlaceToValue = $(placeToReturn).val();
+            var returnDateFromValue = $(dateFromReturn).val();
+            var returnTimeFromValue = $(timeFromReturn).val();
+            var returnTimeDelayValue = $(timeDelayReturn).val();
+            var returnTimeTravelValue = $(timeTravelReturn).val();
+            var returnTimeBreakValue = $(timeBreakReturn).val();
+            var returnPrice = $(rsrPrice).val();
+            var returnIsTotalPrice = $(rsrPriceOption).val() === "TP";
+            var returnPassengersNo = $(rsrPassengersNo).val();
+
+            var returnIsPlaceFromValid = bracketsPatter.exec(returnPlaceFromValue) !== null;
+            var returnIsPlaceToValid = bracketsPatter.exec(returnPlaceToValue) !== null;
+
+            if (returnIsPlaceFromValid && returnIsPlaceToValid && returnDateFromValue !== '' && returnPassengersNo !== '') {
+                returnTimeFromValue = returnTimeFromValue !== '' ? returnTimeFromValue : timeEmpty;
+                returnTimeTravelValue = returnTimeTravelValue !== '' ? returnTimeTravelValue : timeEmpty;
+                returnPrice = returnPrice !== '' ? returnPrice : timeEmpty;
+                returnPassengersNo = returnPassengersNo !== '' ? returnPassengersNo : timeEmpty;
+
+                $(rrSDate).html(returnDateFromValue);
+
+                if (returnTimeDelayValue === '') {
+                    $(rrSStartTime).html(returnTimeFromValue);
+                    $(rrSStartTimeMeridian).html(toMeridianTime(returnTimeFromValue));
+                }
+                else {
+                    var delayedTimeObject = addTime(returnTimeFromValue, returnTimeDelayValue);
+                    var delayTime = toString(delayedTimeObject.hours, delayedTimeObject.minutes);
+                    $(rrSStartTime).html(returnTimeFromValue + lineDelimiter + delayTime);
+                    $(rrSStartTimeMeridian).html(toMeridianTime(returnTimeFromValue) + lineDelimiter + toMeridianTime(delayTime));
+                }
+
+                var totalTravelTime = addTime(returnTimeTravelValue, timeEmpty);
+                var timeToValue = addTime(returnTimeFromValue, toString(totalTravelTime.hours, totalTravelTime.minutes));
+                var timeToValueFormated = toString(timeToValue.hours, timeToValue.minutes);
+                if (returnTimeDelayValue === '') {
+                    $(rrSArrivalTime).html(timeToValueFormated);
+                    $(rrSArrivalTimeMeridian).html(toMeridianTime(timeToValueFormated));
+                }
+                else {
+                    var delayedTimeObject = addTime(timeToValueFormated, returnTimeDelayValue);
+                    var delayTime = toString(delayedTimeObject.hours, delayedTimeObject.minutes);
+                    var fullDelayedTimeObject = addTime(delayTime, returnTimeBreakValue);
+                    var fullDelayTime = toString(fullDelayedTimeObject.hours, fullDelayedTimeObject.minutes);
+                    $(rrSArrivalTime).html(timeToValueFormated + lineDelimiter + fullDelayTime);
+                    $(rrSArrivalTimeMeridian).html(toMeridianTime(timeToValueFormated) + lineDelimiter + toMeridianTime(fullDelayTime));
+                }
+
+                $(rrsPassengersNoFinal).text(returnPassengersNo);
+                $(rrsSummaryPrice).text($(rsrPriceOption + " option:selected").text().substring(1) + ": " + returnPrice);
+
+                $(rsrWrapper).addClass("show");
+                $(rsWrapper).addClass("rider-return");
+                $(btnCreateRideReturn).prop("disabled", false);
+            }
+            else {
+                $(btnCreateRideReturn).prop("disabled", true);
+                $(rsWrapper).removeClass("rider-return");
+            }
+        }
     }
     else {
         $(btnCreateRide).prop("disabled", true);
+        $(btnCreateRideReturn).prop("disabled", true);
     }
-}
+
+};
 
 
 $(document).ready(function (e) {
@@ -134,7 +243,7 @@ $(document).ready(function (e) {
         $(input).autocomplete({
             source: function (request, response) {
                 $.ajax({
-                    url: "/Rides/GetCities",
+                    url: "/en/Rides/GetCities",
                     type: "GET",
                     dataType: "json",
                     data: request,
@@ -167,6 +276,11 @@ $(document).ready(function (e) {
                 event.stopPropagation();
                 //var value = typeof $(ui.item).data('value') !== 'undefined' ? $(ui.item).data('value') : $(ui.item.label).data('value');
                 $(this).val(ui.item.value);
+
+                if (isReturnRideEnabled) {
+                    $(placeFromReturn).val($(placeTo).val());
+                    $(placeToReturn).val($(placeFrom).val());
+                }
             },
             minLength: 2
         }).focus(function (event) {
@@ -185,7 +299,33 @@ $(document).ready(function (e) {
     $(".input-datepicker").datepicker();
 
     $.each($('.timepicker'), function (index, timePicker) {
-        $(timePicker).timepicki({ show_meridian: false });
+        if ($(timePicker).hasClass(timeTravel.substring(1)) || $(timePicker).hasClass(timeTravelReturn.substring(1))) {
+            $(timePicker).timepicki({
+                show_meridian: false,
+                start_time: ["02", "00"],
+                step_size_minutes: 5
+            });
+        }
+        else if ($(timePicker).hasClass(timeDelay.substring(1)) || $(timePicker).hasClass(timeDelayReturn.substring(1))) {
+            $(timePicker).timepicki({
+                show_meridian: false,
+                start_time: ["00", "15"],
+                step_size_minutes: 5
+            });
+        }
+        else if ($(timePicker).hasClass(timeBreak.substring(1)) || $(timePicker).hasClass(timeBreakReturn.substring(1))) {
+            $(timePicker).timepicki({
+                show_meridian: false,
+                start_time: ["00", "00"],
+                step_size_minutes: 5
+            });
+        }
+        else {
+            $(timePicker).timepicki({
+                show_meridian: false,
+                step_size_minutes: 5
+            });
+        }
     });
 });
 
@@ -202,7 +342,23 @@ $(document).on('change', $('.driver-ride-field .input-datepicker'), function (ev
 //    console.log(event.currentTarget);
 //});
 
+$(document).on('change', '.driver-ride-return-enabled-checkbox', function (event) {
+    isReturnRideEnabled = $(event.currentTarget).prop('checked');
+    $.each($('.driver-ride-return-fields').find('.driver-ride-field'), function (index, element) {
+        $(element).toggleClass('disabled').toggleClass('hidden-xs');
+        $(element).find('input:not(' + placeFromReturn + '):not(' + placeToReturn + ')').prop('disabled', !isReturnRideEnabled);
+        $(element).find('select').prop('disabled', !isReturnRideEnabled);
+        $(element).find('textarea').prop('disabled', !isReturnRideEnabled);
+    });
 
+    if (isReturnRideEnabled) {
+        $(placeFromReturn).val($(placeTo).val());
+        $(placeToReturn).val($(placeFrom).val());
+    }
+
+    $('.driver-ride-create-ride-btn').toggleClass('disabled');
+    $('.driver-ride-return-create-ride-btn').toggleClass('disabled');
+});
 
 $(btnCreateRide).on("click", function () {
     var data = {
@@ -214,22 +370,23 @@ $(btnCreateRide).on("click", function () {
         timeTravel: $(timeTravel).val(),
         timeBreak: $(timeBreak).val(),
         passengersNomber: $(rsPassengersNo).val(),
-        isTotalPrice: $(rsPriceOption).val() == "TP",
+        isTotalPrice: $(rsPriceOption).val() === "TP",
         price: $(rsPrice).val(),
         __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
     };
 
-    $.ajax({
-        url: "/Rides/CreateRide",
-        type: "POST",
-        dataType: "json",
-        data: data,
-        success: function (data) {
-            console.log(data);
-        },
-        error: function (request, status, error) {
-            console.log(request.responseText);
-        }
-    });
-});
+    $(this).parents('form').submit();
 
+    //$.ajax({
+    //    url: "/en/Rides/CreateRide",
+    //    type: "POST",
+    //    dataType: "json",
+    //    data: data,
+    //    success: function (data) {
+    //        console.log(data);
+    //    },
+    //    error: function (request, status, error) {
+    //        console.log(request.responseText);
+    //    }
+    //});
+});

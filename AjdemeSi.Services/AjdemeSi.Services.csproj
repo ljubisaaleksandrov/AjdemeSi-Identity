@@ -61,11 +61,13 @@
     <Compile Include="Interfaces\Identity\IAspNetUsersService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Interfaces\IUserGroupsService.cs" />
+    <Compile Include="Interfaces\ISiteLabelsService.cs" />
     <Compile Include="Logic\CitiesService.cs" />
     <Compile Include="Logic\CommonService.cs" />
     <Compile Include="Logic\DriverService.cs" />
     <Compile Include="Logic\RideService.cs" />
     <Compile Include="Logic\Identity\AspNetUsersService.cs" />
+    <Compile Include="Logic\SiteLabelsService.cs" />
     <Compile Include="Logic\UserGroupsService.cs" />
     <Compile Include="Logic\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

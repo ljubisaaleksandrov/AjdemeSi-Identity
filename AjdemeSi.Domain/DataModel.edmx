@@ -150,6 +150,23 @@
           <Property Name="Rate" Type="int" />
           <Property Name="RateComment" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="SiteLabels">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="LanguageName" Type="nvarchar(max)" />
+          <Property Name="RideLocationFrom" Type="nvarchar(max)" />
+          <Property Name="RideLocationTo" Type="nvarchar(max)" />
+          <Property Name="RideStartDate" Type="nvarchar(max)" />
+          <Property Name="RideStartTime" Type="nvarchar(max)" />
+          <Property Name="RideTravelTIme" Type="nvarchar(max)" />
+          <Property Name="RidePricePerPerson" Type="nvarchar(max)" />
+          <Property Name="RidePricePerRide" Type="nvarchar(max)" />
+          <Property Name="RideDelay" Type="nvarchar(max)" />
+          <Property Name="RideBreakTime" Type="nvarchar(max)" />
+          <Property Name="RidePassengers" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="UserSettings">
           <Key>
             <PropertyRef Name="Id" />
@@ -426,6 +443,7 @@
           <EntitySet Name="GroupMembers" EntityType="Self.GroupMembers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ride" EntityType="Self.Ride" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RidePassangers" EntityType="Self.RidePassangers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiteLabels" EntityType="Self.SiteLabels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserSettings" EntityType="Self.UserSettings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersGroup" EntityType="Self.UsersGroup" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -626,6 +644,7 @@
             <End Role="UsersGroup" EntitySet="UsersGroups" />
             <End Role="ChatMessage" EntitySet="ChatMessages" />
           </AssociationSet>
+          <EntitySet Name="SiteLabels" EntityType="AjdemeSi.DomainModel.SiteLabel" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1049,6 +1068,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SiteLabel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="LanguageName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RideLocationFrom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RideLocationTo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RideStartDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RideStartTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RideTravelTIme" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RidePricePerPerson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RidePricePerRide" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RideDelay" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RideBreakTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RidePassengers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1228,6 +1264,24 @@
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="SenderId" ColumnName="SenderId" />
                 <ScalarProperty Name="UsersGroupId" ColumnName="UsersGroupId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiteLabels">
+            <EntityTypeMapping TypeName="AjdemeSi.DomainModel.SiteLabel">
+              <MappingFragment StoreEntitySet="SiteLabels">
+                <ScalarProperty Name="RidePassengers" ColumnName="RidePassengers" />
+                <ScalarProperty Name="RideBreakTime" ColumnName="RideBreakTime" />
+                <ScalarProperty Name="RideDelay" ColumnName="RideDelay" />
+                <ScalarProperty Name="RidePricePerRide" ColumnName="RidePricePerRide" />
+                <ScalarProperty Name="RidePricePerPerson" ColumnName="RidePricePerPerson" />
+                <ScalarProperty Name="RideTravelTIme" ColumnName="RideTravelTIme" />
+                <ScalarProperty Name="RideStartTime" ColumnName="RideStartTime" />
+                <ScalarProperty Name="RideStartDate" ColumnName="RideStartDate" />
+                <ScalarProperty Name="RideLocationTo" ColumnName="RideLocationTo" />
+                <ScalarProperty Name="RideLocationFrom" ColumnName="RideLocationFrom" />
+                <ScalarProperty Name="LanguageName" ColumnName="LanguageName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

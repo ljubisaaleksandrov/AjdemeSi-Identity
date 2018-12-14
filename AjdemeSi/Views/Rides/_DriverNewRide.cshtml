@@ -1,114 +1,251 @@
-﻿@using AjdemeSi.Domain.Models.Settings
-@model CarViewModel
+﻿@using AjdemeSi.Domain.Models.Ride
+@model RideDashboardViewModel
 
 <div class="driver-ride-filters-container">
     @using (Html.BeginForm("CreateRide", "Rides", FormMethod.Post, new { id = "DriverNewRide" }))
     {
         @Html.AntiForgeryToken()
 
-        <div class="driver-ride-fields col-md-11 col-sm-10 col-xs-12">
-            <div class="diver-ride-fields-section">
-                <div class="driver-ride-field">
-                    <label>From Place:</label>
+        <div class="driver-ride-fields col-md-6 col-sm-12 col-xs-12">
+            <div class="driver-ride-fields-section">
+                <h2>Ride Details</h2>
+                <div class="driver-ride-field driver-ride-field-long mandatory col-md-6 col-sm-6 col-xs-12">
+                    <label>@Model.SiteLabels.RideLocationFrom</label>
+                    @Html.HiddenFor(model => model.CarDetails.Make)
                     <div class="ui-widget">
-                        <input type="text" class="input-autocomplete form-control driver-ride-field-place-from" />
+                        <input type="text" id="Test_Test1" class="input-autocomplete form-control driver-ride-field-place-from" />
                         <ul class="autocomplete autocomplete-place-from"></ul>
                     </div>
                 </div>
-                <div class="driver-ride-field">
-                    <label>To Place:</label>
+                <div class="driver-ride-field driver-ride-field-long mandatory col-md-6 col-sm-6 col-xs-12">
+                    <label>@Model.SiteLabels.RideLocationTo</label>
                     <div class="ui-widget">
-                        <input type="text" class="input-autocomplete form-control driver-ride-field-place-to" />
+                        <input type="text" id="Test_Test2" class="input-autocomplete form-control driver-ride-field-place-to" />
                         <ul class="autocomplete autocomplete-place-to"></ul>
                     </div>
                 </div>
-                <div class="driver-ride-field">
-                    <label>Start Date</label>
+                <div class="driver-ride-field driver-ride-field-short mandatory col-md-3 col-sm-3 col-xs-6">
+                    <label>@Model.SiteLabels.RideStartDate</label>
                     <div class="ui-widget">
-                        <input type="text" class="input-datepicker form-control driver-ride-field-date-from" />
+                        <input type="text" class="input-datepicker form-control driver-ride-field-date-from" placeholder="DD/MM/YY" />
                     </div>
                 </div>
-                <div class="driver-ride-field">
-                    <label>Start Time</label>
+                <div class="driver-ride-field driver-ride-field-short mandatory col-md-3 col-sm-3 col-xs-6">
+                    <label>@Model.SiteLabels.RideStartTime</label>
                     <div class="ui-widget">
-                        <input class='timepicker form-control driver-ride-field-start-time' type='text' name='timepicker' />
+                        <input class='timepicker form-control driver-ride-field-start-time' type='text' name='timepicker' placeholder="hh:mm" />
                     </div>
                 </div>
-                <div class="driver-ride-field">
-                    <label>Travel time</label>
-                    <div class="ui-widget">
-                        <input class='timepicker form-control driver-ride-field-travel-time' type='text' name='timepicker' />
-                    </div>
-                </div>
-
-                <div class="driver-ride-field">
+                <div class="driver-ride-field driver-ride-field-short desirable col-md-3 col-sm-3 col-xs-6">
                     <select class="driver-ride-price-option">
-                        <option value="PPP">Price per passenger</option>
-                        <option value="TP">Total Price</option>
+                        <option value="PPP"> @Model.SiteLabels.RidePricePerPerson</option>
+                        <option value="TP"> @Model.SiteLabels.RidePricePerRide</option>
                     </select>
                     <div class="ui-widget">
-                        <input class='form-control driver-ride-price' type='text' />
+                        <input class='form-control driver-ride-price' type='text' placeholder="10 lv" />
+                    </div>
+                </div>
+                <div class="driver-ride-field driver-ride-field-short desirable col-md-3 col-sm-3 col-xs-6">
+                    <label>@Model.SiteLabels.RidePassengers</label>
+                    <div class="ui-widget">
+                        <input class='form-control driver-ride-field-passengers-number' type='text' value="@(Model.CarDetails.NumberOfSits - 1)" />
                     </div>
                 </div>
             </div>
 
-            <div class="diver-ride-fields-section">
-                <div class="driver-ride-field">
-                    <label>Delay</label>
+            <div class="driver-ride-fields-section driver-ride-fields-section-second">
+                <div class="driver-ride-field driver-ride-field-short optional col-md-3 col-sm-3 col-xs-6">
+                    <label>@Model.SiteLabels.RideTravelTIme</label>
                     <div class="ui-widget">
-                        <input class='timepicker form-control driver-ride-field-dalayed-start' type='text' name='timepicker' />
+                        <input class='timepicker form-control driver-ride-field-travel-time' type='text' placeholder="hh:mm" />
                     </div>
                 </div>
-                <div class="driver-ride-field">
-                    <label>Break time</label>
+                <div class="driver-ride-field driver-ride-field-short optional col-md-3 col-sm-3 col-xs-6">
+                    <label>@Model.SiteLabels.RideDelay</label>
                     <div class="ui-widget">
-                        <input class='timepicker form-control driver-ride-field-break-time' type='text' name='timepicker' />
+                        <input class='timepicker form-control driver-ride-field-dalayed-start' type='text' placeholder="hh:mm" />
+                    </div>
+                </div>
+                <div class="driver-ride-field driver-ride-field-short optional col-md-3 col-sm-3 col-xs-6">
+                    <label>@Model.SiteLabels.RideBreakTime</label>
+                    <div class="ui-widget">
+                        <input class='timepicker form-control driver-ride-field-break-time' type='text' placeholder="hh:mm" />
                     </div>
                 </div>
 
-                <div class="driver-ride-field">
-                    <label>Passengers Number</label>
+                <div class="driver-ride-field driver-ride-field-textarea optional col-md-12 col-sm-12 col-xs-12">
+                    <label>-----</label>
+                    <textarea class="driver-ride-field driver-ride-field-additional-info" rows="2"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="driver-ride-return-fields col-md-6 col-sm-12 col-xs-12">
+            <div class="driver-ride-fields-section">
+                <div class="driver-ride-return-header">
+                    <h2>Return Ride Details</h2>
+                    <div class="adroid-button">
+                        <input type="checkbox" name="adroid-button" class="adroid-button-checkbox driver-ride-return-enabled-checkbox" id="myadroid-button">
+                        <label class="adroid-button-label" for="myadroid-button">
+                            <div class="adroid-button-inner">
+                                <div class="adroid-button-active"><div class="adroid-button-switch">ON</div></div>
+                                <div class="adroid-button-inactive"><div class="adroid-button-switch">OFF</div></div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="driver-ride-field driver-ride-field-long disabled mandatory col-md-6 col-sm-6 col-xs-12 hidden-xs">
+                    <label>@Model.SiteLabels.RideLocationFrom</label>
                     <div class="ui-widget">
-                        <input class='form-control driver-ride-field-passengers-number' type='text' value="@(Model.NumberOfSits - 1)" />
+                        <input type="text" class="disabled form-control driver-ride-return-field-place-from" disabled="disabled" />
+                        <ul class="autocomplete autocomplete-place-from"></ul>
+                    </div>
+                </div>
+                <div class="driver-ride-field driver-ride-field-long disabled mandatory col-md-6 col-sm-6 col-xs-12 hidden-xs">
+                    <label>@Model.SiteLabels.RideLocationTo</label>
+                    <div class="ui-widget">
+                        <input type="text" class="form-control driver-ride-return-field-place-to" disabled="disabled" />
+                        <ul class="autocomplete autocomplete-place-to"></ul>
+                    </div>
+                </div>
+                <div class="driver-ride-field driver-ride-field-short disabled mandatory col-md-3 col-sm-3 col-xs-6 hidden-xs">
+                    <label>@Model.SiteLabels.RideStartDate</label>
+                    <div class="ui-widget">
+                        <input type="text" class="input-datepicker form-control driver-ride-return-field-date-from" disabled="disabled" />
+                    </div>
+                </div>
+                <div class="driver-ride-field driver-ride-field-short disabled desirable col-md-3 col-sm-3 col-xs-6 hidden-xs">
+                    <label>@Model.SiteLabels.RideStartTime</label>
+                    <div class="ui-widget">
+                        <input class='timepicker form-control driver-ride-return-field-start-time' type='text' name='timepicker' disabled="disabled" />
+                    </div>
+                </div>
+                <div class="driver-ride-field driver-ride-field-short disabled desirable col-md-3 col-sm-3 col-xs-6 hidden-xs">
+                    <select class="driver-ride-return-price-option" disabled="disabled">
+                        <option value="PPP"> @Model.SiteLabels.RidePricePerPerson</option>
+                        <option value="TP"> @Model.SiteLabels.RidePricePerRide</option>
+                    </select>
+                    <div class="ui-widget">
+                        <input class='form-control driver-ride-return-price' type='text' disabled="disabled" />
+                    </div>
+                </div>
+                <div class="driver-ride-field driver-ride-field-short disabled desirable col-md-3 col-sm-3 col-xs-6 hidden-xs">
+                    <label>@Model.SiteLabels.RidePassengers</label>
+                    <div class="ui-widget">
+                        <input class='form-control driver-ride-return-field-passengers-number' type='text' value="@(Model.CarDetails.NumberOfSits - 1)" disabled="disabled" />
                     </div>
                 </div>
             </div>
 
+            <div class="driver-ride-fields-section driver-ride-fields-section-second">
+                <div class="driver-ride-field driver-ride-field-short disabled optional col-md-3 col-sm-3 col-xs-6 hidden-xs">
+                    <label>@Model.SiteLabels.RideTravelTIme</label>
+                    <div class="ui-widget">
+                        <input class='timepicker form-control driver-ride-return-field-travel-time' type='text' name='timepicker' disabled="disabled" />
+                    </div>
+                </div>
+                <div class="driver-ride-field driver-ride-field-short disabled optional col-md-3 col-sm-3 col-xs-6 hidden-xs">
+                    <label>@Model.SiteLabels.RideDelay</label>
+                    <div class="ui-widget">
+                        <input class='timepicker form-control driver-ride-return-field-dalayed-start' type='text' name='timepicker' disabled="disabled" />
+                    </div>
+                </div>
+                <div class="driver-ride-field driver-ride-field-short disabled optional col-md-3 col-sm-3 col-xs-6 hidden-xs">
+                    <label>@Model.SiteLabels.RideBreakTime</label>
+                    <div class="ui-widget">
+                        <input class='timepicker form-control driver-ride-return-field-break-time' type='text' name='timepicker' disabled="disabled" />
+                    </div>
+                </div>
+
+                <div class="driver-ride-field driver-ride-field-textarea disabled optional col-md-12 col-sm-12 col-xs-12 hidden-xs">
+                    <label>-----</label>
+                    <textarea class="driver-ride-field driver-ride-field-additional-info" rows="2" disabled="disabled"></textarea>
+                </div>
+            </div>
         </div>
-        <div class="col-md-1 col-sm-2 col-xs-12">
-            <input type="button" class="btn btn-primary" id="CreateRide" disabled="disabled" value="Create Ride" />
+
+
+        <div class="col-md-6 col-sm-6 col-xs-12 driver-ride-create-ride">
+            <span class="validation-errors"></span>
+            <input type="button" class="btn btn-primary driver-ride-create-ride-btn" id="CreateRide" disabled="disabled" value="Create Ride" />
         </div>
-        <div>
-            <div class="driver-ride-field driver-ride-field-arrival-wrapper">
-                <label>Ride Summary</label>
-                <h2 id="RideDestination"></h2>
-                <h3 id="RideDate"></h3>
-                <table class="driver-ride-field-arrival-time-table">
-                    <tr>
-                        <td></td>
-                        <td id="RideTravelTime"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="RideStartTime"></td>
-                        <td>Arrow</td>
-                        <td id="RideArivalTime"></td>
-                    </tr>
-                    <tr>
-                        <td id="RideStartTimeMeridian"></td>
-                        <td></td>
-                        <td id="RideArrivalTimeMeridian"></td>
-                    </tr>
-                    <tr>
-                        <td>@Model.Model @Model.Make (@Model.YearOfManufacture)</td>
-                        <td id="PassengersNo"></td>
-                    </tr>
-                </table>
+        <div class="col-md-6 col-sm-6 col-xs-12 driver-ride-return-create-ride">
+            <span class="validation-errors"></span>
+            <input type="button" class="btn btn-primary driver-ride-return-create-ride-btn disabled" id="CreateRideReturn" disabled="disabled" value="Create Rides" />
+        </div>
+
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-6 col-sm-9 col-xs-12 driver-ride-field driver-ride-field-arrival-wrapper">
+                <p id="RideDestination">
+                    <span class="driver-ride-summary-label">FROM: </span><span class="driver-ride-summary-from"></span><br />
+                    <span class="driver-ride-summary-label">TO:   </span><span class="driver-ride-summary-to"></span>
+                </p>
+                <div class="driver-ride-field-arrival-time-table">
+                    <p>
+                        <span class="driver-ride-summary-data-label">DATE: </span>
+                        <span class="diver-ride-summary-data-value" id="RideDate"></span>
+                    </p>
+                    <p>
+                        <span class="driver-ride-summary-data-label">START TIME: </span>
+                        <span class="diver-ride-summary-data-value" id="RideStartTime"></span>&nbsp;&nbsp;
+                        <span class="driver-ride-summary-data-label hidden-xs">ARRIVAL TIME: </span>
+                        <span class="diver-ride-summary-data-value hidden-xs" id="RideArivalTime"></span>
+                    </p>
+                    <p class="visible-xs-block">
+                        <span class="driver-ride-summary-data-label">ARRIVAL TIME: </span>
+                        <span class="diver-ride-summary-data-value" id="RideArivalTimeXS"></span>
+                    </p>
+                    <p>
+                        <span class="driver-ride-summary-data-label">PASSENGERS: </span>
+                        <span class="diver-ride-summary-data-value" id="RidePassengersNo"></span>&nbsp;&nbsp;
+                        <span class="driver-ride-summary-data-label">PRICE: </span>
+                        <span class="diver-ride-summary-data-value" id="RidePrice"></span>
+                    </p>
+                    <p>
+                        <span class="driver-ride-summary-data-label">CAR DETAILS: </span>
+                        <span class="diver-ride-summary-data-value">@Model.CarDetails.Model @Model.CarDetails.Make (@Model.CarDetails.YearOfManufacture)</span>
+                    </p>
+                </div>
+                <div id="RideBottomDelimiter"></div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6 driver-ride-field driver-ride-return-field-arrival-wrapper">
+                <p id="ReturnRideDestination">
+                    <span class="driver-ride-summary-label visible-xs-block">FROM: </span><span class="driver-ride-return-summary-from"></span><br />
+                    <span class="driver-ride-summary-label visible-xs-block">TO:   </span><span class="driver-ride-return-summary-to"></span>
+                </p>
+                <div class="driver-ride-field-arrival-time-table">
+                    <p>
+                        <span class="driver-ride-summary-data-label">DATE: </span>
+                        <span class="diver-ride-summary-data-value" id="ReturnRideDate"></span>
+                    </p>
+                    <p>
+                        <span class="driver-ride-summary-data-label">START TIME: </span>
+                        <span class="diver-ride-summary-data-value" id="ReturnRideStartTime"></span>&nbsp;&nbsp;
+                    </p>
+                    <p>
+                        <span class="driver-ride-summary-data-label hidden-xs">ARRIVAL TIME: </span>
+                        <span class="diver-ride-summary-data-value hidden-xs" id="ReturnRideArivalTime"></span>
+                    </p>
+                    <p class="visible-xs-block">
+                        <span class="driver-ride-summary-data-label">ARRIVAL TIME: </span>
+                        <span class="diver-ride-summary-data-value" id="ReturnRideArivalTimeXS"></span>
+                    </p>
+                    <p>
+                        <span class="driver-ride-summary-data-label">PASSENGERS: </span>
+                        <span class="diver-ride-summary-data-value" id="ReturnRidePassengersNo"></span>&nbsp;&nbsp;
+                    </p>
+                    <p>
+                        <span class="driver-ride-summary-data-label">PRICE: </span>
+                        <span class="diver-ride-summary-data-value" id="ReturnRidePrice"></span>
+                    </p>
+                </div>
+                <div id="ReturnRideBottomDelimiter"></div>
             </div>
         </div>
     }
 
     <div class="driver-rides-list-wrapper">
-        
+
     </div>
 </div>

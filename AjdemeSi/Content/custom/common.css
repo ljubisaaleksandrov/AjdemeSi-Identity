@@ -44,31 +44,95 @@
     .navbar-nav > li > a    { padding: 8px 15px; margin: 7px 0px; }
 }
 
+.constroller-rides,
+.constroller-rides > .container     { padding: 0; }
 
 /*------ custom ------*/
 
 /*------ ride list ----- start */
-
 .driver-ride-filters-container          { width: 100%; height: auto; display: inline-block; }
-.driver-ride-field-arrival-wrapper.show { height: auto; display: inline-block; }
-.diver-ride-fields-section              { display: inline-block }
-.driver-ride-field                      { float: left; margin-right: 10px; height: 60px; margin-bottom: 10px; }
+
+.driver-ride-summary-container          { }
+.driver-ride-fields-section             { display: inline-block; width: 100% }
+.driver-ride-field                      { float: left; }
 .driver-ride-field input[type=text]     { font-size: 16px !important; }
-.driver-ride-field .input-datepicker    { width: 120px; }
-.driver-ride-field .timepicker          { width: 70px; }
-.driver-ride-field .timepicker_wrap     { width: 182px; }
+
+.driver-ride-fields-section-second      { margin-top: 10px; }
 
 span.highlight                          { color: gray; font-weight: bold; }
 .ui-menu .ui-menu-item-wrapper          { width: 100% !important; }
-.driver-ride-field-arrival-wrapper      { display: none; }
 
-.driver-ride-price-option               { margin-bottom: 5px; }
-.driver-ride-field .driver-ride-price   { max-width: 150px; }
+.driver-ride-field-long,
+.driver-ride-field-short                { padding-left: 0; }
+.driver-ride-field-long input           { max-width: 100%; }
+
+.driver-ride-return-header > div        { display: inline-block; top: 20px; float: right; margin-right: 15px; }
+.driver-ride-return-header > h2         { display: inline-block; }
+
+.driver-ride-field.mandatory input[type=text]   { background-color: #faf4f4 }
+.driver-ride-field.desirable input[type=text]   { background-color: #f0f0ff }
+.driver-ride-field.optional input[type=text],
+.driver-ride-field.optional textarea            { background-color: #f4fff4 }
+.driver-ride-field.disabled input[type=text],
+.driver-ride-field.disabled textarea            { background-color: #eeeeee }
+
+.driver-ride-create-ride                { margin-top: 20px; display: inline-block; padding-right: 30px; }
+.driver-ride-return-create-ride         { margin-top: 20px; display: inline-block; padding-right: 30px; }
+
+.driver-ride-create-ride-btn,
+.driver-ride-return-create-ride-btn             { float: right }
+.driver-ride-create-ride-btn.disabled,
+.driver-ride-return-create-ride-btn.disabled    { display: none }
+
+.driver-ride-field-textarea             { margin-top: 10px; padding-left: 0 }
+.driver-ride-field-additional-info      { width: 100%; max-width: 100%; }
+
+.driver-ride-field-arrival-wrapper.show,     
+.driver-ride-return-field-arrival-wrapper.show  { height: 220px; display: inline-block; background-color: #fef6d1; margin-top: 10px; }
+.driver-ride-field-arrival-wrapper > p,
+.driver-ride-return-field-arrival-wrapper > p   { margin-top: 0; padding: 0 10px; color: white; width: 100%; font-size: 28px; background-color: #e84020; border: 1px solid #e84020; border-top-left-radius: 10px; border-top-right-radius: 10px; }
+.driver-ride-return-field-arrival-wrapper > p   { border-top-left-radius: 0; }
+
+.driver-ride-field-arrival-wrapper .driver-ride-summary-label { font-size: 22px; display: inline-block; width: 80px; }
+
+.driver-ride-field-arrival-wrapper,
+.driver-ride-return-field-arrival-wrapper       { display: none; padding: 0; font-family: courier new; letter-spacing: -1px; }
+.driver-ride-field-arrival-time-table,
+.driver-ride-return-field-arrival-time-table    { margin: 15px; font-size: 16px; height: 100px;}
+
+.driver-ride-field-arrival-time-table > p,
+.driver-ride-return-field-arrival-time-table > p{ margin: 0 0 5px; }
+
+.diver-ride-summary-data-label      { text-transform: uppercase; font-weight: bold; }
+.diver-ride-summary-data-value      { font-weight: bold; background-color: #ff6044; padding: 2px 5px; color: white; }
+
+#RideBottomDelimiter,
+#ReturnRideDestination,  
+#ReturnRideBottomDelimiter  { height: 10px; width: 100%; background-color: #e84020; border: 1px solid #e84020; }
+
+#RideBottomDelimiter        { border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; }
+#ReturnRideDestination      { border-top-right-radius: 10px; }
+#ReturnRideBottomDelimiter  { position: absolute; bottom: 0; border-bottom-right-radius: 10px; }
+
+.driver-ride-field-arrival-wrapper.rider-return > p                         { border-top-right-radius: 0; border-right: 2px dashed #882211; }
+.driver-ride-field-arrival-wrapper.rider-return > #RideBottomDelimiter      { border-bottom-right-radius: 0; border-right: 2px dashed #882211; }
+
+.driver-ride-price-option,
+.driver-ride-return-price-option    { margin-bottom: 5px; width: 100%; }
+
+
+.timepicker_wrap {
+    padding: 10px 0px;
+}
+.timepicker_wrap > .time    { margin: 0}
+.timepicker_wrap > .mins    { margin: 0}
 
 
 /*------ ride list ----- end */
 /*------ user groups ----- start */
-.user-groups-body                   { padding-bottom: 0 }
+.user-groups-body {
+    padding-bottom: 0
+}
 
 .user-groups-field > div.ui-widget  { width: 100%; display: inline-block; }
 

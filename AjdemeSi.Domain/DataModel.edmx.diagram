@@ -37,6 +37,7 @@
         <EntityTypeShape EntityType="AjdemeSi.DomainModel.ChatMessage" Width="1.5" PointX="12.75" PointY="14.625" />
         <AssociationConnector Association="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="AjdemeSi.DomainModel.FK_dbo_ChatMessage_dbo_UsersGroup_UsersGroupId" />
+        <EntityTypeShape EntityType="AjdemeSi.DomainModel.SiteLabel" Width="1.5" PointX="0.75" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

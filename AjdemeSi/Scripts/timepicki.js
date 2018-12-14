@@ -25,7 +25,6 @@
 
 			        // limit hours between 0 and 23 - inculsive.
 			        tim = Math.min(Math.max(parseInt(tim), 0), 23);
-
 			        if (tim < 10)
 			            tim = "0" + tim;
 
@@ -33,8 +32,6 @@
 			        mini = Math.min(Math.max(parseInt(mini), 0), 59);
 			        if (mini < 10)
 			            mini = "0" + mini;
-
-			        mini = Math.min(Math.max(parseInt(mini), 0), 59);
 
 					return tim + ":" + mini;
 				}

@@ -3,13 +3,19 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>@ViewBag.Title - My ASP.NET Application</title>
+        <title>@ViewBag.Title</title>
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
+
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Mono" />
     </head>
 
     @{ 
-        bool isUserGroupsController = this.ViewContext.RouteData.Values["controller"].ToString() == "UserGroups";
+        var currentControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+        bool isUserGroupsController = currentControllerName == "UserGroups";
+        string controllerClass = currentControllerName == "Rides" ?
+                                 String.Format("constroller-{0}", currentControllerName.ToLower()) :
+                                 string.Empty;
     }
 
     <body class='@(isUserGroupsController ? "user-groups-body" : String.Empty)'>
@@ -34,7 +40,7 @@
                 </div>
             </div>
         </div>
-        <div class="container body-content">
+        <div class="container body-content @controllerClass">
             @RenderBody()
             @if (!isUserGroupsController)
             {

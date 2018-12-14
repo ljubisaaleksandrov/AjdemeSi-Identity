@@ -3,6 +3,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using AjdemeSi.Business.Helpers;
+using AutoMapper;
+using System;
 
 namespace AjdemeSi
 {
@@ -13,7 +15,7 @@ namespace AjdemeSi
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles); 
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
             AutofacConfig.Configure();
         }
 

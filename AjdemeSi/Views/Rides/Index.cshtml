@@ -11,7 +11,7 @@
     {
         if (Model.CarDetails != null)
         {
-            @Html.Partial("_DriverNewRide", Model.CarDetails)
+            @Html.Partial("_DriverNewRide", Model)
             @Html.Partial("_DriverRides", Model.MyRidesListViewModel)
         }
         else

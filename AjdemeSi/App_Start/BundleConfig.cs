@@ -42,7 +42,8 @@ namespace AjdemeSi
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/timepicki.css",
-                      "~/Content/custom.css"));
+                      "~/Content/custom/common.css",
+                      "~/Content/custom/android-button.css"));
         }
     }
 }

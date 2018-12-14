@@ -11,3 +11,4 @@ Post-Deployment Script Template
 */
 
 :r .\UserRolesData.sql
+:r .\SiteLabelsData.sql
