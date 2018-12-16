@@ -7,14 +7,35 @@
 
 <div class="form-horizontal" id="MySettings">
  
+    <h4>My Details</h4>
+
+    @if (!Model.UserGeneralViewModel.EmailConfirmed)
+    {
+        <div class="alert alert-danger" role="alert">
+            Your email is not confirmed!   -   TODO
+            <input class="btn btn-info" text="Resnd Confirmation" />
+        </div>
+    }
+    else if (Model.UserGeneralViewModel.LockoutEnabled)
+    {
+        <div class="alert alert-danger" role="alert">
+            Your account has been blocked!    -   TODO
+        </div>
+    }
+
+
     @Html.Partial("_userGeneralStatistics", Model.UserGeneralViewModel)
+
+    @Html.Partial("_userResultsStatistics", Model.UserResultsViewModel)
+
 
     @if (Model.UserGeneralViewModel.IsDriver)
     {
-        @Html.Partial("_carsDetails", Model.CarsViewModel)
+        <div id="DriverCarsContainer" class="col-md-12">
+            <hr />
+            @Html.Partial("_carsDetails", Model.CarsViewModel)
+        </div>
     }
-
-    @Html.Partial("_userResultsStatistics", Model.UserResultsViewModel)
 
 </div>
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AjdemeSi.Domain.Models.Settings
 {
@@ -15,5 +16,6 @@ namespace AjdemeSi.Domain.Models.Settings
         public int NumberOfSits { get; set; }
         [Required]
         public bool IsDefault { get; set; }
+        public List<string> VehiclesViewModel { get; set; }
     }
 }

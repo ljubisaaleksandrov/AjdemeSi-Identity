@@ -45,6 +45,7 @@
 }
 
 .navbar                 { background: white; border-bottom: 1px solid blue; }
+footer                  { display: block; width: 100%; }
 
 .constroller-rides,
 .constroller-rides > .container     { padding: 0; }
@@ -178,9 +179,15 @@ span.highlight                          { color: gray; font-weight: bold; }
 
 /*------ user groups ----- end */
 /*------ user settings ----- start */
+#DriverCarsContainer {
+    padding: 0 !important;
+}
+
 .existing-car-wrapper {
     padding: 0 !important;
 }
+
+
 
 /*------ user settings ----- end */
 
