@@ -44,6 +44,8 @@
     .navbar-nav > li > a    { padding: 8px 15px; margin: 7px 0px; }
 }
 
+.navbar                 { background: white; border-bottom: 1px solid blue; }
+
 .constroller-rides,
 .constroller-rides > .container     { padding: 0; }
 

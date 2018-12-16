@@ -80,6 +80,7 @@
     <Build Include="dbo\Tables\City.sql" />
     <Build Include="dbo\Tables\SiteLabels.sql" />
     <None Include="PostDeploymant Scripts\SiteLabelsData.sql" />
+    <Build Include="dbo\Tables\Vehicles.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="PostDeploymant Scripts\Script.PostDeployment.sql" />
