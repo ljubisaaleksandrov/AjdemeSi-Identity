@@ -11,12 +11,10 @@ namespace AjdemeSi.Services.Logic
     public class DriverService : IDriverService
     {
         public readonly IMapper _mapper;
-        private readonly ICommonService _commonService;
         public DriverService() { }
-        public DriverService(IMapper mapper, ICommonService commonService)
+        public DriverService(IMapper mapper)
         {
             _mapper = mapper;
-            _commonService = commonService;
         }
 
 
@@ -55,19 +53,11 @@ namespace AjdemeSi.Services.Logic
 
         public List<CarViewModel> GetCars(string driverId)
         {
-            List<CarViewModel> driversCars = new List<CarViewModel>();
             using (DataContext db = new DataContext())
             {
-                var vehicleModels = _commonService.GetVehicleModels();
-                var cars = db.Cars.Where(c => c.UserId == driverId).ToList();
-                foreach(var car in cars)
-                {
-                    var driversCar = _mapper.Map<CarViewModel>(cars);
-                    driversCar.VehiclesViewModel = vehicleModels;
-                    driversCars.Add(driversCar);
-                }
+                var cars = db.Cars.Where(c => c.UserId == driverId);
+                return cars != null ? _mapper.Map<List<CarViewModel>>(cars) : null;
             }
-            return driversCars;
         }
 
         public int AddOrUpdateCar(CarViewModel model, string userId)

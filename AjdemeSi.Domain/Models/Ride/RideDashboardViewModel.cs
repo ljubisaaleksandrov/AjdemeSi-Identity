@@ -9,6 +9,6 @@ namespace AjdemeSi.Domain.Models.Ride
         public UserResultsSettingsExtendedViewModel UserCommonViewModel { get; set; }
         public CarViewModel CarDetails { get; set; }
         public RideSiteLabelsViewModel SiteLabels { get; set; }
-        public 
+        public RideCreationViewModel RideCreationViewModel { get; set; }
     }
 }

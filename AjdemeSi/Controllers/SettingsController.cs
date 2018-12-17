@@ -26,7 +26,8 @@ namespace AjdemeSi.Controllers
             {
                 CarsViewModel = _driverService.GetCars(currentUserId),
                 UserGeneralViewModel = _userService.GetUserGeneralDetails(currentUserId),
-                UserResultsViewModel = _userService.GetUserResultsSettingsViewModel(currentUserId)
+                UserResultsViewModel = _userService.GetUserResultsSettingsViewModel(currentUserId),
+                VehiclesViewModel = _commonService.GetVehicleModels()
             };
 
             return View(model);

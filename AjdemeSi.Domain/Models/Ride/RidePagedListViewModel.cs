@@ -10,7 +10,7 @@ namespace AjdemeSi.Domain.Models.Ride
 {
     public class RidePagedListViewModel : PagedList<RideEF>
     {
-        public IEnumerable<RideViewModel> ListEntries { get; set; }
+        public IEnumerable<RideCreationViewModel> ListEntries { get; set; }
         public DateTime DateFrom;
         public DateTime DateTo;
         public string CountryFrom;
@@ -30,7 +30,7 @@ namespace AjdemeSi.Domain.Models.Ride
                                       string cityTo = "")
         : base(superset, pageNumber, pageSize)
         {
-            ListEntries = mapper.Map<List<RideViewModel>>(superset.ToList());
+            ListEntries = mapper.Map<List<RideCreationViewModel>>(superset.ToList());
             TotalItemCount = totalItemsCount;
             PageCount = totalItemsCount % pageSize == 0 ? totalItemsCount / pageSize : totalItemsCount / pageSize + 1;
             IsLastPage = PageCount == pageNumber;

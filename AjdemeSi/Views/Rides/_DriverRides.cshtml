@@ -23,10 +23,10 @@
                             {
                                 <tr class="gradeA @(i % 2 == 0 ? "even" : "odd")" role="row">
                                     <td class="sorting_1">
-                                        @Html.DisplayFor(modelItem => ride.FromCity)
+                                        @Html.DisplayFor(modelItem => ride.FromPlace)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => ride.ToCity)
+                                        @Html.DisplayFor(modelItem => ride.ToPlace)
                                     </td>
                                     <td>
                                         @{
@@ -37,7 +37,7 @@
                                         @Html.DisplayFor(modelItem => ride.StartTime)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => ride.EndTime)
+@*                                        @Html.DisplayFor(modelItem => ride.EndTime)*@
                                     </td>
                                     <td class="table-buttons-bar">
                                         <span class="glyphicon glyphicon-pencil color-primary table-button"></span>

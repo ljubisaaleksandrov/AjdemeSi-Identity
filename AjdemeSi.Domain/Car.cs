@@ -18,8 +18,8 @@ namespace AjdemeSi.Domain
         public string UserId { get; set; }
         public string Make { get; set; }
         public string Model { get; set; }
-        public int YearOfManufacture { get; set; }
         public int NumberOfSits { get; set; }
+        public int YearOfManufacture { get; set; }
         public bool IsDefault { get; set; }
     
         public virtual Driver Driver { get; set; }

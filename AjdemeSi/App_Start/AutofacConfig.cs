@@ -40,7 +40,8 @@ namespace AjdemeSi.App_Start
                 cfg.CreateMap<RidePassanger, RidePassengerViewModel>()
                    .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.AspNetUser.UserName));
                 cfg.CreateMap<RideDriverViewModel, RidePassanger>();
-                cfg.CreateMap<RideViewModel, Ride>().ForMember(d => d.RidePassangers, opt => opt.MapFrom(s => s.Passengers));
+                cfg.CreateMap<RideCreationViewModel, Ride>();
+                //.ForMember(d => d.RidePassangers, opt => opt.MapFrom(s => s.Passengers));
 
                 cfg.CreateMap<CarViewModel, Car>();
                 cfg.CreateMap<Car, CarViewModel>();

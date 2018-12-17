@@ -13,15 +13,13 @@ namespace AjdemeSi.Controllers
         private readonly IRideService _rideService;
         private readonly IDriverService _driverService;
         private readonly ICitiesService _citiesService;
-        private readonly ICommonService _commonService;
         private readonly ISiteLabelsService _siteLabelsService;
 
-        public RidesController(IRideService rideService, IDriverService driverService, ICitiesService citiesService, ICommonService commonService, ISiteLabelsService siteLabelsService)
+        public RidesController(IRideService rideService, IDriverService driverService, ICitiesService citiesService, ISiteLabelsService siteLabelsService)
         {
             _rideService = rideService;
             _driverService = driverService;
             _citiesService = citiesService;
-            _commonService = commonService;
             _siteLabelsService = siteLabelsService;
         }
 
@@ -63,7 +61,7 @@ namespace AjdemeSi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateRide(CarViewModel model)
+        public ActionResult CreateRide(RideCreationViewModel model)
         {
             var test = model != null;
             return Json(new { results = "success" });

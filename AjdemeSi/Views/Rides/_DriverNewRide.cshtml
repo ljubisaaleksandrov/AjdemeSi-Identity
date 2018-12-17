@@ -5,6 +5,7 @@
     @using (Html.BeginForm("CreateRide", "Rides", FormMethod.Post, new { id = "DriverNewRide" }))
     {
         @Html.AntiForgeryToken()
+        var viewModel = Model.RideCreationViewModel;
 
         <div class="driver-ride-fields col-md-6 col-sm-12 col-xs-12">
             <div class="driver-ride-fields-section">
@@ -13,42 +14,42 @@
                     <label>@Model.SiteLabels.RideLocationFrom</label>
                     @Html.HiddenFor(model => model.CarDetails.Make)
                     <div class="ui-widget">
-                        <input type="text" id="Test_Test1" class="input-autocomplete form-control driver-ride-field-place-from" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.FromPlace, new { @class = "input-autocomplete form-control driver-ride-field-place-from" } )
                         <ul class="autocomplete autocomplete-place-from"></ul>
                     </div>
                 </div>
                 <div class="driver-ride-field driver-ride-field-long mandatory col-md-6 col-sm-6 col-xs-12">
                     <label>@Model.SiteLabels.RideLocationTo</label>
                     <div class="ui-widget">
-                        <input type="text" id="Test_Test2" class="input-autocomplete form-control driver-ride-field-place-to" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.ToPlace, new { @class = "input-autocomplete form-control driver-ride-field-place-to" })
                         <ul class="autocomplete autocomplete-place-to"></ul>
                     </div>
                 </div>
                 <div class="driver-ride-field driver-ride-field-short mandatory col-md-3 col-sm-3 col-xs-6">
                     <label>@Model.SiteLabels.RideStartDate</label>
                     <div class="ui-widget">
-                        <input type="text" class="input-datepicker form-control driver-ride-field-date-from" placeholder="DD/MM/YY" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.StartDate, new { @class = "input-datepicker form-control driver-ride-field-date-fro", @placeholder = "DD/MM/YY" })
                     </div>
                 </div>
                 <div class="driver-ride-field driver-ride-field-short mandatory col-md-3 col-sm-3 col-xs-6">
                     <label>@Model.SiteLabels.RideStartTime</label>
                     <div class="ui-widget">
-                        <input class='timepicker form-control driver-ride-field-start-time' type='text' name='timepicker' placeholder="hh:mm" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.StartTime, new { @class = "timepicker form-control driver-ride-field-start-time", @placeholder = "hh:mm" })
                     </div>
                 </div>
                 <div class="driver-ride-field driver-ride-field-short desirable col-md-3 col-sm-3 col-xs-6">
-                    <select class="driver-ride-price-option">
+                    <select class="driver-ride-price-option" name="SelectedPriceType">
                         <option value="PPP"> @Model.SiteLabels.RidePricePerPerson</option>
                         <option value="TP"> @Model.SiteLabels.RidePricePerRide</option>
                     </select>
                     <div class="ui-widget">
-                        <input class='form-control driver-ride-price' type='text' placeholder="10 lv" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.Price, new { @class = "form-control driver-ride-price", @placeholder = "10 lv", @id = "Price" })
                     </div>
                 </div>
                 <div class="driver-ride-field driver-ride-field-short desirable col-md-3 col-sm-3 col-xs-6">
                     <label>@Model.SiteLabels.RidePassengers</label>
                     <div class="ui-widget">
-                        <input class='form-control driver-ride-field-passengers-number' type='text' value="@(Model.CarDetails.NumberOfSits - 1)" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.MaxPassengers, new { @class = "form-control driver-ride-field-passengers-number" })
                     </div>
                 </div>
             </div>
@@ -57,25 +58,25 @@
                 <div class="driver-ride-field driver-ride-field-short optional col-md-3 col-sm-3 col-xs-6">
                     <label>@Model.SiteLabels.RideTravelTIme</label>
                     <div class="ui-widget">
-                        <input class='timepicker form-control driver-ride-field-travel-time' type='text' placeholder="hh:mm" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.TravelTime, new { @class = "timepicker form-control driver-ride-field-travel-time", @placeholder = "hh:mm" })
                     </div>
                 </div>
                 <div class="driver-ride-field driver-ride-field-short optional col-md-3 col-sm-3 col-xs-6">
                     <label>@Model.SiteLabels.RideDelay</label>
                     <div class="ui-widget">
-                        <input class='timepicker form-control driver-ride-field-dalayed-start' type='text' placeholder="hh:mm" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.DelayedStartTime, new { @class = "timepicker form-control driver-ride-field-dalayed-start", @placeholder = "hh:mm" })
                     </div>
                 </div>
                 <div class="driver-ride-field driver-ride-field-short optional col-md-3 col-sm-3 col-xs-6">
                     <label>@Model.SiteLabels.RideBreakTime</label>
                     <div class="ui-widget">
-                        <input class='timepicker form-control driver-ride-field-break-time' type='text' placeholder="hh:mm" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.BreakTime, new { @class = "timepicker form-control driver-ride-field-break-time", @placeholder = "hh:mm" })
                     </div>
                 </div>
 
                 <div class="driver-ride-field driver-ride-field-textarea optional col-md-12 col-sm-12 col-xs-12">
                     <label>-----</label>
-                    <textarea class="driver-ride-field driver-ride-field-additional-info" rows="2"></textarea>
+                    @Html.TextAreaFor(model => model.RideCreationViewModel.AdditionalInfo, new { @class = "driver-ride-field driver-ride-field-additional-info", @rows = "2" }) 
                 </div>
             </div>
         </div>
@@ -97,42 +98,48 @@
                 <div class="driver-ride-field driver-ride-field-long disabled mandatory col-md-6 col-sm-6 col-xs-12 hidden-xs">
                     <label>@Model.SiteLabels.RideLocationFrom</label>
                     <div class="ui-widget">
-                        <input type="text" class="disabled form-control driver-ride-return-field-place-from" disabled="disabled" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.ToPlace, new { @class = "disabled form-control driver-ride-return-field-place-from", @disabled = "disabled" })
+                        @*<input type="text" class="disabled form-control driver-ride-return-field-place-from" disabled="disabled" />*@
                         <ul class="autocomplete autocomplete-place-from"></ul>
                     </div>
                 </div>
                 <div class="driver-ride-field driver-ride-field-long disabled mandatory col-md-6 col-sm-6 col-xs-12 hidden-xs">
                     <label>@Model.SiteLabels.RideLocationTo</label>
                     <div class="ui-widget">
-                        <input type="text" class="form-control driver-ride-return-field-place-to" disabled="disabled" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.FromPlace, new { @class = "form-control driver-ride-return-field-place-to", @disabled = "disabled" })
+                        @*<input type="text" class="form-control driver-ride-return-field-place-to" disabled="disabled" />*@
                         <ul class="autocomplete autocomplete-place-to"></ul>
                     </div>
                 </div>
                 <div class="driver-ride-field driver-ride-field-short disabled mandatory col-md-3 col-sm-3 col-xs-6 hidden-xs">
                     <label>@Model.SiteLabels.RideStartDate</label>
                     <div class="ui-widget">
-                        <input type="text" class="input-datepicker form-control driver-ride-return-field-date-from" disabled="disabled" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.ReturnStartDate, new { @class = "input-datepicker form-control driver-ride-return-field-date-from", @disabled = "disabled", @placeholder = "DD/MM/YY" })
+                        @*<input type="text" class="input-datepicker form-control driver-ride-return-field-date-from" disabled="disabled" />*@
                     </div>
                 </div>
                 <div class="driver-ride-field driver-ride-field-short disabled desirable col-md-3 col-sm-3 col-xs-6 hidden-xs">
                     <label>@Model.SiteLabels.RideStartTime</label>
                     <div class="ui-widget">
-                        <input class='timepicker form-control driver-ride-return-field-start-time' type='text' name='timepicker' disabled="disabled" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.ReturnStartTime, new { @class = "timepicker form-control driver-ride-return-field-start-time", @placeholder = "hh:mm" })
+                        @*<input class='timepicker form-control driver-ride-return-field-start-time' type='text' name='timepicker' disabled="disabled" />*@
                     </div>
                 </div>
                 <div class="driver-ride-field driver-ride-field-short disabled desirable col-md-3 col-sm-3 col-xs-6 hidden-xs">
-                    <select class="driver-ride-return-price-option" disabled="disabled">
+                    <select class="driver-ride-return-price-option" name="ReturnSelectedPriceType" disabled="disabled">
                         <option value="PPP"> @Model.SiteLabels.RidePricePerPerson</option>
                         <option value="TP"> @Model.SiteLabels.RidePricePerRide</option>
                     </select>
                     <div class="ui-widget">
-                        <input class='form-control driver-ride-return-price' type='text' disabled="disabled" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.ReturnPrice, new { @class = "form-control driver-ride-return-price", @placeholder = "10 lv" })
+                        @*<input class='form-control driver-ride-return-price' type='text' disabled="disabled" />*@
                     </div>
                 </div>
                 <div class="driver-ride-field driver-ride-field-short disabled desirable col-md-3 col-sm-3 col-xs-6 hidden-xs">
                     <label>@Model.SiteLabels.RidePassengers</label>
                     <div class="ui-widget">
-                        <input class='form-control driver-ride-return-field-passengers-number' type='text' value="@(Model.CarDetails.NumberOfSits - 1)" disabled="disabled" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.ReturnMaxPassengers, new { @class = "form-control driver-ride-return-field-passengers-number" })
+                        @*<input class='form-control driver-ride-return-field-passengers-number' type='text' value="@(Model.CarDetails.NumberOfSits - 1)" disabled="disabled" />*@
                     </div>
                 </div>
             </div>
@@ -141,25 +148,29 @@
                 <div class="driver-ride-field driver-ride-field-short disabled optional col-md-3 col-sm-3 col-xs-6 hidden-xs">
                     <label>@Model.SiteLabels.RideTravelTIme</label>
                     <div class="ui-widget">
-                        <input class='timepicker form-control driver-ride-return-field-travel-time' type='text' name='timepicker' disabled="disabled" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.ReturnTravelTime, new { @class = "timepicker form-control driver-ride-return-field-travel-time", @placeholder = "hh:mm" })
+                        @*<input class='timepicker form-control driver-ride-return-field-travel-time' type='text' name='timepicker' disabled="disabled" />*@
                     </div>
                 </div>
                 <div class="driver-ride-field driver-ride-field-short disabled optional col-md-3 col-sm-3 col-xs-6 hidden-xs">
                     <label>@Model.SiteLabels.RideDelay</label>
                     <div class="ui-widget">
-                        <input class='timepicker form-control driver-ride-return-field-dalayed-start' type='text' name='timepicker' disabled="disabled" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.ReturnDelayedStartTime, new { @class = "timepicker form-control driver-ride-return-field-dalayed-start", @placeholder = "hh:mm" })
+                        @*<input class='timepicker form-control driver-ride-return-field-dalayed-start' type='text' name='timepicker' disabled="disabled" />*@
                     </div>
                 </div>
                 <div class="driver-ride-field driver-ride-field-short disabled optional col-md-3 col-sm-3 col-xs-6 hidden-xs">
                     <label>@Model.SiteLabels.RideBreakTime</label>
                     <div class="ui-widget">
-                        <input class='timepicker form-control driver-ride-return-field-break-time' type='text' name='timepicker' disabled="disabled" />
+                        @Html.TextBoxFor(model => model.RideCreationViewModel.ReturnBreakTime, new { @class = "timepicker form-control driver-ride-return-field-break-time", @placeholder = "hh:mm" })
+                        @*<input class='timepicker form-control driver-ride-return-field-break-time' type='text' name='timepicker' disabled="disabled" />*@
                     </div>
                 </div>
 
                 <div class="driver-ride-field driver-ride-field-textarea disabled optional col-md-12 col-sm-12 col-xs-12 hidden-xs">
                     <label>-----</label>
-                    <textarea class="driver-ride-field driver-ride-field-additional-info" rows="2" disabled="disabled"></textarea>
+                    @Html.TextAreaFor(model => model.RideCreationViewModel.ReturnAdditionalInfo, new { @class = "driver-ride-field driver-ride-field-additional-info", @rows = "2" })
+                    @*<textarea class="driver-ride-field driver-ride-field-additional-info" rows="2" disabled="disabled"></textarea>*@
                 </div>
             </div>
         </div>

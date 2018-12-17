@@ -82,6 +82,9 @@
     <Compile Include="City.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="C__RefactorLog.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -115,7 +118,7 @@
     <Compile Include="Models\Ride\RidePassengerViewModel.cs" />
     <Compile Include="Models\Ride\RideDriverViewModel.cs" />
     <Compile Include="Models\Ride\RidePagedListViewModel.cs" />
-    <Compile Include="Models\Ride\RideViewModel.cs" />
+    <Compile Include="Models\Ride\RideCreationViewModel.cs" />
     <Compile Include="Models\Identity\IdentityUserPagedListViewModel.cs" />
     <Compile Include="Models\Identity\IdentityUserViewModel.cs" />
     <Compile Include="Models\UserGroups\ChatMessageViewModel.cs" />

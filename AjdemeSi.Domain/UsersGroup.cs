@@ -17,8 +17,8 @@ namespace AjdemeSi.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UsersGroup()
         {
-            this.GroupMembers = new HashSet<GroupMember>();
             this.ChatMessages = new HashSet<ChatMessage>();
+            this.GroupMembers = new HashSet<GroupMember>();
         }
     
         public int Id { get; set; }
@@ -28,9 +28,9 @@ namespace AjdemeSi.Domain
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChatMessage> ChatMessages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GroupMember> GroupMembers { get; set; }
         public virtual Ride Ride { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChatMessage> ChatMessages { get; set; }
     }
 }

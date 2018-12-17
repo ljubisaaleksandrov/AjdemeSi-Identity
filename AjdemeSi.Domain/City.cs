@@ -19,5 +19,7 @@ namespace AjdemeSi.Domain
         public string Country { get; set; }
         public string NameAlternative { get; set; }
         public string CountryAlternative { get; set; }
+        public Nullable<decimal> Latitude { get; set; }
+        public Nullable<decimal> Longitude { get; set; }
     }
 }

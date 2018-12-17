@@ -31,14 +31,14 @@ namespace AjdemeSi.Domain
         public System.DateTime StartTime { get; set; }
         public System.DateTime EndTime { get; set; }
         public int TravelTime { get; set; }
-        public int MaxPassengers { get; set; }
-        public float TotalPrice { get; set; }
-        public float MinTotalPrice { get; set; }
-        public float PricePerPassenger { get; set; }
-        public Nullable<int> ReturnDrivingId { get; set; }
-        public Nullable<System.DateTime> DateCreated { get; set; }
         public Nullable<int> DelayedStartTime { get; set; }
         public Nullable<int> BreakTime { get; set; }
+        public int MaxPassengers { get; set; }
+        public float TotalPrice { get; set; }
+        public float PricePerPassenger { get; set; }
+        public Nullable<int> ReturnRideId { get; set; }
+        public Nullable<System.DateTime> DateCreated { get; set; }
+        public string AdditionalInfo { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

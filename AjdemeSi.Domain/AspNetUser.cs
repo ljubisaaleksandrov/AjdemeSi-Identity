@@ -19,6 +19,7 @@ namespace AjdemeSi.Domain
         {
             this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
+            this.ChatMessages = new HashSet<ChatMessage>();
             this.Friends = new HashSet<Friend>();
             this.Friends1 = new HashSet<Friend>();
             this.GroupMembers = new HashSet<GroupMember>();
@@ -27,7 +28,6 @@ namespace AjdemeSi.Domain
             this.UserSettings = new HashSet<UserSetting>();
             this.UsersGroups = new HashSet<UsersGroup>();
             this.AspNetRoles = new HashSet<AspNetRole>();
-            this.ChatMessages = new HashSet<ChatMessage>();
         }
     
         public string Id { get; set; }
@@ -49,6 +49,8 @@ namespace AjdemeSi.Domain
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChatMessage> ChatMessages { get; set; }
         public virtual Driver Driver { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Friend> Friends { get; set; }
@@ -66,7 +68,5 @@ namespace AjdemeSi.Domain
         public virtual ICollection<UsersGroup> UsersGroups { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChatMessage> ChatMessages { get; set; }
     }
 }

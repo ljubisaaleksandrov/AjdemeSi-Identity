@@ -12,14 +12,12 @@ namespace AjdemeSi.Services.Logic
     public class CommonService : ICommonService
     {
         private readonly IMapper _mapper;
-        private readonly IDriverService _driverService;
 
         public CommonService() { }
 
         public CommonService(IMapper mapper, IDriverService driverService)
         {
             _mapper = mapper;
-            _driverService = driverService;
         }
 
         #region Car Methods

@@ -360,6 +360,22 @@ $(document).on('change', '.driver-ride-return-enabled-checkbox', function (event
     $('.driver-ride-return-create-ride-btn').toggleClass('disabled');
 });
 
+var serializeObject = function (form) {
+    var o = {};
+    var a = form.serializeArray();
+    $.each(a, function () {
+        if (o[this.name.replace("RideCreationViewModel.", "")]) {
+            if (!o[this.name.replace("RideCreationViewModel.", "")].push) {
+                o[this.name.replace("RideCreationViewModel.", "")] = [o[this.name.replace("RideCreationViewModel.", "")]];
+            }
+            o[this.name.replace("RideCreationViewModel.", "")].push(this.value || '');
+        } else {
+            o[this.name.replace("RideCreationViewModel.", "")] = this.value || '';
+        }
+    });
+    return o;
+};
+
 $(btnCreateRide).on("click", function () {
     var data = {
         placeFrom: $(placeFrom).val(),
@@ -371,22 +387,30 @@ $(btnCreateRide).on("click", function () {
         timeBreak: $(timeBreak).val(),
         passengersNomber: $(rsPassengersNo).val(),
         isTotalPrice: $(rsPriceOption).val() === "TP",
-        price: $(rsPrice).val(),
+        Price: $(rsPrice).val(),
         __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
     };
 
-    $(this).parents('form').submit();
+    var token = $('input[name="__RequestVerificationToken"]').val();
 
-    //$.ajax({
-    //    url: "/en/Rides/CreateRide",
-    //    type: "POST",
-    //    dataType: "json",
-    //    data: data,
-    //    success: function (data) {
-    //        console.log(data);
-    //    },
-    //    error: function (request, status, error) {
-    //        console.log(request.responseText);
-    //    }
-    //});
+
+    var formData = $(this).parents('form').serialize();
+    var aaform = $(this).parents('form').serializeArray();
+    var adata = serializeObject($(this).parents('form'));
+
+    $.ajax({
+        url: "/en/Rides/CreateRide",
+        type: "POST",
+        dataType: "json",
+        data: {
+            __RequestVerificationToken: token,
+            model: adata
+        },
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (request, status, error) {
+            console.log(request.responseText);
+        }
+    });
 });

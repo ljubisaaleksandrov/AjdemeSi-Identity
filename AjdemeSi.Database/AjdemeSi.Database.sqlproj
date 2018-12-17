@@ -85,4 +85,7 @@
   <ItemGroup>
     <PostDeploy Include="PostDeploymant Scripts\Script.PostDeployment.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="AjdemeSi.Database.refactorlog" />
+  </ItemGroup>
 </Project>

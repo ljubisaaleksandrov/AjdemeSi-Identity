@@ -20,9 +20,9 @@ namespace AjdemeSi.Services.Logic
             _mapper = mapper;
         }
 
-        public RideViewModel CreateRide(string placeFrom, string placeTo, string dateFrom, string timeFrom, string timeDelay, string timeTravel, string timeBreak, string passengersNomber, bool isTotalPrice, float price, string userId)
+        public RideCreationViewModel CreateRide(string placeFrom, string placeTo, string dateFrom, string timeFrom, string timeDelay, string timeTravel, string timeBreak, string passengersNomber, bool isTotalPrice, float price, string userId)
         {
-            RideViewModel viewModel = new RideViewModel();
+            RideCreationViewModel viewModel = new RideCreationViewModel();
 
             try
             {

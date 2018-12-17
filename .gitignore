@@ -536,3 +536,5 @@
 /packages/log4net.2.0.8/lib/net40-full/log4net.dll
 /packages/log4net.2.0.8/lib/net45-full/log4net.dll
 /packages/log4net.2.0.8/lib/netstandard1.3/log4net.dll
+/AjdemeSi.Domain/C__RefactorLog.cs
+/AjdemeSi.Database/AjdemeSi.Database.refactorlog

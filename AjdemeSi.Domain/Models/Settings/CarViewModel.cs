@@ -16,6 +16,5 @@ namespace AjdemeSi.Domain.Models.Settings
         public int NumberOfSits { get; set; }
         [Required]
         public bool IsDefault { get; set; }
-        public List<string> VehiclesViewModel { get; set; }
     }
 }
