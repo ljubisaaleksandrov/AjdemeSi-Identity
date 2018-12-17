@@ -516,3 +516,4 @@
 /packages/log4net.2.0.8/log4net.2.0.8.nupkg
 /AjdemeSi.Database/bin/Release
 /AjdemeSi/App_Data/logs
+/AjdemeSi.Database/obj/Release
