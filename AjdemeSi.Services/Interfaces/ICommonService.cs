@@ -6,7 +6,7 @@ namespace AjdemeSi.Services.Interfaces
     public interface ICommonService
     {
         CarViewModel GetCarDetails(int carId);
-        List<string> GetVehicleModels();
-        List<string> GetVehicleMakes(string model);
+        List<string> GetVehicleMakes();
+        List<string> GetVehicleModels(string make);
     }
 }

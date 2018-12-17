@@ -1,6 +1,7 @@
 ﻿using AjdemeSi.Domain.Models.Settings;
 using AjdemeSi.Services.Interfaces;
 using Microsoft.AspNet.Identity;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace AjdemeSi.Controllers
@@ -27,8 +28,13 @@ namespace AjdemeSi.Controllers
                 CarsViewModel = _driverService.GetCars(currentUserId),
                 UserGeneralViewModel = _userService.GetUserGeneralDetails(currentUserId),
                 UserResultsViewModel = _userService.GetUserResultsSettingsViewModel(currentUserId),
-                VehiclesViewModel = _commonService.GetVehicleModels()
             };
+
+            ViewData.Add("VehicleMakesList", _commonService.GetVehicleMakes().Select(vm => new SelectListItem()
+            {
+                Text = vm,
+                Value = vm
+            }).ToList());
 
             return View(model);
         }
@@ -50,6 +56,20 @@ namespace AjdemeSi.Controllers
             }
 
             return PartialView("~/Views/Settings/_addNewCar.cshtml", car);
+        }
+
+        [AllowAnonymous]
+        public ActionResult GetVehicleModels(string make)
+        {
+            if (!string.IsNullOrEmpty(make))
+            {
+                var models = _commonService.GetVehicleModels(make);
+                return Json(new { results = models }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { results = "" }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

@@ -30,21 +30,21 @@ namespace AjdemeSi.Services.Logic
             }
         }
 
-        public List<string> GetVehicleMakes(string model)
+        public List<string> GetVehicleModels(string make)
         {
             using (DataContext db = new DataContext())
             {
-                var vehicles = db.Vehicles.Where(v => v.Model == model).GroupBy(v => v.Make);
-                return vehicles.Select(vg => vg.Key).ToList();
+                var vehicles = db.Vehicles.Where(v => v.Make == make).GroupBy(v => v.Model);
+                return vehicles.Select(vg => vg.Key).OrderBy(vgk => vgk).ToList();
             }
         }
 
-        public List<string> GetVehicleModels()
+        public List<string> GetVehicleMakes()
         {
             using (DataContext db = new DataContext())
             {
-                var vehicles = db.Vehicles.GroupBy(v => v.Model);
-                return vehicles.Select(vg => vg.Key).ToList();
+                var vehicles = db.Vehicles.GroupBy(v => v.Make);
+                return vehicles.Select(vg => vg.Key).OrderBy(vgk => vgk).ToList();
             }
         }
         #endregion

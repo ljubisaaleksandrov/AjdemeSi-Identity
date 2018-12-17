@@ -73,10 +73,4 @@ namespace AjdemeSi.Controllers
             return Json(new { results = data }, JsonRequestBehavior.AllowGet);
         }
     }
-
-    public class Test
-    {
-        public string Test1 { get; set; }
-        public string Test2 { get; set; }
-    }
 }
